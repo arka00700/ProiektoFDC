@@ -44,7 +44,6 @@ import android.widget.Toast;
 		Cursor c = BD_sqlite.getMiBD(getActivity()).leerMedicamentos();
 		sistemas.clear();
 		String nombre="";
-		//iNombre=c.getColumnIndex("Nombre");
 		if(c.moveToFirst()){
 			do{
 				nombre=c.getString(0);
