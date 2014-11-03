@@ -22,7 +22,7 @@ public class Botiquin extends FragmentActivity{
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+				// INSERTAMOS MEDICAMENTOS DE PRUEBA
 				BDhelper.insertarMedicamentos("Trombocil", "Anestesico local");
 				BDhelper.insertarMedicamentos("Botarel", "Crema de uso local");
 				BDhelper.insertarMedicamentos("Reflex", "Dolor muscular");
