@@ -1,5 +1,6 @@
 package com.example.proiektofindecarrera;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -8,11 +9,11 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class BD_sqlite extends SQLiteOpenHelper {
-
+	private static BD_sqlite miLaBD;
 	String crearUsuarios = "CREATE TABLE Usuarios (User TEXT PRIMARY KEY NOT NULL, Password TEXT NOT NULL)";
 	String crearMedicamentos = "CREATE TABLE Medicamentos (Nombre TEXT PRIMARY KEY NOT NULL, Indicaciones TEXT NOT NULL)";
 	
-	//CONTRUCTORES (CREAR Y EL SEGUNDO PARA MODIFICAR PASANDO LA VERSION)
+	//CONSTRUCTORES (CREAR Y EL SEGUNDO PARA MODIFICAR PASANDO LA VERSION)
 	public BD_sqlite(Context context) {
 		super(context, "BD.sqlite", null, 1);
 		
@@ -20,6 +21,18 @@ public class BD_sqlite extends SQLiteOpenHelper {
 	private BD_sqlite (Context context, String name, CursorFactory factory, int version)  {
 		super(context, name, factory, version);
 	}
+	//CONSTRUCTOR PARA FRAGMENT_LIST
+	@SuppressLint("NewApi") 
+	public BD_sqlite(FragmentLista fl) {
+		super(fl.getActivity(),"BD.sqlite", null, 1);
+	}
+	public static BD_sqlite getMiBD(Context context){
+		if (miLaBD==null){
+			miLaBD = new BD_sqlite(context,"BD.sqlite", null, 1);
+		}
+		return miLaBD;
+	}
+	
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// TODO Auto-generated method stub
@@ -61,6 +74,19 @@ public class BD_sqlite extends SQLiteOpenHelper {
 		valores.put("Nombre",nombre);
 		valores.put("Indicaciones",indicaciones);
 		this.getWritableDatabase().insert("Medicamentos", null, valores);
+	}
+	public Cursor leerMedicamentos(){
+		String sql="SELECT Nombre FROM Medicamentos";
+		return this.getReadableDatabase().rawQuery(sql, null);
+		/*String nombres[]= new String[c.getCount()];
+		c.moveToFirst();
+		int iNombre;
+		int contador =0;
+		iNombre = c.getColumnIndex("Nombre");
+		for (c.moveToFirst();!c.isAfterLast();c.moveToNext()){
+			nombres[contador]=c.getString(iNombre);
+		}*/
+		
 	}
 	
 	public Boolean existeUsuario(String usr){

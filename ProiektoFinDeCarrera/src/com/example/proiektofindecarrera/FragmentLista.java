@@ -1,5 +1,10 @@
 package com.example.proiektofindecarrera;
 
+import java.util.ArrayList;
+
+import android.annotation.SuppressLint;
+import android.app.ListFragment;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,12 +14,14 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 	 
+	@SuppressLint("NewApi") 
 	public class FragmentLista extends android.support.v4.app.ListFragment{
 	
-	private String[] sistemas = {"Android","IOS","Ubuntu","MacOX","Windows"};
+	private ArrayList<String> sistemas;
+		//{"Android","IOS","Ubuntu","MacOX","Windows"};
 
-	
 	public void onCreate(Bundle savedInstanceState){
+		sistemas= new ArrayList<String>();
 		super.onCreate(savedInstanceState);
 		//Adaptar a la lista de fragment
 		setListAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,sistemas));
@@ -30,8 +37,19 @@ import android.widget.Toast;
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		// TODO Auto-generated method stub
 		super.onListItemClick(l, v, position, id);
-		Toast.makeText(getActivity(), "Has pulsado"+sistemas[position], 2000).show();
+		Toast.makeText(getActivity(), "Has pulsado "+ sistemas.get(position), 2000).show();
 	}
-
-
+	
+	public void mostrarTodosLosMedicamentos(){
+		Cursor c = BD_sqlite.getMiBD(getActivity()).leerMedicamentos();
+		sistemas.clear();
+		String nombre="";
+		//iNombre=c.getColumnIndex("Nombre");
+		if(c.moveToFirst()){
+			do{
+				nombre=c.getString(0);
+				sistemas.add(nombre);
+			}while(c.moveToNext());
+		}
+	}
 }
