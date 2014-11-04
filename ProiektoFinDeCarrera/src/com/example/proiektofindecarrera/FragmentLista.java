@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
 import android.app.ListFragment;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -38,6 +39,9 @@ import android.widget.Toast;
 		// TODO Auto-generated method stub
 		super.onListItemClick(l, v, position, id);
 		Toast.makeText(getActivity(), "Has pulsado "+ sistemas.get(position), 2000).show();
+		Intent i = new Intent(getActivity(),IndicacionesMedicamento.class);
+		i.putExtra("NombreMedicamento", sistemas.get(position));
+		startActivity(i);
 	}
 	
 	public void mostrarTodosLosMedicamentos(){

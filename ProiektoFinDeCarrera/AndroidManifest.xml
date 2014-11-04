@@ -25,6 +25,7 @@
         <activity android:name=".Registration" android:label="registration"></activity>
         <activity android:name=".MainActivity" android:label="mainactivity"></activity>
         <activity android:name=".Botiquin" android:label="botiquin"></activity>
+        <activity android:label="indicacionesmedicamento" android:name=".IndicacionesMedicamento"></activity>
     </application>
 
 </manifest>

@@ -68,6 +68,11 @@ public class BD_sqlite extends SQLiteOpenHelper {
 		valores.put("Password",pass);
 		this.getWritableDatabase().insert("Usuarios", null, valores);
 	}
+	public Cursor leerIndicaciones (String md){
+		String sql = "SELECT Indicaciones FROM Medicamentos WHERE Nombre='"+md+"'";
+		return this.getWritableDatabase().rawQuery(sql, null);
+		
+	}
 	
 	public void insertarMedicamentos (String nombre, String indicaciones){
 		ContentValues valores = new ContentValues();
@@ -86,7 +91,6 @@ public class BD_sqlite extends SQLiteOpenHelper {
 		for (c.moveToFirst();!c.isAfterLast();c.moveToNext()){
 			nombres[contador]=c.getString(iNombre);
 		}*/
-		
 	}
 	
 	public Boolean existeUsuario(String usr){
