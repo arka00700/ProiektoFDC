@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="LugarDeSuceso">
+        <item>En el agua bañandose</item>
+        <item>En la arena tomando el sol</item>
+        <item>Paseando</item>
+        <item>En embarcación</item>
+        <item>Practicando submarinismo</item>
+        <item>Otro(especificar)</item>
+    </string-array>
+
+    <string-array name="TipoDeSuceso">
+        <item>Herida</item>
+        <item>Traumatismo cerrado</item>
+        <item>Lesiones producidas por el sol</item>
+        <item>Quemadura no solar</item>
+        <item>Picaduras salvario</item>
+        <item>Picadura medusa</item>
+        <item>Picadura insecto</item>
+        <item>Cuerpo extraño</item>
+        <item>Pinchazo de jeringuilla</item>
+        <item>Cansancio</item>
+        <item>Corrientes de agua</item>
+        <item>Enfermedad</item>
+        <item>Otro(especificar)</item>
+    </string-array>
+    
+    <string-array name="AsistenciaPrestada">
+        <item>RCP-Ventilatorio</item>
+        <item>RCP-Cardio-respiratorio</item>
+        <item>Sanitaria</item>
+        <item>Social</item>
+        <item>Otro(especificar)</item>
+    </string-array>
+    
+    <string-array name="Resultado">
+        <item>Se le evacuó a (especificar)</item>
+        <item>Alta</item>
+        <item>Falleció(Hacer informe especícifo)</item>
+    </string-array>
+</resources>

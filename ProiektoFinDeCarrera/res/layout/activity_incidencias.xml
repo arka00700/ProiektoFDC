@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+	<TableLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:background="#ffffff"
+	    android:dividerPadding="5dp"
+	    android:padding="10dp" >
+
+		<TableRow
+		    android:id="@+id/tableRow1"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_marginTop="15dp" >
+
+			<TextView
+			    android:id="@+id/datospersonalestext"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:text="Datos Personales:"
+			    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+		</TableRow>
+	<View
+        android:layout_width="fill_parent"
+        android:layout_height="0.2dp"
+        android:id="@+id/separator"
+        android:visibility="visible"
+        android:background="@android:color/darker_gray"/>
+
+    <TableRow
+        android:id="@+id/nombreapellidosRow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="#BBBBBB" >
+
+        <EditText
+            android:id="@+id/nombreapellidos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="Nombre y apellido"
+            android:hint="Nombre y Apellido"
+            android:inputType="textPersonName"
+            android:maxLength="30"
+            android:singleLine="true"
+            android:textAppearance="?android:attr/textAppearanceMedium" >
+
+            <requestFocus />
+        </EditText>
+    </TableRow>
+	
+    <TableRow
+        android:id="@+id/sexoRow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="#DDDDDD" >
+
+        <TableRow
+            android:id="@+id/LineaSexo"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent" >
+
+            <TextView
+                android:id="@+id/textsexo"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_margin="5dp"
+                android:paddingRight="30dp"
+                android:text="Sexo:"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+	<RadioGroup 
+	    android:id="@+id/sexoradiogroup">
+            <RadioButton
+                android:id="@+id/Hombre"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Hombre" />
+
+            <RadioButton
+                android:id="@+id/Mujer"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"            
+                android:text="Mujer" />
+	</RadioGroup>
+	
+        </TableRow>
+		
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/edadRow"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="1dp"
+        android:background="#BBBBBB" >
+
+        <TableRow
+            android:id="@+id/lineaedad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/textedad"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_gravity="bottom"
+                android:layout_margin="5dp"
+                android:paddingRight="30dp"
+                android:text="Edad:"
+                android:singleLine="true"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <EditText
+                android:id="@+id/edad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:maxLength="2" />
+
+        </TableRow>
+
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tlfRow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="#DDDDDD" >
+
+        <TableRow
+            android:id="@+id/lineatfn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/textelefono:"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_margin="5dp"
+                android:text="Telefono:"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <EditText
+                android:id="@+id/editText1"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="5dp"
+                android:ems="10"
+                android:hint="(opcional)"
+                android:inputType="phone"
+                android:singleLine="true"
+                android:maxLength="9" />
+
+        </TableRow>
+
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/leyendaRow"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Leyenda:"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+    </TableRow>
+	 <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.2dp"
+        android:id="@+id/separator2"
+        android:visibility="visible"
+        android:background="@android:color/darker_gray"/>
+	 
+    <TableRow
+        android:id="@+id/horaRow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="#BBBBBB" >
+
+        <TableRow
+            android:id="@+id/LineaHora"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:text="Hora:"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <EditText
+                android:id="@+id/texthora"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="5dp"
+                android:ems="10"
+                android:hint="HH:MM"
+                android:singleLine="true"
+                android:inputType="time" />
+
+        </TableRow>
+
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/lugarRow"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="1dp"
+        android:background="#DDDDDD" >
+
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="5dp"
+                android:text="Lugar:"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <Spinner
+                android:id="@+id/spinnerlugar"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="1dp"
+                android:prompt="@string/spinner" />
+
+        </TableRow>
+
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/sucesoRow"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="1dp"
+        android:background="#BBBBBB" >
+
+        <TableRow
+            android:id="@+id/lineasuceso"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <TextView
+                android:id="@+id/Suceso"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="6dp"
+                android:text="Suceso:"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <Spinner
+                android:id="@+id/spinnersuceso"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginBottom="7dp"
+                android:layout_marginTop="7dp" />
+
+        </TableRow>
+
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/asistenciaRow"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="1dp"
+        android:background="#DDDDDD" >
+
+        <TableRow
+            android:id="@+id/lineaasistencia"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:text="Asistencia:"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <Spinner
+                android:id="@+id/spinnerAsistencia"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginBottom="7dp"
+                android:layout_marginTop="7dp" />
+
+        </TableRow>
+
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/resultadoRow"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="1dp"
+        android:background="#BBBBBB" >
+	<TableRow
+            android:id="@+id/linearesultado"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:text="Resultado:"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+        
+        <Spinner
+            android:id="@+id/spinnerResultado"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="7dp"
+            android:layout_marginTop="7dp"
+            android:contentDescription="Resultado" />
+
+   	 </TableRow>
+  </TableRow>
+
+    <TableRow
+        android:id="@+id/observacionesRow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#ffffff" >
+
+        <TextView
+            android:id="@+id/textObservaciones"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Observaciones:"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+    </TableRow>
+
+    <View
+        android:id="@+id/separator3"
+        android:layout_width="fill_parent"
+        android:layout_height="0.2dp"
+        android:background="@android:color/darker_gray"
+        android:visibility="visible" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/edittext_bg"
+        android:inputType="textMultiLine"
+        android:linksClickable="false"
+        android:maxLines="5"
+        android:scrollbars="vertical" 
+        android:maxLength="150"/>
+	
+</TableLayout>
+
+	
+
+</ScrollView>
