@@ -20,10 +20,11 @@
         android:layout_above="@+id/rfinalizarregistro"
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="23dp"
+        android:singleLine="true"
         android:ems="10" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/Suceso"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/rrepetircontraseña"
@@ -36,9 +37,10 @@
         android:id="@+id/rcontraseña"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/textView4"
+        android:layout_above="@+id/Suceso"
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="28dp"
+        android:singleLine="true"
         android:ems="10" />
 
     <EditText
@@ -48,6 +50,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textView2"
         android:layout_marginTop="14dp"
+        android:singleLine="true"
         android:ems="10" >
 
         <requestFocus />

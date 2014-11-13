@@ -19,7 +19,6 @@ import android.widget.Toast;
 	public class FragmentLista extends android.support.v4.app.ListFragment{
 	
 	private ArrayList<String> sistemas;
-		//{"Android","IOS","Ubuntu","MacOX","Windows"};
 
 	public void onCreate(Bundle savedInstanceState){
 		sistemas= new ArrayList<String>();
