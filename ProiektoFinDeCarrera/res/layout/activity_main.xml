@@ -1,45 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
-    
-<Button
-        android:id="@+id/Modificarpartes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="Modificar Partes" />
+    android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/Crearpartes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/Modificarpartes"
-        android:layout_alignLeft="@+id/Modificarpartes"
-        android:layout_alignRight="@+id/Modificarpartes"
-        android:layout_marginBottom="22dp"
-        android:text="Crear Partes" />
+    <FrameLayout
+        android:id="@+id/content_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </FrameLayout>
 
-    <Button
-        android:id="@+id/Botiquín"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Modificarpartes"
-        android:layout_alignRight="@+id/Modificarpartes"
-        android:layout_below="@+id/Modificarpartes"
-        android:layout_marginTop="17dp"
-        android:text="Botiquín" />
-
-    <TextView
-        android:id="@+id/Bienvenido"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/Crearpartes"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="48dp"
-        android:layout_marginLeft="26dp"
-        android:text="Bienvenido " />
-    
-</RelativeLayout>
+    <ListView android:id="@+id/left_drawer"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:choiceMode="singleChoice"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp"
+        android:background="#ff11"/>
+</android.support.v4.widget.DrawerLayout>

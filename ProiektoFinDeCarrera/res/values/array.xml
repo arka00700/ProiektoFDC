@@ -38,4 +38,38 @@
         <item>Alta</item>
         <item>Falleció(Hacer informe especícifo)</item>
     </string-array>
+    
+    <string-array name="OpcionesMenuLateral">
+        <item>Crear Partes</item>
+        <item>Modificardor de Partes</item>
+        <item>Botiquin</item>
+    </string-array>
+    
+    <string-array name="Playas">
+        <item>La Arena</item>
+        <item>Las Arenas</item>
+        <item>Ereaga</item>
+        <item>Arrigunaga</item>
+        <item>Azkorri-Gorrondatxe</item>
+        <item>Barinatxe-Salvaje</item>
+        <item>Arrietara-Atxabiribil</item>
+        <item>Barrika</item>
+        <item>Plentzia</item>
+        <item>Astondo</item>
+        <item>Gorliz</item>
+        <item>Muriola</item>
+        <item>Armintza</item>
+        <item>Bakio</item>
+        <item>Aritxatxu</item>
+        <item>Laidatxu</item>
+        <item>Toña</item>
+        <item>San Antonio</item>
+        <item>Laida</item>
+        <item>Laga</item>
+        <item>Ea</item>
+        <item>Ogella</item>
+        <item>Isuntza</item>
+        <item>Karraspio</item>
+        <item>Arrigorri</item>
+    </string-array>
 </resources>

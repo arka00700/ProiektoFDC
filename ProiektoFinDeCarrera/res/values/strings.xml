@@ -8,4 +8,6 @@
 	<string name="menu_nuevo">NewMenu</string>
 	<string name="search">Search</string>
 	<string name="spinner">Lugar de suceso</string>
+	<string name="open_drawer">Drawer abierto</string>
+	<string name="close_drawer">Drawer cerrado</string>
 </resources>

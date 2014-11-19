@@ -1,6 +1,7 @@
 package com.example.proiektofindecarrera;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -22,13 +23,15 @@ public class Login extends ActionBarActivity {
         setContentView(R.layout.activity_login);
         
         final BD_sqlite BDhelper= new BD_sqlite(getApplicationContext());
+        //PARA ACTUALIZAR LA BASE DE DATOS
+		/*SQLiteDatabase db = BDhelper.getWritableDatabase();
+		//Log.i(this.getClass().toString(), "Probando BD");
+		BDhelper.onUpgrade(db, 1, 2);*/
 		
-		Log.i(this.getClass().toString(), "Probando login 1");
-		//BDhelper.onUpgrade(db, 1, 2);
         btlogin = (Button) findViewById(R.id.login);
         btregistration= (Button) findViewById(R.id.registrarse);
         
-        usrId = (EditText) findViewById(R.id.editText1);
+        usrId = (EditText) findViewById(R.id.rRecurso);
 		passId = (EditText) findViewById(R.id.editText2);
                 
         //AÑADIR LISTENER Y CREAR BASE DE DATOS

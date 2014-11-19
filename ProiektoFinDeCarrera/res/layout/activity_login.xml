@@ -23,7 +23,7 @@
         android:id="@+id/usuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/editText1"
+        android:layout_above="@+id/rRecurso"
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="25dp"
         android:layout_marginLeft="34dp"
@@ -47,7 +47,7 @@
         android:text="Contraseña:" />
 
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/rRecurso"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/contraseña"

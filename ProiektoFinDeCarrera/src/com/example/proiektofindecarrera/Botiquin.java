@@ -50,14 +50,7 @@ public class Botiquin extends FragmentActivity implements OnQueryTextListener{
        
         return true;
     }
-	public boolean onOptionsItemSelected(MenuItem item) {
-       
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+	
 	@Override
 	public boolean onQueryTextChange(String msg) {
 		Log.d("Searchbar", msg);

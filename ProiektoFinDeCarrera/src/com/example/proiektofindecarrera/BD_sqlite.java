@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class BD_sqlite extends SQLiteOpenHelper {
 	private static BD_sqlite miLaBD;
-	String crearUsuarios = "CREATE TABLE Usuarios (User TEXT PRIMARY KEY NOT NULL, Password TEXT NOT NULL)";
+	String crearUsuarios = "CREATE TABLE Usuarios (User TEXT PRIMARY KEY NOT NULL, Password TEXT NOT NULL,Playa TEXT NOT NULL,Recurso SMALLINT NOT NULL)";
 	String crearMedicamentos = "CREATE TABLE Medicamentos (Nombre TEXT PRIMARY KEY NOT NULL, Indicaciones TEXT NOT NULL)";
 	
 	//CONSTRUCTORES (CREAR Y EL SEGUNDO PARA MODIFICAR PASANDO LA VERSION)
@@ -62,10 +62,12 @@ public class BD_sqlite extends SQLiteOpenHelper {
 		this.close();
 	}
 
-	public void insertarUsuarios(String usr, String pass){
+	public void insertarUsuarios(String usr, String pass,String playa,int recurso){
 		ContentValues valores = new ContentValues();
 		valores.put("User",usr);
 		valores.put("Password",pass);
+		valores.put("Playa", playa);
+		valores.put("Recurso",recurso);
 		this.getWritableDatabase().insert("Usuarios", null, valores);
 	}
 	public Cursor leerIndicaciones (String md){
