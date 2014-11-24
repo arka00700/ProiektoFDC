@@ -29,7 +29,7 @@ public class Registration extends ActionBarActivity{
 		passId = (EditText) findViewById(R.id.rcontraseña);
 		passId2 = (EditText) findViewById(R.id.rrepetircontraseña);
 		spinnerPlayas = (Spinner) findViewById(R.id.spinnerplaya);
-		usrRecurso=(EditText) findViewById(R.id.rRecurso);
+		usrRecurso=(EditText) findViewById(R.id.telefono);
 	  //SPINNER
 		ArrayAdapter<CharSequence> adapterPlayas = ArrayAdapter.createFromResource(this,
         	     R.array.Playas, android.R.layout.simple_spinner_item);
@@ -57,7 +57,8 @@ public class Registration extends ActionBarActivity{
 		String playa = spinnerPlayas.getSelectedItem().toString();
 		String editvalue=usrRecurso.getText().toString();
 		
-		if (estaVacio()==true){
+		
+		if (estaVacioRegistro()==true){
 			Toast.makeText(getApplicationContext(),"Algun campo en blanco", 2000).show();
 		}else if (pass.equals(pass2)==false){
 				Toast.makeText(getApplicationContext(),"Contraseñas diferentes", 2000).show();
@@ -76,7 +77,7 @@ public class Registration extends ActionBarActivity{
 				}	
 	
 			}
-	public boolean estaVacio(){
+	private boolean estaVacioRegistro(){
 		boolean vacio = true;
 		if(usrId.getText().toString().compareTo("")!=0 && passId.getText().toString().compareTo("")!=0
 				&& passId2.getText().toString().compareTo("")!=0 && usrRecurso.getText().toString().compareTo("")!=0){

@@ -10,9 +10,15 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class BD_sqlite extends SQLiteOpenHelper {
 	private static BD_sqlite miLaBD;
-	String crearUsuarios = "CREATE TABLE Usuarios (User TEXT PRIMARY KEY NOT NULL, Password TEXT NOT NULL,Playa TEXT NOT NULL,Recurso SMALLINT NOT NULL)";
-	String crearMedicamentos = "CREATE TABLE Medicamentos (Nombre TEXT PRIMARY KEY NOT NULL, Indicaciones TEXT NOT NULL)";
-	
+	String crearUsuarios = "CREATE TABLE Usuarios (User TEXT PRIMARY KEY NOT NULL, Password TEXT NOT NULL," +
+			"Playa TEXT NOT NULL,Recurso SMALLINT NOT NULL)";
+	String crearMedicamentos = "CREATE TABLE Medicamentos (Nombre TEXT PRIMARY KEY NOT NULL," +
+			"Indicaciones TEXT NOT NULL)";
+	String crearPartesIncidencias = "CREATE TABLE ParteIncidencias (NombreApellido TEXT NOT NULL," +
+			"Sexo BOOLEAN NOT NUT,Edad TINYINT NOT NULL,Telefono INT,Hora TIME NOT NULL,Lugar TINYINT NOT NULL" +
+			"Suceso TINYINT NOT NULL,Asistencia TINYINT NOT NULL,Resultado TINYINT NOT NULL," +
+			"Observaciones VARCHAR(200))";
+			
 	//CONSTRUCTORES (CREAR Y EL SEGUNDO PARA MODIFICAR PASANDO LA VERSION)
 	public BD_sqlite(Context context) {
 		super(context, "BD.sqlite", null, 1);
@@ -38,7 +44,7 @@ public class BD_sqlite extends SQLiteOpenHelper {
 		// TODO Auto-generated method stub
 		db.execSQL(crearUsuarios);
 		db.execSQL(crearMedicamentos);
-		
+		db.execSQL(crearPartesIncidencias);
 	}
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -46,6 +52,7 @@ public class BD_sqlite extends SQLiteOpenHelper {
 		if (newVersion>oldVersion){
 			db.execSQL("DROP TABLE IF EXISTS Usuarios");
 			db.execSQL("DROP TABLE IF EXISTS Medicamentos");
+			db.execSQL("DROP TABLE IF EXISTS ParteIncidencias");
 			onCreate(db);
 			}
 	
@@ -128,22 +135,21 @@ public class BD_sqlite extends SQLiteOpenHelper {
 		return result;
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		public void InsertarParteIncidencias(String nomApel,Boolean sexo,int edad,int telefono,String hora,
+				int lugar,int suceso,int asistencia,int resultado,String observaciones){
+			ContentValues valores = new ContentValues();
+		}
+		
+		public Boolean existeParte(String nombreApellido,String hora){
+			Boolean estaParte=true;
+			String sql = "SELECT * FROM ParteIncidencias WHERE NombreApellido='"+nombreApellido+"'" +
+					" AND Hora='"+hora+"'";
+			Cursor c= this.getReadableDatabase().rawQuery(sql, null);
+			c.moveToFirst();
+			if(c.getCount()<=0){
+				estaParte = false;
+			}
+			return estaParte;
+		}
 	
 }

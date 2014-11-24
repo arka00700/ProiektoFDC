@@ -147,15 +147,15 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
-                android:id="@+id/rRecurso"
+                android:id="@+id/telefono"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_marginLeft="5dp"
                 android:ems="10"
                 android:hint="(opcional)"
                 android:inputType="phone"
-                android:singleLine="true"
-                android:maxLength="9" />
+                android:maxLength="9"
+                android:singleLine="true" />
 
         </TableRow>
 
@@ -209,8 +209,9 @@
                 android:layout_marginTop="5dp"
                 android:ems="10"
                 android:hint="HH:MM"
-                android:singleLine="true"
-                android:inputType="time" />
+                android:inputType="time"
+                android:onClick="timeOnClick"
+                android:singleLine="true" />
 
         </TableRow>
 
@@ -370,11 +371,25 @@
         android:layout_height="fill_parent"
         android:layout_marginTop="5dp"
         android:background="@drawable/edittext_bg"
+        android:ems="10"
         android:inputType="textMultiLine"
         android:linksClickable="false"
+        android:maxLength="150"
         android:maxLines="5"
-        android:scrollbars="vertical" 
-        android:maxLength="150"/>
+        android:scrollbars="vertical" />
+
+    <View
+        android:id="@+id/separator4"
+        android:layout_width="fill_parent"
+        android:layout_height="0.2dp"
+        android:background="@android:color/darker_gray"
+        android:visibility="visible" />
+
+    <Button
+        android:id="@+id/guardarIncidencias"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Guardar Incidencias" />
 	
 </TableLayout>
 
