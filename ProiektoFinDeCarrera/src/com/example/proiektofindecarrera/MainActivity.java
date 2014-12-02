@@ -99,10 +99,13 @@ public class MainActivity extends ActionBarActivity{
     	case 0://Crear Partes
     		lanzarPartesCuras();
     	break;
-    	case 1://Modificador de partes
+    	case 1:
+    		lanzarPartesDiarios();
+    	break;
+    	case 2://Modificador de partes
     		Toast.makeText(getApplicationContext(),"Modificar partes sin hacer...", 2000).show();
     	break;
-    	case 2://Botiquin
+    	case 3://Botiquin
     		lanzarBotiquin();
     	break;
     	default:
@@ -135,6 +138,10 @@ public class MainActivity extends ActionBarActivity{
 	}
 	public void lanzarPartesCuras(){
 		Intent i = new Intent (this,ParteIncidencias.class);
+		startActivity(i);
+	}
+	public void lanzarPartesDiarios(){
+		Intent i = new Intent (this,ParteDiarios.class);
 		startActivity(i);
 	}
 	//MENU ALTO

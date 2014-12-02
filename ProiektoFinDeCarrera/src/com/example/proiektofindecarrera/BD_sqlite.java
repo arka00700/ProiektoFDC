@@ -15,7 +15,7 @@ public class BD_sqlite extends SQLiteOpenHelper {
 	String crearMedicamentos = "CREATE TABLE Medicamentos (Nombre TEXT PRIMARY KEY NOT NULL," +
 			"Indicaciones TEXT NOT NULL)";
 	String crearPartesIncidencias = "CREATE TABLE ParteIncidencias (NombreApellido TEXT NOT NULL," +
-			"Sexo BOOLEAN NOT NUT,Edad TINYINT NOT NULL,Telefono INT,Hora TIME NOT NULL,Lugar TINYINT NOT NULL" +
+			"Sexo BOOLEAN NOT NULL,Edad TINYINT NOT NULL,Telefono INT,Hora TIME NOT NULL,Lugar TINYINT NOT NULL," +
 			"Suceso TINYINT NOT NULL,Asistencia TINYINT NOT NULL,Resultado TINYINT NOT NULL," +
 			"Observaciones VARCHAR(200))";
 			
@@ -138,9 +138,20 @@ public class BD_sqlite extends SQLiteOpenHelper {
 		public void InsertarParteIncidencias(String nomApel,Boolean sexo,int edad,int telefono,String hora,
 				int lugar,int suceso,int asistencia,int resultado,String observaciones){
 			ContentValues valores = new ContentValues();
+			valores.put("NombreApellido",nomApel);
+			valores.put("Sexo",sexo);
+			valores.put("Edad",edad);
+			valores.put("Telefono",telefono);
+			valores.put("Hora",hora);
+			valores.put("Lugar",lugar);
+			valores.put("Suceso",suceso);
+			valores.put("Asistencia",asistencia);
+			valores.put("Resultado",resultado);
+			valores.put("Observaciones", observaciones);
+			this.getWritableDatabase().insert("ParteIncidencias", null, valores);
 		}
 		
-		public Boolean existeParte(String nombreApellido,String hora){
+		public Boolean existeParteIncidencias(String nombreApellido,String hora){
 			Boolean estaParte=true;
 			String sql = "SELECT * FROM ParteIncidencias WHERE NombreApellido='"+nombreApellido+"'" +
 					" AND Hora='"+hora+"'";

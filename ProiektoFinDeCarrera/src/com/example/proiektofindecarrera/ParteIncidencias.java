@@ -6,12 +6,11 @@ import java.util.Locale;
 
 import android.app.TimePickerDialog;
 import android.app.TimePickerDialog.OnTimeSetListener;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.text.format.Time;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,7 +22,7 @@ import android.widget.Toast;
 public class ParteIncidencias extends ActionBarActivity {
 	
 	final Calendar calendario= Calendar.getInstance();
-	EditText insertarHora,nombreApellido,edad,telefono;
+	EditText insertarHora,nombreApellido,edad,telefono,observaciones;
 	BD_sqlite BDhelper= new BD_sqlite(this);
 	Spinner spinnerLugar,spinnerSuceso,spinnerAsistencia,spinnerResultado;
 	RadioGroup sexo;
@@ -37,6 +36,7 @@ public class ParteIncidencias extends ActionBarActivity {
 		edad = (EditText) findViewById(R.id.edad);
 		telefono = (EditText) findViewById(R.id.telefono);
         insertarHora=(EditText)findViewById(R.id.texthora);
+        observaciones=(EditText)findViewById(R.id.editText2);
         btguardar=(Button)findViewById(R.id.guardarIncidencias);
         //Spiners de opciones
         spinnerLugar = (Spinner) findViewById(R.id.spinnerlugar);
@@ -101,7 +101,7 @@ public class ParteIncidencias extends ActionBarActivity {
 	private void setCurrentTimeOnView(){
 		String timeFormat="hh:mm";
 		SimpleDateFormat stf = new SimpleDateFormat(timeFormat,Locale.UK);
-		insertarHora.setText(stf.format(calendario.getTime()).concat(":00"));
+		insertarHora.setText(stf.format(calendario.getTime()));
 	}
 	//GUARDAR EN BASE DE DATOS 
 	private void registrarIncidencia (){
@@ -111,22 +111,32 @@ public class ParteIncidencias extends ActionBarActivity {
 		String telefonoString = telefono.getText().toString();
 		boolean esHombre=valorRadioGroup();
 		String hora = insertarHora.getText().toString();
-		int datosSpinner[]=ConversorSpinner(spinnerLugar, spinnerSuceso, spinnerAsistencia, spinnerResultado);
-		
+		String observacionesString = observaciones.getText().toString();
+		int datosSpinner[]=ConversorSpinner(spinnerLugar, spinnerSuceso, 
+				spinnerAsistencia, spinnerResultado);
+		int edadInt = 0,telefonoInt = 0;
 		if (estaVacioIncidencias()==true){
 			Toast.makeText(getApplicationContext(), "Algún campo en blanco", 2000).show();
 		}else if(hora.isEmpty()){
 				Toast.makeText(getApplicationContext(),"Inserta una hora", 2000).show();
-		/*	}else if (BDhelper.existeParte(nombreString, hora)==false){
-				//BDhelper.InsertarParteIncidencias();
-				Toast.makeText(getApplicationContext(),"Parte realizado correctamente", 2000).show();
+		}else if (BDhelper.existeParteIncidencias(nombreString, hora)==false){
+			hora.concat(":00");
+			
+			if (telefonoString.isEmpty()==false){	
+				telefonoInt=Integer.parseInt(telefonoString);
+			}else if(edadString.isEmpty()==false){
+				edadInt =Integer.parseInt(edadString);
 				
-				}else{
-				
-				Toast.makeText(getApplicationContext(),"El usuario ya existe", 2000).show();
-				
-				*/
-				}	
+			}else{
+				telefonoInt=0;
+			}
+			BDhelper.InsertarParteIncidencias(nombreString, esHombre, edadInt, telefonoInt,
+					hora, datosSpinner[0], datosSpinner[1], datosSpinner[2], datosSpinner[3], observacionesString);
+			Toast.makeText(getApplicationContext(),"Parte realizado correctamente", 2000).show();
+			IrMainActivity();
+			}else{
+			Toast.makeText(getApplicationContext(),"El parte de incidencias ya existe", 2000).show();
+			}	
 	
 			}
 	
@@ -134,7 +144,7 @@ public class ParteIncidencias extends ActionBarActivity {
 		int[] respuestasSpinner=new int[4] ;
 		
 			respuestasSpinner[0]=(spinnerLugar.getSelectedItemPosition())+1;
-			respuestasSpinner[1]=(spinnerLugar.getSelectedItemPosition())+1;
+			respuestasSpinner[1]=(spinnerSuceso.getSelectedItemPosition())+1;
 			respuestasSpinner[2]=(spinnerAsistencia.getSelectedItemPosition())+1;
 			respuestasSpinner[3]=(spinnerResultado.getSelectedItemPosition())+1;
 		 
@@ -158,4 +168,9 @@ public class ParteIncidencias extends ActionBarActivity {
 		}
 		return hombre;
 	}
+	public void IrMainActivity(){
+    	Intent i = new Intent (this, MainActivity.class);
+    	startActivity(i);
+    	}
+
 }
