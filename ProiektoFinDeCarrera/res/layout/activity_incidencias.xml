@@ -204,7 +204,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
-                android:id="@+id/texthora"
+                android:id="@+id/horaincidencia"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_marginTop="5dp"
@@ -367,7 +367,7 @@
         android:visibility="visible" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/balizalugar"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_marginTop="5dp"

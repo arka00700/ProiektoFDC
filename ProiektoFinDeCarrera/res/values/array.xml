@@ -73,4 +73,11 @@
         <item>Karraspio</item>
         <item>Arrigorri</item>
     </string-array>
+    
+    <string-array name="OpcionesAgua">
+        <item>Excelente</item>
+        <item>Buena</item>
+        <item>Suficiente</item>
+        <item>Insuficiente</item>
+    </string-array>
 </resources>

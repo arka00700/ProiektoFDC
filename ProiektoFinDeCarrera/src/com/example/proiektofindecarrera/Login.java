@@ -32,7 +32,7 @@ public class Login extends ActionBarActivity {
         btregistration= (Button) findViewById(R.id.registrarse);
         
         usrId = (EditText) findViewById(R.id.telefono);
-		passId = (EditText) findViewById(R.id.editText2);
+		passId = (EditText) findViewById(R.id.balizalugar);
                 
         //AÑADIR LISTENER Y CREAR BASE DE DATOS
 		btlogin.setOnClickListener(new OnClickListener() {

@@ -20,7 +20,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 public class ParteIncidencias extends ActionBarActivity {
-	
+	//DECLARACION
 	final Calendar calendario= Calendar.getInstance();
 	EditText insertarHora,nombreApellido,edad,telefono,observaciones;
 	BD_sqlite BDhelper= new BD_sqlite(this);
@@ -35,8 +35,8 @@ public class ParteIncidencias extends ActionBarActivity {
         nombreApellido = (EditText) findViewById(R.id.nombreapellidos);
 		edad = (EditText) findViewById(R.id.edad);
 		telefono = (EditText) findViewById(R.id.telefono);
-        insertarHora=(EditText)findViewById(R.id.texthora);
-        observaciones=(EditText)findViewById(R.id.editText2);
+        insertarHora=(EditText)findViewById(R.id.horaincidencia);
+        observaciones=(EditText)findViewById(R.id.balizalugar);
         btguardar=(Button)findViewById(R.id.guardarIncidencias);
         //Spiners de opciones
         spinnerLugar = (Spinner) findViewById(R.id.spinnerlugar);

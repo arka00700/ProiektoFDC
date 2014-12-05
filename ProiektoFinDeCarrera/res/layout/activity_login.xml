@@ -9,7 +9,7 @@
     tools:context="com.example.proiektofindecarrera.Login" >
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/balizalugar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/contraseña"
@@ -33,7 +33,7 @@
         android:id="@+id/login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText2"
+        android:layout_below="@+id/balizalugar"
         android:layout_marginTop="25dp"
         android:text="Log In" />
 
