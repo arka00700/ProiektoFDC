@@ -79,7 +79,7 @@ public class ParteIncidencias extends ActionBarActivity {
 			
 			@Override
 			public void onClick(View v) {
-				registrarIncidencia();
+				guardarIncidencia();
 			}
 		});
 	}
@@ -104,17 +104,19 @@ public class ParteIncidencias extends ActionBarActivity {
 		insertarHora.setText(stf.format(calendario.getTime()));
 	}
 	//GUARDAR EN BASE DE DATOS 
-	private void registrarIncidencia (){
+	
+	private void guardarIncidencia (){
 		//RECOGIDA DE DATOS
-		String nombreString = nombreApellido.getText().toString(); //COMPROBAR LOS DATOS QUE ALGUNO FALLA
+		String nombreString = nombreApellido.getText().toString(); 
 		String edadString = edad.getText().toString();
 		String telefonoString = telefono.getText().toString();
-		boolean esHombre=valorRadioGroup();
+		boolean esHombre=valorRadioSexo();
 		String hora = insertarHora.getText().toString();
 		String observacionesString = observaciones.getText().toString();
 		int datosSpinner[]=ConversorSpinner(spinnerLugar, spinnerSuceso, 
 				spinnerAsistencia, spinnerResultado);
 		int edadInt = 0,telefonoInt = 0;
+		
 		if (estaVacioIncidencias()==true){
 			Toast.makeText(getApplicationContext(), "Algún campo en blanco", 2000).show();
 		}else if(hora.isEmpty()){
@@ -149,8 +151,8 @@ public class ParteIncidencias extends ActionBarActivity {
 			respuestasSpinner[3]=(spinnerResultado.getSelectedItemPosition())+1;
 		 
 		return respuestasSpinner;
-		
 	}
+	
 	private boolean estaVacioIncidencias(){
 		boolean vacio = true;
 		if(nombreApellido.getText().toString().compareTo("")!=0 && edad.getText().toString().compareTo("")!=0
@@ -158,9 +160,9 @@ public class ParteIncidencias extends ActionBarActivity {
 			vacio=false;
 		}
 		return vacio;
-	
 	}
-	private boolean valorRadioGroup(){
+	
+	private boolean valorRadioSexo(){
 		boolean hombre=true;
 		int radioButtonID = sexo.getCheckedRadioButtonId();
 		if(radioButtonID==R.id.Mujer){
@@ -168,6 +170,7 @@ public class ParteIncidencias extends ActionBarActivity {
 		}
 		return hombre;
 	}
+	
 	public void IrMainActivity(){
     	Intent i = new Intent (this, MainActivity.class);
     	startActivity(i);

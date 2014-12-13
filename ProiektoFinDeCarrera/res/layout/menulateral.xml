@@ -21,10 +21,11 @@
 <!-- Navigation Drawer -->
  
 <ListView
- android:id="@+id/drawer"
- android:layout_width="240dp"
- android:layout_height="match_parent"
- android:layout_gravity="left"
- android:background="#EEE" />
+    android:id="@+id/drawer"
+    style="@style/AppTheme"
+    android:layout_width="240dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="left"
+    android:background="#000000" />
  
 </android.support.v4.widget.DrawerLayout>

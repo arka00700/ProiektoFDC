@@ -18,7 +18,12 @@ public class BD_sqlite extends SQLiteOpenHelper {
 			"Sexo BOOLEAN NOT NULL,Edad TINYINT NOT NULL,Telefono INT,Hora TIME NOT NULL,Lugar TINYINT NOT NULL," +
 			"Suceso TINYINT NOT NULL,Asistencia TINYINT NOT NULL,Resultado TINYINT NOT NULL," +
 			"Observaciones VARCHAR(200))";
-			
+	String crearPartesDiarios = "CREATE TABLE PartesDiarios (RecursoHumanos TEXT NOT NULL," +
+			"CalidadAgua TINYINT NOT NULL,Hora TIME NOT NULL,TemperaturaAgua TYNYINT NOT NULL," +
+			"Grados11 TINYINT,Hora11 TIME,Grados13 TINYINT,Hora13 TIME,Grados15 TINYINT,Hora15 TIME," +
+			"Grados17 TINYINT,Hora17 TIME,Grados19 TINYINT,Hora19 TIME,Hora20 TIME," +
+			"Bandera TEXT NOT NULL,BalizaLugar TEXT,BalizaHora TIME,CartelLugar TEXT," +
+			"CartelHora TIME,Orgánico TINYINT,Papel TINYINT,Plástico TINYINT,Incidencias VARCHAR(200))";
 	//CONSTRUCTORES (CREAR Y EL SEGUNDO PARA MODIFICAR PASANDO LA VERSION)
 	public BD_sqlite(Context context) {
 		super(context, "BD.sqlite", null, 1);

@@ -1,80 +1,80 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.proiektofindecarrera.Login" >
 
-    <EditText
-        android:id="@+id/balizalugar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/contraseña"
-        android:layout_below="@+id/contraseña"
-        android:layout_marginTop="24dp"
-        android:singleLine="true"
-        android:password="true"
-        android:ems="10" />
 
-    <TextView
-        android:id="@+id/usuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/telefono"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="25dp"
-        android:layout_marginLeft="34dp"
-        android:text="Usuario:" />
-
-    <Button
-        android:id="@+id/login"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/balizalugar"
-        android:layout_marginTop="25dp"
-        android:text="Log In" />
+        android:layout_height="match_parent"
+        android:orientation="vertical" 
+        android:dividerPadding="5dp"
+    	android:padding="10dp" >
 
-    <TextView
-        android:id="@+id/contraseña"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/usuario"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="194dp"
-        android:text="Contraseña:" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="70dp"
+            android:background="@drawable/border"
+            android:orientation="vertical" >
 
-    <EditText
-        android:id="@+id/telefono"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/contraseña"
-        android:layout_alignLeft="@+id/contraseña"
-        android:layout_marginBottom="50dp"
-        android:singleLine="true"
-        android:ems="10" >
+            <TextView
+                android:id="@+id/usuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:text="Usuario:" />
 
-        <requestFocus />
-    </EditText>
+            <EditText
+                android:id="@+id/loginusuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/border"
+                android:ems="10"
+                android:singleLine="true" />
 
-    <TextView
-        android:id="@+id/nuevoenbat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/login"
-        android:layout_marginTop="21dp"
-        android:text="Nuevo en B.A.T?"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+            <TextView
+                android:id="@+id/contraseña"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Contraseña:" />
 
-    <Button
-        android:id="@+id/registrarse"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/nuevoenbat"
-        android:layout_alignParentBottom="true"
-        android:text="Registrarse" />
+            <EditText
+                android:id="@+id/loginpass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/border"
+                android:ems="10"
+                android:password="true"
+                android:singleLine="true" />
 
-</RelativeLayout>
+            <Button
+                android:id="@+id/login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:text="Log In" />
+
+            <TextView
+                android:id="@+id/nuevoenbat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:text="Nuevo en B.A.T?"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <Button
+                android:id="@+id/registrarse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Registrarse" />
+
+        </LinearLayout>
+</LinearLayout>
