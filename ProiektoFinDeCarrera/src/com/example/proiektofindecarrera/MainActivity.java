@@ -27,6 +27,7 @@ public class MainActivity extends ActionBarActivity{
     private ListView navList;
     private CharSequence mTitle;
     private ActionBarDrawerToggle drawerToggle;
+    String playa;
     
 	protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +36,7 @@ public class MainActivity extends ActionBarActivity{
       /*Intent de nombre del usuario introducido en el registro
         String usuario =getIntent().getStringExtra("Usuario");
       	bienvenido.setText("Bienvenido "+usuario);*/
+        playa = getIntent().getStringExtra("Playa");
       	
       /*btbotiquin = (Button) findViewById(R.id.Botiquín);
       	btcrearpartes= (Button) findViewById(R.id.Crearpartes);
@@ -142,6 +144,7 @@ public class MainActivity extends ActionBarActivity{
 	}
 	public void lanzarPartesDiarios(){
 		Intent i = new Intent (this,ParteDiarios.class);
+		i.putExtra("PlayaDiarios", playa);
 		startActivity(i);
 	}
 	//MENU ALTO

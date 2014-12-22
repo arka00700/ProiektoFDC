@@ -36,7 +36,7 @@ public class ParteIncidencias extends ActionBarActivity {
 		edad = (EditText) findViewById(R.id.edad);
 		telefono = (EditText) findViewById(R.id.telefono);
         insertarHora=(EditText)findViewById(R.id.horaincidencia);
-        observaciones=(EditText)findViewById(R.id.balizalugar);
+        observaciones=(EditText)findViewById(R.id.observaciones);
         btguardar=(Button)findViewById(R.id.guardarIncidencias);
         //Spiners de opciones
         spinnerLugar = (Spinner) findViewById(R.id.spinnerlugar);

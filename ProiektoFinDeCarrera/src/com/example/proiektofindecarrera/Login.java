@@ -13,10 +13,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
+	
 public class Login extends ActionBarActivity {
 	private Button btlogin,btregistration;
 	private EditText usrId,passId;
+	public String playausr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +52,7 @@ public class Login extends ActionBarActivity {
 					String comparar[]= new String[2];
 					comparar=BDhelper.buscarUsuario(usr);
 					if(comparar[0].equals(usr) && comparar[1].equals(pass)){
+						playausr=BDhelper.playaUsuario(comparar[0]);
 						lanzarMainActivity();	
 					}else if (comparar[0].equals(usr)==false || comparar[1].equals(pass)==false){
 						Toast.makeText(getApplicationContext(),"Usuario o contraseña incorrectos", 2000).show();	
@@ -71,9 +73,10 @@ public class Login extends ActionBarActivity {
    private void lanzarMainActivity(){
     	Intent i = new Intent (Login.this,MainActivity.class);
 		i.putExtra("Usuario", usrId.getText()+"");
+		i.putExtra("Playa",playausr);
     	startActivity(i);
     	}
-
+  
     private void lanzarRegistration(){
     	Intent i = new Intent (this, Registration.class);
     	startActivity(i);

@@ -1,5 +1,7 @@
 package com.example.proiektofindecarrera;
 
+import java.util.Date;
+
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
@@ -18,12 +20,14 @@ public class BD_sqlite extends SQLiteOpenHelper {
 			"Sexo BOOLEAN NOT NULL,Edad TINYINT NOT NULL,Telefono INT,Hora TIME NOT NULL,Lugar TINYINT NOT NULL," +
 			"Suceso TINYINT NOT NULL,Asistencia TINYINT NOT NULL,Resultado TINYINT NOT NULL," +
 			"Observaciones VARCHAR(200))";
-	String crearPartesDiarios = "CREATE TABLE PartesDiarios (RecursoHumanos TEXT NOT NULL," +
+	String crearPartesDiarios = "CREATE TABLE ParteDiarios (FechaDiarios DATE NOT NULL," +
+			"PlayaDiarios TEXT NOT NULL,RecursoHumanos TEXT NOT NULL," +
 			"CalidadAgua TINYINT NOT NULL,Hora TIME NOT NULL,TemperaturaAgua TYNYINT NOT NULL," +
 			"Grados11 TINYINT,Hora11 TIME,Grados13 TINYINT,Hora13 TIME,Grados15 TINYINT,Hora15 TIME," +
 			"Grados17 TINYINT,Hora17 TIME,Grados19 TINYINT,Hora19 TIME,Hora20 TIME," +
 			"Bandera TEXT NOT NULL,BalizaLugar TEXT,BalizaHora TIME,CartelLugar TEXT," +
 			"CartelHora TIME,Orgánico TINYINT,Papel TINYINT,Plástico TINYINT,Incidencias VARCHAR(200))";
+	
 	//CONSTRUCTORES (CREAR Y EL SEGUNDO PARA MODIFICAR PASANDO LA VERSION)
 	public BD_sqlite(Context context) {
 		super(context, "BD.sqlite", null, 1);
@@ -37,6 +41,7 @@ public class BD_sqlite extends SQLiteOpenHelper {
 	public BD_sqlite(FragmentLista fl) {
 		super(fl.getActivity(),"BD.sqlite", null, 1);
 	}
+	
 	public static BD_sqlite getMiBD(Context context){
 		if (miLaBD==null){
 			miLaBD = new BD_sqlite(context,"BD.sqlite", null, 1);
@@ -50,6 +55,7 @@ public class BD_sqlite extends SQLiteOpenHelper {
 		db.execSQL(crearUsuarios);
 		db.execSQL(crearMedicamentos);
 		db.execSQL(crearPartesIncidencias);
+		db.execSQL(crearPartesDiarios);
 	}
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -58,6 +64,7 @@ public class BD_sqlite extends SQLiteOpenHelper {
 			db.execSQL("DROP TABLE IF EXISTS Usuarios");
 			db.execSQL("DROP TABLE IF EXISTS Medicamentos");
 			db.execSQL("DROP TABLE IF EXISTS ParteIncidencias");
+			db.execSQL("DROP TABLE IF EXISTS ParteDiarios");
 			onCreate(db);
 			}
 	
@@ -105,6 +112,16 @@ public class BD_sqlite extends SQLiteOpenHelper {
 		for (c.moveToFirst();!c.isAfterLast();c.moveToNext()){
 			nombres[contador]=c.getString(iNombre);
 		}*/
+	}
+	public String playaUsuario(String usr){
+		String result = null;
+		String sql ="SELECT Playa FROM Usuarios WHERE User='"+usr+"'";
+		Cursor c = this.getReadableDatabase().rawQuery(sql, null);
+		c.moveToFirst();
+		int p;
+		p=c.getColumnIndex("Playa");
+		result=c.getString(p);
+		return result;
 	}
 	
 	public Boolean existeUsuario(String usr){
@@ -166,6 +183,43 @@ public class BD_sqlite extends SQLiteOpenHelper {
 				estaParte = false;
 			}
 			return estaParte;
+		}
+		//SIN TERMINAR
+		public void insertarParteDiarios(String fecha, String playa,int rcsh,String calidadAgua,
+				String hora,int tmpagua,int g11,String h11,int g13,
+				String h13,int g15,String h15,int g17,String h17,int g19,
+				String h19,String h20,String bandera){
+			ContentValues valores = new ContentValues();
+			valores.put("FechaDiarios",fecha);
+			valores.put("PlayaDiarios",playa);
+			valores.put("RecursoHumanos",rcsh);
+			valores.put("CalidadAgua",calidadAgua);
+			valores.put("Hora",hora);
+			valores.put("TemperaturaAgua",tmpagua);
+			valores.put("Grados11",g11);
+			valores.put("Hora11",h11);
+			valores.put("Grados13",g13);
+			valores.put("Hora13",h13);
+			valores.put("Grados15",g15);
+			valores.put("Hora15",h15);
+			valores.put("Grados17",g17);
+			valores.put("Hora17",h17);
+			valores.put("Grados19",g19);
+			valores.put("Hora19",h19);
+			valores.put("Hora20",h20);
+			valores.put("Bandera",bandera);
+			this.getWritableDatabase().insert("ParteDiarios", null, valores);
+		}
+		
+		public Boolean existeParteDiarios(String fecha){
+		Boolean estaParte = true;
+		String sql = "SELECT * FROM ParteDiarios WHERE FechaDiarios'"+fecha+"'";
+		Cursor c= this.getReadableDatabase().rawQuery(sql, null);
+		c.moveToFirst();
+		if(c.getCount()<=0){
+			estaParte = false;
+		}
+		return estaParte;
 		}
 	
 }
