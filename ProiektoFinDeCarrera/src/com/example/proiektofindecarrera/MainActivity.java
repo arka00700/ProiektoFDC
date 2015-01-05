@@ -33,11 +33,15 @@ public class MainActivity extends ActionBarActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-      /*Intent de nombre del usuario introducido en el registro
+        FragmentListaIncidencias parteincidencias= (FragmentListaIncidencias)
+        		getSupportFragmentManager().findFragmentById(R.id.fragmentincidencias);
+		parteincidencias.mostrarTodosLosParteIncidencias();
+      
+		/*Intent de nombre del usuario introducido en el registro
         String usuario =getIntent().getStringExtra("Usuario");
       	bienvenido.setText("Bienvenido "+usuario);*/
         playa = getIntent().getStringExtra("Playa");
-      	
+        
       /*btbotiquin = (Button) findViewById(R.id.Botiquín);
       	btcrearpartes= (Button) findViewById(R.id.Crearpartes);
       	btmodificarpartes= (Button) findViewById(R.id.Modificarpartes);

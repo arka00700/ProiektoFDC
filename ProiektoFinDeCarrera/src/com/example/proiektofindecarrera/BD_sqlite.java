@@ -17,7 +17,8 @@ public class BD_sqlite extends SQLiteOpenHelper {
 	String crearMedicamentos = "CREATE TABLE Medicamentos (Nombre TEXT PRIMARY KEY NOT NULL," +
 			"Indicaciones TEXT NOT NULL)";
 	String crearPartesIncidencias = "CREATE TABLE ParteIncidencias (NombreApellido TEXT NOT NULL," +
-			"Sexo BOOLEAN NOT NULL,Edad TINYINT NOT NULL,Telefono INT,Hora TIME NOT NULL,Lugar TINYINT NOT NULL," +
+			"FechaIncidencias DATE NOT NULL,Sexo BOOLEAN NOT NULL,Edad TINYINT NOT NULL," +
+			"Telefono INT,Hora TIME NOT NULL,Lugar TINYINT NOT NULL," +
 			"Suceso TINYINT NOT NULL,Asistencia TINYINT NOT NULL,Resultado TINYINT NOT NULL," +
 			"Observaciones VARCHAR(200))";
 	String crearPartesDiarios = "CREATE TABLE ParteDiarios (FechaDiarios DATE NOT NULL," +
@@ -157,10 +158,11 @@ public class BD_sqlite extends SQLiteOpenHelper {
 		return result;
 	}
 
-		public void InsertarParteIncidencias(String nomApel,Boolean sexo,int edad,int telefono,String hora,
+		public void InsertarParteIncidencias(String nomApel,String fecha,Boolean sexo,int edad,int telefono,String hora,
 				int lugar,int suceso,int asistencia,int resultado,String observaciones){
 			ContentValues valores = new ContentValues();
 			valores.put("NombreApellido",nomApel);
+			valores.put("FechaIncidencias",fecha);
 			valores.put("Sexo",sexo);
 			valores.put("Edad",edad);
 			valores.put("Telefono",telefono);
@@ -184,7 +186,16 @@ public class BD_sqlite extends SQLiteOpenHelper {
 			}
 			return estaParte;
 		}
-		//SIN TERMINAR
+		public Cursor recuperarIncidencias(String NombreApellido){
+			String sql ="SELECT NombreApellido,Edad,Sexo,Telefono,Hora," +
+					"Lugar,Suceso,Asistencia,Resultado,Observaciones FROM ParteIncidencias WHERE NombreApellido='"+NombreApellido+"'";
+			return this.getReadableDatabase().rawQuery(sql, null);
+		}
+		public Cursor leerParteIncidencias(){
+			String sql="SELECT NombreApellido,FechaIncidencias FROM ParteIncidencias";
+			return this.getReadableDatabase().rawQuery(sql, null);
+		}
+		//SIN TERMINAR (DATOS DINAMICOS)
 		public void insertarParteDiarios(String fecha, String playa,int rcsh,String calidadAgua,
 				String hora,int tmpagua,int g11,String h11,int g13,
 				String h13,int g15,String h15,int g17,String h17,int g19,

@@ -21,7 +21,8 @@ public class Botiquin extends FragmentActivity implements OnQueryTextListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_botiquin);
-        FragmentLista medicamentos= (FragmentLista) getSupportFragmentManager().findFragmentById(R.id.fragment);
+        FragmentLista medicamentos= (FragmentLista) getSupportFragmentManager().
+        		findFragmentById(R.id.fragment);
 		medicamentos.mostrarTodosLosMedicamentos();
        // searchView= (SearchView) findViewById(R.id.buscador); 
         btmedicamentonuevo = (Button) findViewById(R.id.insertarmedicamento);

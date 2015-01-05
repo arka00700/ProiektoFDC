@@ -3,7 +3,6 @@ package com.example.proiektofindecarrera;
 import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
-import android.app.ListFragment;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
