@@ -114,6 +114,7 @@ public class BD_sqlite extends SQLiteOpenHelper {
 			nombres[contador]=c.getString(iNombre);
 		}*/
 	}
+	
 	public String playaUsuario(String usr){
 		String result = null;
 		String sql ="SELECT Playa FROM Usuarios WHERE User='"+usr+"'";

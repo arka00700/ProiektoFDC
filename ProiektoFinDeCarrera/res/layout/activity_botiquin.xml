@@ -16,15 +16,25 @@
 
 			<TextView
 			    android:id="@+id/lsd"
-			    android:layout_width="wrap_content"
+			    android:layout_width="0dp"
 			    android:layout_height="wrap_content"
+			    android:layout_weight="20"
 			    android:text="Botiquín:" />
+
+			<android.support.v7.widget.SearchView
+			    android:id="@+id/buscarmedicamento"
+			    android:layout_width="0dp"
+			    android:layout_height="wrap_content"
+			    android:layout_weight="80" />
+
+			
 
 			<Button
 			    android:id="@+id/insertarmedicamento"
-			    android:layout_width="match_parent"
+			    android:layout_width="0dp"
 			    android:layout_height="wrap_content"
-			    android:text="Medicamento nuevo" />
+			    android:layout_weight="10"
+			    android:text="+" />
 
 		</LinearLayout>
 

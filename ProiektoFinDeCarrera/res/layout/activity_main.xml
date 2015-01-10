@@ -8,11 +8,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" >
     
-
     <FrameLayout
         android:id="@+id/content_frame"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,8 +33,10 @@
        <fragment
         android:id="@+id/fragmentincidencias"
         android:name="com.example.proiektofindecarrera.FragmentListaIncidencias"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+       	android:layout_width="wrap_content"
+        android:layout_weight="200"
+        android:layout_height="0dp"
+		 >
 		</fragment>
     
     </LinearLayout> 
@@ -44,12 +45,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+       
        
         <TextView
         android:id="@+id/diariostext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Partes Diarios:"/>
+		
+        <fragment
+        android:id="@+id/fragmentdiarios"
+        android:name="com.example.proiektofindecarrera.FragmentListaIncidencias"
+       	android:layout_width="wrap_content"
+        android:layout_weight="200"
+        android:layout_height="0dp"
+		 >
+		</fragment>
+        
       
     </LinearLayout>
      </LinearLayout> 

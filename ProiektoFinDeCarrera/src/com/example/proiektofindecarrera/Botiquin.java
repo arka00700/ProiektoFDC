@@ -5,33 +5,50 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.SearchView.OnQueryTextListener;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
 import android.widget.Button;
+
+import android.widget.Toast;
 
 public class Botiquin extends FragmentActivity implements OnQueryTextListener{
 	
 	private Button btmedicamentonuevo;
-	//private SearchView searchView;
+	SearchView searchView; //no me dejar hacer cast con la version v7
 	BD_sqlite BDhelper = new BD_sqlite(this);
+	FragmentLista medicamentos;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_botiquin);
-        FragmentLista medicamentos= (FragmentLista) getSupportFragmentManager().
+        medicamentos= (FragmentLista) getSupportFragmentManager().
         		findFragmentById(R.id.fragment);
 		medicamentos.mostrarTodosLosMedicamentos();
-       // searchView= (SearchView) findViewById(R.id.buscador); 
+        searchView= (SearchView) findViewById(R.id.buscarmedicamento); 
         btmedicamentonuevo = (Button) findViewById(R.id.insertarmedicamento);
-		btmedicamentonuevo.setOnClickListener(new OnClickListener() {
+		searchView.setOnQueryTextListener(new OnQueryTextListener() {
 			
+			@Override
+			public boolean onQueryTextSubmit(String query) {
+				medicamentos.actualizarLista(query);
+				return false;
+			}
+			
+			@Override
+			public boolean onQueryTextChange(String newText) {
+				
+				medicamentos.actualizarLista(newText);
+				//Toast.makeText(getApplicationContext(), "A cambiado: "+newText, 2000).show();
+				return false;
+			}
+		});
+        btmedicamentonuevo.setOnClickListener(new OnClickListener() {	
 			@Override
 			public void onClick(View v) {
 				// INSERTAMOS MEDICAMENTOS DE PRUEBA
 				BDhelper.insertarMedicamentos("Trombocil", "Anestesico local");
+				BDhelper.insertarMedicamentos("Tropical", "Anestesico local");
 				BDhelper.insertarMedicamentos("Botarel", "Crema de uso local");
 				BDhelper.insertarMedicamentos("Reflex", "Dolor muscular");
 				BDhelper.insertarMedicamentos("Sintrom", "Anestesico local");
@@ -40,21 +57,11 @@ public class Botiquin extends FragmentActivity implements OnQueryTextListener{
 				BDhelper.insertarMedicamentos("Raditina", "Antiacido");
 			}
 		});
-
 	}
-	public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-       getMenuInflater().inflate(R.menu.botiquin, menu);
-       MenuItem item = menu.findItem(R.id.search);
-       SearchView searchView = (SearchView) item.getActionView();
-       searchView.setOnQueryTextListener(this);
-       
-        return true;
-    }
 	
 	@Override
-	public boolean onQueryTextChange(String msg) {
-		Log.d("Searchbar", msg);
+	public boolean onQueryTextChange(String arg0) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 	@Override
@@ -62,4 +69,4 @@ public class Botiquin extends FragmentActivity implements OnQueryTextListener{
 		// TODO Auto-generated method stub
 		return false;
 	}
-}
+}	
