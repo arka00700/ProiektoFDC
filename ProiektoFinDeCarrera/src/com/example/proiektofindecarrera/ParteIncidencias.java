@@ -5,8 +5,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.app.TimePickerDialog.OnTimeSetListener;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -50,9 +52,10 @@ public class ParteIncidencias extends ActionBarActivity {
         spinnerAsistencia = (Spinner) findViewById(R.id.spinnerAsistencia);
         spinnerResultado = (Spinner) findViewById(R.id.spinnerResultado);
         sexo= (RadioGroup)findViewById(R.id.sexoradiogroup);
+       
         //CARGAR EL INTENT si es para modificar un parte ya existente
         if(getIntent().getStringExtra("NombreApellido")!=null){
-        cargarSpinners=CargarIntent();
+        cargarSpinners=crgIntenInc();
         }
        
         //Crear el array adaptador asignandole el array
@@ -115,14 +118,16 @@ public class ParteIncidencias extends ActionBarActivity {
 		SimpleDateFormat stf = new SimpleDateFormat(timeFormat,Locale.UK);
 		insertarHora.setText(stf.format(calendario.getTime()));
 	}
-	//GUARDAR EN BASE DE DATOS 
 	
+	//GUARDAR EN BASE DE DATOS 
 	private void guardarIncidencia (){
 		//RECOGIDA DE DATOS
 		String nombreString = nombreApellido.getText().toString(); 
-		String edadString = edad.getText().toString();
 		String telefonoString = telefono.getText().toString();
 		String datephone = getDatePhone();
+		if(getIntent().getStringExtra("Hora")!=null){
+			datephone=getIntent().getStringExtra("FechaIncidencias");
+		}
 		boolean esHombre=valorRadioSexo();
 		
 		String hora = insertarHora.getText().toString();
@@ -135,9 +140,9 @@ public class ParteIncidencias extends ActionBarActivity {
 			Toast.makeText(getApplicationContext(), "Algún campo en blanco", 2000).show();
 		}else if(hora.isEmpty()){
 				Toast.makeText(getApplicationContext(),"Inserta una hora", 2000).show();
-		}else if (BDhelper.existeParteIncidencias(nombreString, hora)==false){
+		}else if (BDhelper.existeParteIncidencias(getIntent().getStringExtra("FechaIncidencias"), hora)==false){
 			hora.concat(":00");
-			edadInt =Integer.parseInt(edadString);
+			edadInt =Integer.parseInt(edad.getText().toString());
 			
 			if (telefonoString.isEmpty()==false){	
 				telefonoInt=Integer.parseInt(telefonoString);
@@ -148,12 +153,13 @@ public class ParteIncidencias extends ActionBarActivity {
 			BDhelper.InsertarParteIncidencias(nombreString,datephone,esHombre, edadInt, telefonoInt,
 					hora, datosSpinner[0], datosSpinner[1], datosSpinner[2], datosSpinner[3], observacionesString);
 			Toast.makeText(getApplicationContext(),"Parte realizado correctamente", 2000).show();
-			IrMainActivity();
-			}else{
-			Toast.makeText(getApplicationContext(),"El parte de incidencias ya existe", 2000).show();
+			irMainActivity();
+		}else if (BDhelper.existeParteIncidencias(getIntent().getStringExtra("FechaIncidencias"), hora)==true
+					&& getIntent().getStringExtra("Hora")!=null){
+					alertaSobreescritura();
 			}	
 	
-			}
+		}
 	
 	private int[] ConversorSpinner(Spinner sp0,Spinner sp1,Spinner sp2, Spinner sp3){
 		int[] respuestasSpinner=new int[4] ;
@@ -184,7 +190,7 @@ public class ParteIncidencias extends ActionBarActivity {
 		return hombre;
 	}
 	
-	public void IrMainActivity(){
+	public void irMainActivity(){
     	Intent i = new Intent (this, MainActivity.class);
     	startActivity(i);
     	}
@@ -197,27 +203,23 @@ public class ParteIncidencias extends ActionBarActivity {
 	    String formatteDate = df.format(date);
 	    return formatteDate;
 	}
-	private int[] CargarIntent (){
+	private int[] crgIntenInc (){
 		int[] spinners = new int[4];
-		nomApel=getIntent().getStringExtra("NombreApellido");
 	    sex=getIntent().getBooleanExtra("Sexo", true);
-	    años=getIntent().getStringExtra("Edad");
-	    nomApel=getIntent().getStringExtra("NombreApellido");
 	    tlf= getIntent().getStringExtra("Telefono");
 	    hora= getIntent().getStringExtra("Hora"); 
 	    lugar=getIntent().getIntExtra("Lugar", 0);
 	    suceso=getIntent().getIntExtra("Suceso", 0);
 	    asistencia=getIntent().getIntExtra("Asistencia", 0);
 	    resultado=getIntent().getIntExtra("Resultado", 0);
-	    obs=getIntent().getStringExtra("Observaciones");
 	    
 	       if (sex==true){
 	        sexo.check(R.id.Hombre);	
 	        }else{
 	        sexo.check(R.id.Mujer);
 	        }
-	        edad.setText(años);
-	        nombreApellido.setText(nomApel);
+	        edad.setText(getIntent().getStringExtra("Edad"));
+	        nombreApellido.setText(getIntent().getStringExtra("NombreApellido"));
 	        insertarHora.setText(hora);
 	      if (tlf.equals("0")!=true){
 	    	   telefono.setText(tlf);
@@ -230,7 +232,30 @@ public class ParteIncidencias extends ActionBarActivity {
 		    spinners[1]=suceso;
 		    spinners[2]=asistencia;
 		    spinners[3]=resultado;
-		    observaciones.setText(obs);
+		    observaciones.setText(getIntent().getStringExtra("Observaciones"));
 	      return spinners;
+	}
+	public void alertaSobreescritura(){
+		AlertDialog.Builder alertaSobEsc = new AlertDialog.Builder(ParteIncidencias.this);
+		alertaSobEsc.setTitle("Alerta de modificacion");
+		alertaSobEsc.setMessage("¿Quiere guardar el parte ya existente con las nuevas modificaciones?");
+		alertaSobEsc.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				String hIncidencias = getIntent().getStringExtra("Hora");
+				BDhelper.borrarIncidenciaPorFecha(getIntent().getStringExtra("FechaIncidencias"), hIncidencias);
+				guardarIncidencia();
+			}
+		});
+		alertaSobEsc.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.cancel();
+			}
+		});
+		alertaSobEsc.create();
+		alertaSobEsc.show();
 	}
 }

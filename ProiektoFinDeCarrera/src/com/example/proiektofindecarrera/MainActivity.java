@@ -1,90 +1,143 @@
 package com.example.proiektofindecarrera;
 
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
 public class MainActivity extends ActionBarActivity{
 	
-	//private TextView bienvenido;
-	//private Button btbotiquin,btcrearpartes,btmodificarpartes;
 	//MENU LATERAL
-	private DrawerLayout drawerLayout;
-    private ListView navList;
-    private CharSequence mTitle;
-    private ActionBarDrawerToggle drawerToggle;
+	private DrawerLayout drawerLayout; //en activity_main.xml layout principal
+    private ListView navListLeft,navListRight; // en activity_main id del menu izquierdo
+    private CharSequence mTitle; //secuencia para coger titulo de la app
+    private ActionBarDrawerToggle drawerToggle,drawerToggleRight; //
+    private ArrayList<NavDrawerItem> navDrawerItems,navDrawerItemsRight; //clase navDrawerItem.java como compartimento
+    private TypedArray navMenuIcons,navMenuIconsRight; //para cargar iconos del navigation_drawer
+    private NavDrawerListAdapter adapter;
+    private NavDrawerListAdapterRight adapterRight;
     String playa;
+    private Button ordenar;
+    private FragmentListaIncidencias parteincidencias;
+    private FragmentListaDiarios partediarios;
     
 	protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        FragmentListaIncidencias parteincidencias= (FragmentListaIncidencias)
-        		getSupportFragmentManager().findFragmentById(R.id.fragmentincidencias);
-		parteincidencias.mostrarTodosLosParteIncidencias();
-      
+        parteincidencias= (FragmentListaIncidencias)getSupportFragmentManager().findFragmentById(R.id.fragmentincidencias);
+		partediarios = (FragmentListaDiarios) getSupportFragmentManager().findFragmentById(R.id.fragmentdiarios);
+        parteincidencias.mostrarPartesPorFecha();
+        partediarios.mostrarPartesPorFecha();
+		
 		/*Intent de nombre del usuario introducido en el registro
         String usuario =getIntent().getStringExtra("Usuario");
       	bienvenido.setText("Bienvenido "+usuario);*/
-        playa = getIntent().getStringExtra("Playa");
-        
-      /*btbotiquin = (Button) findViewById(R.id.Botiquín);
-      	btcrearpartes= (Button) findViewById(R.id.Crearpartes);
-      	btmodificarpartes= (Button) findViewById(R.id.Modificarpartes);
-      	bienvenido = (TextView) findViewById(R.id.Bienvenido);*/ 
-      
+        playa = getIntent().getStringExtra("Playa"); 
       	mTitle = getTitle();
+      	
         this.drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        this.navList = (ListView) findViewById(R.id.left_drawer);
+        this.navListLeft = (ListView) findViewById(R.id.left_drawer);
+        this.navListRight = (ListView) findViewById(R.id.right_drawer);
+        navMenuIcons = getResources().obtainTypedArray(R.array.nav_drawer_icons);//cargar
+        navMenuIconsRight= getResources().obtainTypedArray(R.array.nav_drawer_icons_right);
         
-        //Cargar opcion menu lateral
-        final String[] names = getResources().getStringArray(R.array.OpcionesMenuLateral);
-		
-        // Set previous array as adapter of the list
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, names);
-        navList.setAdapter(adapter);
-        navList.setOnItemClickListener(new DrawerItemClickListener());
+        //Cargar opciones Navigation_drawer
+        final String[] names = getResources().getStringArray(R.array.OpcionesMenuLateral);//Titulos
+        final String[] namesright = getResources().getStringArray(R.array.OpcionesMenuLateralRight);
+        
+        //MENU LATERAL IZQUIERDO
+        navDrawerItems = new ArrayList<NavDrawerItem>(); 
+        //con la clase navDrawerItem cargamos (nombre,icono)
+        navDrawerItems.add(new NavDrawerItem(names[0], navMenuIcons.getResourceId(0, -1)));
+        navDrawerItems.add(new NavDrawerItem(names[1], navMenuIcons.getResourceId(1, -1)));
+        navDrawerItems.add(new NavDrawerItem(names[2], navMenuIcons.getResourceId(2, -1)));
+        navDrawerItems.add(new NavDrawerItem(names[3], navMenuIcons.getResourceId(3, -1)));
+       
+        // Metemos en el adapter toda la configuracion con iconos y titulos
+        adapter = new NavDrawerListAdapter(getApplicationContext(),navDrawerItems);
+        navListLeft.setAdapter(adapter);//cargamos el adaptador en el menu lateral
+        navListLeft.setOnItemClickListener(new DrawerItemClickListenerLeft());
+        //listener de cerrar y abrir el navigation menu
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout,
         		R.string.open_drawer,R.string.close_drawer);
-        
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         drawerLayout.setDrawerListener(drawerToggle);
         
-      	/*btcrearpartes.setOnClickListener(new OnClickListener() {
+        //MENU LATERAL DERECHO
+        navDrawerItemsRight = new ArrayList<NavDrawerItem>(); 
+        navDrawerItemsRight.add(new NavDrawerItem(namesright[0], navMenuIconsRight.getResourceId(0, -1),"VISIBLE"));
+        navDrawerItemsRight.add(new NavDrawerItem(namesright[1], navMenuIconsRight.getResourceId(1, -1),"INVISIBLE"));
+        navDrawerItemsRight.add(new NavDrawerItem(namesright[2], navMenuIconsRight.getResourceId(2, -1),"INVISIBLE"));
+        
+        crearAdaptador();
+        navListRight.setOnItemClickListener(new DrawerItemClickListenerRight());
+        
+        drawerToggleRight = new ActionBarDrawerToggle(this, drawerLayout,
+        		R.string.open_drawer,R.string.close_drawer);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        drawerLayout.setDrawerListener(drawerToggleRight);
+        
+        //Listener del boton ordenar
+        ordenar=(Button) findViewById(R.id.ordenar);
+        ordenar.setOnClickListener(new OnClickListener() {
 			
 			@Override
-			public void onClick(View v) {
-				lanzarPartesCuras();
+			public void onClick(View v) {	
+				drawerLayout.openDrawer(Gravity.RIGHT);
 			}
 		});
-      	
-      	btbotiquin.setOnClickListener(new OnClickListener() {
-      				
-      				@Override
-      				public void onClick(View v) {
-      					lanzarbotiquin();
-      					
-      				}
-      			}); */
+        
 	}
 	//Fuera del ONCREATE
 	
+	private void crearAdaptador() {
+		
+		adapterRight = new NavDrawerListAdapterRight(getApplicationContext(),navDrawerItemsRight);
+        navListRight.setAdapter(adapterRight);
+		
+	}
+	
+	private void cambiarTicks(int position){
+		String visibility=navDrawerItemsRight.get(position).getIconVisible();
+        if (visibility.equals("INVISIBLE")){
+        	navDrawerItemsRight.get(position).setIconVisible("VISIBLE");
+        	switch (position){
+        	case 0:
+        		navDrawerItemsRight.get(1).setIconVisible("INVISIBLE");
+            	navDrawerItemsRight.get(2).setIconVisible("INVISIBLE");
+        	break;
+        	case 1:
+        		navDrawerItemsRight.get(0).setIconVisible("INVISIBLE");
+        		navDrawerItemsRight.get(2).setIconVisible("INVISIBLE");
+        	break;
+        	case 2:
+        		navDrawerItemsRight.get(0).setIconVisible("INVISIBLE");
+            	navDrawerItemsRight.get(1).setIconVisible("INVISIBLE");
+            break;
+        	}
+        }
+        crearAdaptador();
+	}
+
 	public void onDrawerClosed(View view) {
         getSupportActionBar().setTitle(mTitle);
         // creates call to onPrepareOptionsMenu()
@@ -96,10 +149,9 @@ public class MainActivity extends ActionBarActivity{
         // creates call to onPrepareOptionsMenu()
         supportInvalidateOptionsMenu();
     }
-
-	private class DrawerItemClickListener implements
-    ListView.OnItemClickListener {
-		@Override
+	
+	//OPCIONES MENU IZQUIERDO
+	private class DrawerItemClickListenerLeft implements ListView.OnItemClickListener {
 		public void onItemClick(AdapterView<?> parent, View view, int position,long id) {
     	switch (position){
     	case 0://Crear Partes
@@ -121,9 +173,30 @@ public class MainActivity extends ActionBarActivity{
 	}
 	/*private void selectedItem(int pos){
 		mTitle=getResources().getStringArray(R.array.OpcionesMenuLateral)[pos].toString();
-		
-		
+			
 	}*/
+	//OPCIONES MENU DERECHO
+	private class DrawerItemClickListenerRight implements ListView.OnItemClickListener {
+		public void onItemClick(AdapterView<?> parent, View view, int position,long id) {
+			
+    	switch (position){
+    	case 0://Ordenar por fecha de creación
+            cambiarTicks(position);
+			parteincidencias.mostrarPartesPorFecha();
+    	break;
+    	case 1://Ordenar por titulo
+            cambiarTicks(position);
+            parteincidencias.mostrarPartesPorTitulo();
+    	break;
+    	case 2://Ordenar por ultima modificacion
+    		cambiarTicks(position);
+    		parteincidencias.mostraPorUltimaMod();
+    	break;
+    	default:
+    		System.out.println("Error");
+    		}
+		}
+	}
 	@Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -148,7 +221,6 @@ public class MainActivity extends ActionBarActivity{
 	}
 	public void lanzarPartesDiarios(){
 		Intent i = new Intent (this,ParteDiarios.class);
-		i.putExtra("PlayaDiarios", playa);
 		startActivity(i);
 	}
 	//MENU ALTO
@@ -160,7 +232,7 @@ public class MainActivity extends ActionBarActivity{
 	public boolean onPrepareOptionsMenu(Menu menu) {
         // If the nav drawer is open, hide action items related to the content
         // view
-        boolean drawerOpen = drawerLayout.isDrawerOpen(navList);
+        boolean drawerOpen = drawerLayout.isDrawerOpen(navListLeft);
         menu.findItem(R.id.action_search).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }

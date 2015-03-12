@@ -15,14 +15,14 @@ import android.widget.Toast;
 public class Botiquin extends FragmentActivity implements OnQueryTextListener{
 	
 	private Button btmedicamentonuevo;
-	SearchView searchView; //no me dejar hacer cast con la version v7
+	SearchView searchView; 
 	BD_sqlite BDhelper = new BD_sqlite(this);
-	FragmentLista medicamentos;
+	FragmentListaMedicamentos medicamentos;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_botiquin);
-        medicamentos= (FragmentLista) getSupportFragmentManager().
+        medicamentos= (FragmentListaMedicamentos) getSupportFragmentManager().
         		findFragmentById(R.id.fragment);
 		medicamentos.mostrarTodosLosMedicamentos();
         searchView= (SearchView) findViewById(R.id.buscarmedicamento); 
@@ -36,10 +36,8 @@ public class Botiquin extends FragmentActivity implements OnQueryTextListener{
 			}
 			
 			@Override
-			public boolean onQueryTextChange(String newText) {
-				
+			public boolean onQueryTextChange(String newText) {			
 				medicamentos.actualizarLista(newText);
-				//Toast.makeText(getApplicationContext(), "A cambiado: "+newText, 2000).show();
 				return false;
 			}
 		});

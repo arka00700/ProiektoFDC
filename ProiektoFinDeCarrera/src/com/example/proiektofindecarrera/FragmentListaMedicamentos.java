@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 	 
 	@SuppressLint("NewApi") 
-	public class FragmentLista extends android.support.v4.app.ListFragment{
+	public class FragmentListaMedicamentos extends android.support.v4.app.ListFragment{
 	
 	private ArrayList<String> sistemas,actsistemas;
 	private SearchView search;
@@ -59,22 +59,11 @@ import android.widget.Toast;
 		}
 	}
 	//RECIBIR EL TEXTO METIDO EN EL SEARCHVIEW Y HACER CONSULTA PARA ACTUALIZAR SISTEMAS
-	public void cambiarlista(){
-		
-		
-		sistemas= new ArrayList<String>();
-		sistemas.add("hola");
-		sistemas.add("hwwe23");
-		//Adaptar a la lista de fragment
-		setListAdapter(new ArrayAdapter<String>(getActivity(), 
-				android.R.layout.simple_list_item_1,sistemas));
-		}
 	
 	public void actualizarLista(String texto){
 		sistemas= new ArrayList<String>();
 		Cursor c = BD_sqlite.getMiBD(getActivity()).leerMedicamentos();
 		int largo = texto.length();
-		Toast.makeText(getActivity(), "Largura:"+ largo, 2000).show();
 		String nombre="";
 		if(c.moveToFirst()){
 			do{

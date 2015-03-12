@@ -25,6 +25,19 @@
         <item>Otro(especificar)</item>
     </string-array>
     
+    <array name="nav_drawer_icons">
+        <item>@drawable/ic_whats_hot</item>
+        <item>@drawable/ic_people</item>
+        <item>@drawable/ic_photos</item>
+        <item>@drawable/ic_communities</item>
+    </array>
+    
+    <array name="nav_drawer_icons_right">
+        <item>@drawable/ic_action_accept</item>
+        <item>@drawable/ic_action_accept</item>
+        <item>@drawable/ic_action_accept</item>
+    </array>
+    
     <string-array name="AsistenciaPrestada">
         <item>RCP-Ventilatorio</item>
         <item>RCP-Cardio-respiratorio</item>
@@ -44,6 +57,12 @@
         <item>Crear Partes Diarios</item>
         <item>Modificardor de Partes</item>
         <item>Botiquin</item>
+    </string-array>
+    
+    <string-array name="OpcionesMenuLateralRight">
+        <item>Fecha de creación</item>
+        <item>Título</item>
+        <item>Última modificación</item>
     </string-array>
     
     <string-array name="Playas">

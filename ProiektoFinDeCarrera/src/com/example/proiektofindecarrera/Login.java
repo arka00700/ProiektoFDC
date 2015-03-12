@@ -18,12 +18,13 @@ public class Login extends ActionBarActivity {
 	private Button btlogin,btregistration;
 	private EditText usrId,passId;
 	public String playausr;
+	BD_sqlite BDhelper= new BD_sqlite(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         
-        final BD_sqlite BDhelper= new BD_sqlite(getApplicationContext());
+        
         //PARA ACTUALIZAR LA BASE DE DATOS
 		/*SQLiteDatabase db = BDhelper.getWritableDatabase();
 		//Log.i(this.getClass().toString(), "Probando BD");
@@ -53,6 +54,7 @@ public class Login extends ActionBarActivity {
 					comparar=BDhelper.buscarUsuario(usr);
 					if(comparar[0].equals(usr) && comparar[1].equals(pass)){
 						playausr=BDhelper.playaUsuario(comparar[0]);
+						BDhelper.añadirconexion(usr);
 						lanzarMainActivity();	
 					}else if (comparar[0].equals(usr)==false || comparar[1].equals(pass)==false){
 						Toast.makeText(getApplicationContext(),"Usuario o contraseña incorrectos", 2000).show();	

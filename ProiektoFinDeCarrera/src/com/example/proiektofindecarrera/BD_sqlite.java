@@ -12,8 +12,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class BD_sqlite extends SQLiteOpenHelper {
 	private static BD_sqlite miLaBD;
+	
 	String crearUsuarios = "CREATE TABLE Usuarios (User TEXT PRIMARY KEY NOT NULL, Password TEXT NOT NULL," +
-			"Playa TEXT NOT NULL,Recurso SMALLINT NOT NULL)";
+			"Playa TEXT NOT NULL,Recurso SMALLINT NOT NULL,conectado BOOLEAN)";
 	String crearMedicamentos = "CREATE TABLE Medicamentos (Nombre TEXT PRIMARY KEY NOT NULL," +
 			"Indicaciones TEXT NOT NULL)";
 	String crearPartesIncidencias = "CREATE TABLE ParteIncidencias (NombreApellido TEXT NOT NULL," +
@@ -39,7 +40,7 @@ public class BD_sqlite extends SQLiteOpenHelper {
 	}
 	//CONSTRUCTOR PARA FRAGMENT_LIST
 	@SuppressLint("NewApi") 
-	public BD_sqlite(FragmentLista fl) {
+	public BD_sqlite(FragmentListaMedicamentos fl) {
 		super(fl.getActivity(),"BD.sqlite", null, 1);
 	}
 	
@@ -95,7 +96,24 @@ public class BD_sqlite extends SQLiteOpenHelper {
 		return this.getWritableDatabase().rawQuery(sql, null);
 		
 	}
-	
+	public void añadirconexion(String usr){
+		String sql="UPDATE Usuarios SET conectado='0'";
+		String sql2 ="UPDATE Usuarios SET conectado='1' WHERE User='"+usr+"'";
+		this.getWritableDatabase().execSQL(sql);
+		this.getWritableDatabase().execSQL(sql2);
+	}
+	public String[] usrConectado(){
+		String result []= new String [2];
+		String sql ="SELECT User,Playa FROM Usuarios WHERE conectado='1'";
+		Cursor c=this.getWritableDatabase().rawQuery(sql, null);
+		c.moveToFirst();
+		int iu,ip;
+		iu=c.getColumnIndex("User");
+		ip=c.getColumnIndex("Playa");
+		result[0]=c.getString(iu);
+		result[1]=c.getString(ip);
+		return result;
+	}
 	public void insertarMedicamentos (String nombre, String indicaciones){
 		ContentValues valores = new ContentValues();
 		valores.put("Nombre",nombre);
@@ -105,14 +123,6 @@ public class BD_sqlite extends SQLiteOpenHelper {
 	public Cursor leerMedicamentos(){
 		String sql="SELECT Nombre FROM Medicamentos";
 		return this.getReadableDatabase().rawQuery(sql, null);
-		/*String nombres[]= new String[c.getCount()];
-		c.moveToFirst();
-		int iNombre;
-		int contador =0;
-		iNombre = c.getColumnIndex("Nombre");
-		for (c.moveToFirst();!c.isAfterLast();c.moveToNext()){
-			nombres[contador]=c.getString(iNombre);
-		}*/
 	}
 	
 	public String playaUsuario(String usr){
@@ -176,31 +186,44 @@ public class BD_sqlite extends SQLiteOpenHelper {
 			this.getWritableDatabase().insert("ParteIncidencias", null, valores);
 		}
 		
-		public Boolean existeParteIncidencias(String nombreApellido,String hora){
-			Boolean estaParte=true;
-			String sql = "SELECT * FROM ParteIncidencias WHERE NombreApellido='"+nombreApellido+"'" +
-					" AND Hora='"+hora+"'";
-			Cursor c= this.getReadableDatabase().rawQuery(sql, null);
-			c.moveToFirst();
-			if(c.getCount()<=0){
-				estaParte = false;
-			}
-			return estaParte;
-		}
 		public Cursor recuperarIncidencias(String NombreApellido){
-			String sql ="SELECT NombreApellido,Edad,Sexo,Telefono,Hora," +
+			String sql ="SELECT NombreApellido,FechaIncidencias,Edad,Sexo,Telefono,Hora," +
 					"Lugar,Suceso,Asistencia,Resultado,Observaciones FROM ParteIncidencias WHERE NombreApellido='"+NombreApellido+"'";
 			return this.getReadableDatabase().rawQuery(sql, null);
 		}
-		public Cursor leerParteIncidencias(){
+		
+		public Cursor recuperarDiarios(String FechaDiarios){
+			String sql ="SELECT FechaDiarios,RecursoHumanos,CalidadAgua,Hora,TemperaturaAgua," +
+					"Grados11,Hora11,Grados13,Hora13,Grados15,Hora15,Grados17,Hora17,Grados19,Hora19," +
+					"Hora20,Bandera,BalizaLugar,BalizaHora,CartelLugar,CartelHora,Orgánico,Papel," +
+					"Plástico,Incidencias FROM ParteDiarios WHERE FechaDiarios='"+FechaDiarios+"'";
+			return this.getReadableDatabase().rawQuery(sql, null);
+		}
+		//Cojemos los datos por fecha (mismo orden que se introdujeron)
+		public Cursor leerPartePorUltMod(){
 			String sql="SELECT NombreApellido,FechaIncidencias FROM ParteIncidencias";
 			return this.getReadableDatabase().rawQuery(sql, null);
 		}
+		public Cursor leerPartePorTitulo(){
+			String sql="SELECT NombreApellido,FechaIncidencias FROM ParteIncidencias ORDER BY NombreApellido";
+			return this.getReadableDatabase().rawQuery(sql, null);	
+		}
+		public Cursor leerPartePorFecha(){//QUITAR LA BANDERA DESPUES
+			String sql="SELECT NombreApellido,FechaIncidencias FROM ParteIncidencias ORDER BY FechaIncidencias ASC";
+			return this.getReadableDatabase().rawQuery(sql, null);
+		}
+		public Cursor leerParteDiarios(){//QUITAR LA BANDERA DESPUES
+			String sql="SELECT FechaDiarios,PlayaDiarios FROM ParteDiarios ORDER BY FechaDiarios";
+			return this.getReadableDatabase().rawQuery(sql, null);
+		}
 		//SIN TERMINAR (DATOS DINAMICOS)
-		public void insertarParteDiarios(String fecha, String playa,int rcsh,String calidadAgua,
-				String hora,int tmpagua,int g11,String h11,int g13,
-				String h13,int g15,String h15,int g17,String h17,int g19,
-				String h19,String h20,String bandera){
+		public void insertarParteDiarios(String fecha, String playa,int rcsh,int calidadAgua,
+			String hora,int tmpagua,int g11,String h11,int g13,
+			String h13,int g15,String h15,int g17,String h17,int g19,
+			String h19,String h20,String bandera,String balizalugar,
+			String balizahora,String cartelugar,String cartelhora,int organico,int papel,
+			int plastico,String incidencias){
+			
 			ContentValues valores = new ContentValues();
 			valores.put("FechaDiarios",fecha);
 			valores.put("PlayaDiarios",playa);
@@ -220,12 +243,32 @@ public class BD_sqlite extends SQLiteOpenHelper {
 			valores.put("Hora19",h19);
 			valores.put("Hora20",h20);
 			valores.put("Bandera",bandera);
+			valores.put("BalizaLugar",balizalugar);
+			valores.put("BalizaHora",balizahora);
+			valores.put("CartelLugar",cartelugar);
+			valores.put("CartelHora",cartelhora);
+			valores.put("Orgánico",organico);
+			valores.put("Papel",papel);
+			valores.put("Plástico",plastico);
+			valores.put("Incidencias", incidencias);
 			this.getWritableDatabase().insert("ParteDiarios", null, valores);
+		}
+		
+		public Boolean existeParteIncidencias(String fecha,String hora){
+			Boolean estaParte=true;
+			String sql = "SELECT * FROM ParteIncidencias WHERE FechaIncidencias='"+fecha+"'" +
+					" AND Hora='"+hora+"'";
+			Cursor c= this.getReadableDatabase().rawQuery(sql, null);
+			c.moveToFirst();
+			if(c.getCount()<=0){
+				estaParte = false;
+			}
+			return estaParte;
 		}
 		
 		public Boolean existeParteDiarios(String fecha){
 		Boolean estaParte = true;
-		String sql = "SELECT * FROM ParteDiarios WHERE FechaDiarios'"+fecha+"'";
+		String sql = "SELECT * FROM ParteDiarios WHERE FechaDiarios='"+fecha+"'";
 		Cursor c= this.getReadableDatabase().rawQuery(sql, null);
 		c.moveToFirst();
 		if(c.getCount()<=0){
@@ -233,5 +276,14 @@ public class BD_sqlite extends SQLiteOpenHelper {
 		}
 		return estaParte;
 		}
-	
+		
+		public void borrarDiarioPorFecha (String fecha){
+			String sql ="DELETE FROM ParteDiarios WHERE FechaDiarios='"+fecha+"'";
+			this.getWritableDatabase().execSQL(sql);
+		}
+		
+		public void borrarIncidenciaPorFecha (String fecha,String hora){
+			String sql ="DELETE FROM ParteIncidencias WHERE FechaIncidencias='"+fecha+"' AND Hora='"+hora+"'";
+			this.getWritableDatabase().execSQL(sql);
+		}
 }
