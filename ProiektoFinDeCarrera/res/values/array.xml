@@ -53,9 +53,9 @@
     </string-array>
     
     <string-array name="OpcionesMenuLateral">
-        <item>Crear Partes Incidencias</item>
-        <item>Crear Partes Diarios</item>
-        <item>Modificardor de Partes</item>
+        <item>Parte Incidencia</item>
+        <item>Parte Diario</item>
+        <item>Parte Pulsera</item>
         <item>Botiquin</item>
     </string-array>
     

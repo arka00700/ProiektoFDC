@@ -29,7 +29,7 @@ public class Registration extends ActionBarActivity{
 		passId = (EditText) findViewById(R.id.rcontraseña);
 		passId2 = (EditText) findViewById(R.id.rrepetircontraseña);
 		spinnerPlayas = (Spinner) findViewById(R.id.spinnerplaya);
-		usrRecurso=(EditText) findViewById(R.id.telefono);
+		usrRecurso=(EditText) findViewById(R.id.numrecurso);
 	  //SPINNER
 		ArrayAdapter<CharSequence> adapterPlayas = ArrayAdapter.createFromResource(this,
         	     R.array.Playas, android.R.layout.simple_spinner_item);

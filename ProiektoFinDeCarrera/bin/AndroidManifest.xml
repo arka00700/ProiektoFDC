@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="11"
+        android:minSdkVersion="17"
         android:targetSdkVersion="21" />
 
     <application
@@ -26,10 +26,10 @@
         <activity android:name=".MainActivity" android:label="mainactivity"></activity>
         <activity android:name=".Botiquin" android:label="botiquin"></activity>
         <activity android:label="indicacionesmedicamento" android:name=".IndicacionesMedicamento"></activity>
-        <meta-data android:name="com.google.android.gms.version"
-        android:value="@integer/google_play_services_version" />
-        <activity android:label="partescuras" android:name=".ParteIncidencias"></activity>
+        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+        <activity android:label="parteIncidencias" android:name=".ParteIncidencias"></activity>
         <activity android:label="ParteDiarios" android:name=".ParteDiarios"></activity>
+        <activity android:name=".PartePulseras" android:label="PartePulseras"></activity>
     </application>
 
 </manifest>

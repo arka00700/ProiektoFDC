@@ -125,12 +125,13 @@ public class ParteIncidencias extends ActionBarActivity {
 		String nombreString = nombreApellido.getText().toString(); 
 		String telefonoString = telefono.getText().toString();
 		String datephone = getDatePhone();
+		String horaOld = null;
+		String horaNew=insertarHora.getText().toString();
 		if(getIntent().getStringExtra("Hora")!=null){
 			datephone=getIntent().getStringExtra("FechaIncidencias");
+			horaOld =getIntent().getStringExtra("Hora");
 		}
 		boolean esHombre=valorRadioSexo();
-		
-		String hora = insertarHora.getText().toString();
 		String observacionesString = observaciones.getText().toString();
 		int datosSpinner[]=ConversorSpinner(spinnerLugar, spinnerSuceso, 
 				spinnerAsistencia, spinnerResultado);
@@ -138,10 +139,18 @@ public class ParteIncidencias extends ActionBarActivity {
 		
 		if (estaVacioIncidencias()==true){
 			Toast.makeText(getApplicationContext(), "Algún campo en blanco", 2000).show();
-		}else if(hora.isEmpty()){
+		}else if(horaNew.isEmpty()){
 				Toast.makeText(getApplicationContext(),"Inserta una hora", 2000).show();
-		}else if (BDhelper.existeParteIncidencias(getIntent().getStringExtra("FechaIncidencias"), hora)==false){
-			hora.concat(":00");
+				//HAY UNA PERSONA QUE SE LLAMA IGUAL Y YA HA SIDO ATENTIDA HOY
+		}else if(BDhelper.existeParteIncidenciaNombre(nombreString,datephone) && getIntent().getStringExtra("Hora")==null){ 
+			Toast.makeText(getApplicationContext(),"Esta persona ya ha sido atendida hoy,modifique el nombre", 2000).show();
+			
+			//SE HA CLICADO DESDE EL MAIN PERO NO SE HA MODIFICADO LA HORA Y EL NOMBRE
+		}else if (BDhelper.existeParteIncidencias(datephone,horaOld) && getIntent().getStringExtra("Hora")!=null){
+				alertaSobreescritura();
+		
+		}else if (BDhelper.existeParteIncidencias(datephone, horaNew)==false){
+			horaNew.concat(":00");
 			edadInt =Integer.parseInt(edad.getText().toString());
 			
 			if (telefonoString.isEmpty()==false){	
@@ -151,12 +160,10 @@ public class ParteIncidencias extends ActionBarActivity {
 			}
 			 
 			BDhelper.InsertarParteIncidencias(nombreString,datephone,esHombre, edadInt, telefonoInt,
-					hora, datosSpinner[0], datosSpinner[1], datosSpinner[2], datosSpinner[3], observacionesString);
+					horaNew, datosSpinner[0], datosSpinner[1], datosSpinner[2], datosSpinner[3], observacionesString);
+			BDhelper.cerrar();
 			Toast.makeText(getApplicationContext(),"Parte realizado correctamente", 2000).show();
 			irMainActivity();
-		}else if (BDhelper.existeParteIncidencias(getIntent().getStringExtra("FechaIncidencias"), hora)==true
-					&& getIntent().getStringExtra("Hora")!=null){
-					alertaSobreescritura();
 			}	
 	
 		}
@@ -243,9 +250,9 @@ public class ParteIncidencias extends ActionBarActivity {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				String hIncidencias = getIntent().getStringExtra("Hora");
-				BDhelper.borrarIncidenciaPorFecha(getIntent().getStringExtra("FechaIncidencias"), hIncidencias);
-				guardarIncidencia();
+				BDhelper.borrarIncidenciaPorNombreyFecha(getIntent().getStringExtra("NombreApellido")
+						,getIntent().getStringExtra("FechaIncidencias"));
+						guardarIncidencia();
 			}
 		});
 		alertaSobEsc.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {

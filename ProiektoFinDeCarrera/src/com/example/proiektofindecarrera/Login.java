@@ -1,8 +1,10 @@
 package com.example.proiektofindecarrera;
 
+import android.R.color;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -11,12 +13,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 	
 public class Login extends ActionBarActivity {
 	private Button btlogin,btregistration;
 	private EditText usrId,passId;
+	private TextView registro;
 	public String playausr;
 	BD_sqlite BDhelper= new BD_sqlite(this);
     @Override
@@ -35,7 +39,7 @@ public class Login extends ActionBarActivity {
         
         usrId = (EditText) findViewById(R.id.loginusuario);
 		passId = (EditText) findViewById(R.id.loginpass);
-                
+        registro=(TextView) findViewById(R.id.registro);       
         //AÑADIR LISTENER Y CREAR BASE DE DATOS
 		btlogin.setOnClickListener(new OnClickListener() {
 	
@@ -55,6 +59,7 @@ public class Login extends ActionBarActivity {
 					if(comparar[0].equals(usr) && comparar[1].equals(pass)){
 						playausr=BDhelper.playaUsuario(comparar[0]);
 						BDhelper.añadirconexion(usr);
+						BDhelper.cerrar();
 						lanzarMainActivity();	
 					}else if (comparar[0].equals(usr)==false || comparar[1].equals(pass)==false){
 						Toast.makeText(getApplicationContext(),"Usuario o contraseña incorrectos", 2000).show();	
@@ -66,11 +71,20 @@ public class Login extends ActionBarActivity {
 			
 			@Override
 			public void onClick(View v) {
-				lanzarRegistration();
+				btregistration.getBackground();
 				
 			}
 		}); 
-    }
+		
+		registro.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				lanzarRegistration();
+				
+			}
+		});
+    }//FIN ONCREATE
 
    private void lanzarMainActivity(){
     	Intent i = new Intent (Login.this,MainActivity.class);

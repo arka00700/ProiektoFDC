@@ -18,7 +18,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
+
 
 
 public class MainActivity extends ActionBarActivity{
@@ -161,7 +161,7 @@ public class MainActivity extends ActionBarActivity{
     		lanzarPartesDiarios();
     	break;
     	case 2://Modificador de partes
-    		Toast.makeText(getApplicationContext(),"Modificar partes sin hacer...", 2000).show();
+    		lanzarPartesPulseras();
     	break;
     	case 3://Botiquin
     		lanzarBotiquin();
@@ -222,6 +222,10 @@ public class MainActivity extends ActionBarActivity{
 	public void lanzarPartesDiarios(){
 		Intent i = new Intent (this,ParteDiarios.class);
 		startActivity(i);
+	}
+	private void lanzarPartesPulseras() {
+		Intent i = new Intent (this,PartePulseras.class);
+		startActivity(i);	
 	}
 	//MENU ALTO
 	public boolean onCreateOptionsMenu(Menu menu) {

@@ -1,80 +1,115 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondodef"
+    android:orientation="vertical" >
 
+    	<LinearLayout
+    	    android:layout_width="match_parent"
+    	    android:layout_height="wrap_content"
+    	    android:layout_gravity="top|center_horizontal"
+    	    android:layout_marginTop="30dp"
+    	    android:orientation="vertical" >
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical" 
-        android:dividerPadding="5dp"
-    	android:padding="10dp" >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:layout_marginBottom="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="70dp"
-            android:background="@drawable/border"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/usuario"
+            <ImageView
+                android:id="@+id/imageView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:text="Usuario:" />
+                android:maxHeight="60dp"
+                android:maxWidth="60dp"
+                android:scaleType="center"
+                android:src="@drawable/iconocruzblanco" />
 
-            <EditText
-                android:id="@+id/loginusuario"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@drawable/border"
-                android:ems="10"
-                android:singleLine="true" />
+           </LinearLayout>
 
-            <TextView
-                android:id="@+id/contraseña"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Contraseña:" />
+              	<LinearLayout
+              	    android:layout_width="wrap_content"
+              	    android:layout_height="wrap_content"
+              	    android:layout_gravity="center_horizontal"
+              	    android:layout_marginBottom="50dp"
+              	    android:background="@drawable/border"
+              	    android:orientation="vertical" >
 
-            <EditText
-                android:id="@+id/loginpass"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@drawable/border"
-                android:ems="10"
-                android:password="true"
-                android:singleLine="true" />
+                    <EditText
+                    	android:id="@+id/loginusuario"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                       	android:layout_marginBottom="15dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"	                                         android:layout_marginTop="20dp"
+                       	android:background="@drawable/border"
+                        android:ems="10"
+                        android:hint="Usuario"
+                        android:singleLine="true" >
 
-            <Button
-                android:id="@+id/login"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="15dp"
-                android:text="Log In" />
+                     <requestFocus />
+                     </EditText>
 
-            <TextView
-                android:id="@+id/nuevoenbat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="50dp"
-                android:text="Nuevo en B.A.T?"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                        <EditText
+                        	android:id="@+id/loginpass"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="20dp"
+           	                android:layout_marginTop="15dp"
+                            android:background="@drawable/border"
+                            android:ems="10"
+                            android:hint="Contraseña"
+                            android:password="true"
+                           	android:singleLine="true" />
 
-            <Button
-                android:id="@+id/registrarse"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Registrarse" />
+                            <Button
+                                android:id="@+id/login"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="5dp"
+                                android:background="@drawable/button_selector"
+                                android:minHeight="30dp"
+                                android:minWidth="125dp"
+                                android:shadowColor="#AAAAAA"
+                                android:shadowRadius="2"
+                                android:text="Log In"
+                                android:textColor="#777777" />
 
-        </LinearLayout>
+                         </LinearLayout>
+
+              	<LinearLayout
+              	    android:layout_width="match_parent"
+              	    android:layout_height="match_parent"
+              	    android:gravity="bottom"
+              	    android:orientation="vertical" >
+
+              	    <TextView
+              	        android:id="@+id/registro"
+              	        android:layout_width="wrap_content"
+              	        android:layout_height="wrap_content"
+              	        android:layout_gravity="center_horizontal"
+              	        android:clickable="true"
+              	        android:text="Regístrate en BeachControl"
+              	        android:textAppearance="?android:attr/textAppearanceSmall"
+              	        android:textColor="#222222"
+              	        android:textSize="14dp"
+              	        android:textStyle="bold" />
+
+              	    <Button
+              	        android:id="@+id/registrarse"
+              	        android:layout_width="wrap_content"
+              	        android:layout_height="wrap_content"
+              	        android:layout_gravity="end"
+              	        android:layout_margin="10dp"
+              	        android:background="@drawable/button_selector"
+              	        android:maxHeight="30dp"
+              	        android:maxWidth="100dp"
+              	        android:minHeight="30dp"
+              	        android:minWidth="30dp"
+              	        android:shadowColor="#AAAAAA"
+              	        android:shadowRadius="2"
+              	        android:text="o?"
+              	        android:textColor="#777777" />
+
+              	</LinearLayout>
+
 </LinearLayout>

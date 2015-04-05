@@ -1,7 +1,5 @@
 package com.example.proiektofindecarrera;
 
-import java.util.Date;
-
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
@@ -15,13 +13,16 @@ public class BD_sqlite extends SQLiteOpenHelper {
 	
 	String crearUsuarios = "CREATE TABLE Usuarios (User TEXT PRIMARY KEY NOT NULL, Password TEXT NOT NULL," +
 			"Playa TEXT NOT NULL,Recurso SMALLINT NOT NULL,conectado BOOLEAN)";
+	
 	String crearMedicamentos = "CREATE TABLE Medicamentos (Nombre TEXT PRIMARY KEY NOT NULL," +
 			"Indicaciones TEXT NOT NULL)";
+	
 	String crearPartesIncidencias = "CREATE TABLE ParteIncidencias (NombreApellido TEXT NOT NULL," +
 			"FechaIncidencias DATE NOT NULL,Sexo BOOLEAN NOT NULL,Edad TINYINT NOT NULL," +
 			"Telefono INT,Hora TIME NOT NULL,Lugar TINYINT NOT NULL," +
 			"Suceso TINYINT NOT NULL,Asistencia TINYINT NOT NULL,Resultado TINYINT NOT NULL," +
-			"Observaciones VARCHAR(200))";
+			"Observaciones VARCHAR(200))";//AÑADIR LA PLAYA
+	
 	String crearPartesDiarios = "CREATE TABLE ParteDiarios (FechaDiarios DATE NOT NULL," +
 			"PlayaDiarios TEXT NOT NULL,RecursoHumanos TEXT NOT NULL," +
 			"CalidadAgua TINYINT NOT NULL,Hora TIME NOT NULL,TemperaturaAgua TYNYINT NOT NULL," +
@@ -30,6 +31,8 @@ public class BD_sqlite extends SQLiteOpenHelper {
 			"Bandera TEXT NOT NULL,BalizaLugar TEXT,BalizaHora TIME,CartelLugar TEXT," +
 			"CartelHora TIME,Orgánico TINYINT,Papel TINYINT,Plástico TINYINT,Incidencias VARCHAR(200))";
 	
+	String crearPartesPulseras = "CREATE TABLE PartePulseras (NumPulsera INT NOT NULL,NumContacto TEXT NOT NULL," +
+			"NomMenor TEXT NOT NULL,NomResponsable TEXT NOT NULL)";
 	//CONSTRUCTORES (CREAR Y EL SEGUNDO PARA MODIFICAR PASANDO LA VERSION)
 	public BD_sqlite(Context context) {
 		super(context, "BD.sqlite", null, 1);
@@ -41,6 +44,13 @@ public class BD_sqlite extends SQLiteOpenHelper {
 	//CONSTRUCTOR PARA FRAGMENT_LIST
 	@SuppressLint("NewApi") 
 	public BD_sqlite(FragmentListaMedicamentos fl) {
+		super(fl.getActivity(),"BD.sqlite", null, 1);
+	}
+	
+	public BD_sqlite(FragmentListaDiarios fl) {
+		super(fl.getActivity(),"BD.sqlite", null, 1);
+	}
+	public BD_sqlite(FragmentListaIncidencias fl) {
 		super(fl.getActivity(),"BD.sqlite", null, 1);
 	}
 	
@@ -58,6 +68,7 @@ public class BD_sqlite extends SQLiteOpenHelper {
 		db.execSQL(crearMedicamentos);
 		db.execSQL(crearPartesIncidencias);
 		db.execSQL(crearPartesDiarios);
+		db.execSQL(crearPartesPulseras);
 	}
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -67,6 +78,7 @@ public class BD_sqlite extends SQLiteOpenHelper {
 			db.execSQL("DROP TABLE IF EXISTS Medicamentos");
 			db.execSQL("DROP TABLE IF EXISTS ParteIncidencias");
 			db.execSQL("DROP TABLE IF EXISTS ParteDiarios");
+			db.execSQL("DROP TABLE IF EXISTS PartePulseras");
 			onCreate(db);
 			}
 	
@@ -90,6 +102,7 @@ public class BD_sqlite extends SQLiteOpenHelper {
 		valores.put("Playa", playa);
 		valores.put("Recurso",recurso);
 		this.getWritableDatabase().insert("Usuarios", null, valores);
+	
 	}
 	public Cursor leerIndicaciones (String md){
 		String sql = "SELECT Indicaciones FROM Medicamentos WHERE Nombre='"+md+"'";
@@ -186,9 +199,9 @@ public class BD_sqlite extends SQLiteOpenHelper {
 			this.getWritableDatabase().insert("ParteIncidencias", null, valores);
 		}
 		
-		public Cursor recuperarIncidencias(String NombreApellido){
+		public Cursor recuperarIncidencias(String NombreApellido,String fecha){
 			String sql ="SELECT NombreApellido,FechaIncidencias,Edad,Sexo,Telefono,Hora," +
-					"Lugar,Suceso,Asistencia,Resultado,Observaciones FROM ParteIncidencias WHERE NombreApellido='"+NombreApellido+"'";
+					"Lugar,Suceso,Asistencia,Resultado,Observaciones FROM ParteIncidencias WHERE NombreApellido='"+NombreApellido+"' AND FechaIncidencias='"+fecha+"'";
 			return this.getReadableDatabase().rawQuery(sql, null);
 		}
 		
@@ -266,6 +279,17 @@ public class BD_sqlite extends SQLiteOpenHelper {
 			return estaParte;
 		}
 		
+		public Boolean existeParteIncidenciaNombre(String nom,String fecha){
+			Boolean estaParte=true;
+			String sql ="SELECT * FROM ParteIncidencias WHERE NombreApellido='"+nom+"' AND FechaIncidencias='"+fecha+"'";
+			Cursor c= this.getReadableDatabase().rawQuery(sql, null);
+			c.moveToFirst();
+			if(c.getCount()<=0){
+				estaParte = false;
+			}
+			return estaParte;
+		}
+		
 		public Boolean existeParteDiarios(String fecha){
 		Boolean estaParte = true;
 		String sql = "SELECT * FROM ParteDiarios WHERE FechaDiarios='"+fecha+"'";
@@ -282,8 +306,20 @@ public class BD_sqlite extends SQLiteOpenHelper {
 			this.getWritableDatabase().execSQL(sql);
 		}
 		
-		public void borrarIncidenciaPorFecha (String fecha,String hora){
-			String sql ="DELETE FROM ParteIncidencias WHERE FechaIncidencias='"+fecha+"' AND Hora='"+hora+"'";
+		public void borrarIncidenciaPorNombreyFecha (String nombre,String fecha){
+			String sql ="DELETE FROM ParteIncidencias WHERE NombreApellido='"+nombre+"' AND FechaIncidencias='"+fecha+"'";
+			this.getWritableDatabase().execSQL(sql);
+		}
+		public void insertarPulsera(int numPuls,String numTlfContac,String nomMenor,String nomRespo){
+			ContentValues valores = new ContentValues();
+			valores.put("NumPulsera",numPuls);
+			valores.put("NumContacto",numTlfContac);
+			valores.put("NomMenor", nomMenor);
+			valores.put("NomResponsable",nomRespo);
+			this.getWritableDatabase().insert("PartePulseras", null, valores);
+		}
+		public void borrarPulsera (int numPulsera){
+			String sql ="DELETE FROM PartePulseras WHERE NumPulsera='"+numPulsera+"'";
 			this.getWritableDatabase().execSQL(sql);
 		}
 }

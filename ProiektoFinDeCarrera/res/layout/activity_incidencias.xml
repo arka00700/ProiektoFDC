@@ -368,8 +368,8 @@
 
     <EditText
         android:id="@+id/observaciones"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginTop="5dp"
         android:background="@drawable/edittext_bg"
         android:ems="10"
@@ -381,7 +381,7 @@
 
     <View
         android:id="@+id/separator4"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="0.2dp"
         android:background="@android:color/darker_gray"
         android:visibility="visible" />
