@@ -28,7 +28,9 @@ public class BD_sqlite extends SQLiteOpenHelper {
 			"CalidadAgua TINYINT NOT NULL,Hora TIME NOT NULL,TemperaturaAgua TYNYINT NOT NULL," +
 			"Grados11 TINYINT,Hora11 TIME,Grados13 TINYINT,Hora13 TIME,Grados15 TINYINT,Hora15 TIME," +
 			"Grados17 TINYINT,Hora17 TIME,Grados19 TINYINT,Hora19 TIME,Hora20 TIME," +
-			"Bandera TEXT NOT NULL,BalizaLugar TEXT,BalizaHora TIME,CartelLugar TEXT," +
+			"Bandera TEXT NOT NULL,horaBandera TEXT NOT NULL,Bandera1 TEXT,horaBandera1 TEXT" +
+			",Bandera2 TEXT,horaBandera2 TEXT,Bandera3 TEXT,horaBandera3 TEXT" +
+			",Bandera4 TEXT,horaBandera4 TEXT,BalizaLugar TEXT,BalizaHora TIME,CartelLugar TEXT," +
 			"CartelHora TIME,Orgánico TINYINT,Papel TINYINT,Plástico TINYINT,Incidencias VARCHAR(200))";
 	
 	String crearPartesPulseras = "CREATE TABLE PartePulseras (NumPulsera INT NOT NULL,NumContacto TEXT NOT NULL," +
@@ -169,7 +171,7 @@ public class BD_sqlite extends SQLiteOpenHelper {
 			//String columnas[]={"User","Password"};
 			//Cursor c = this.getWritableDatabase().query("Usuarios", columnas, null, null, null, null, null);
 			int iu,ip;
-		
+			
 			iu=c.getColumnIndex("User");
 			ip=c.getColumnIndex("Password");
 		
@@ -256,6 +258,15 @@ public class BD_sqlite extends SQLiteOpenHelper {
 			valores.put("Hora19",h19);
 			valores.put("Hora20",h20);
 			valores.put("Bandera",bandera);
+			//valores.put("horaBandera",horaBandera);
+			//valores.put("Bandera1",bandera1);
+			//valores.put("horaBandera1",horaBandera1);
+			//valores.put("Bandera2",bandera2);
+			//valores.put("horaBandera2",horaBandera2);
+			//valores.put("Bandera3",bandera3);
+			//valores.put("horaBandera3",horaBandera3);
+			//valores.put("Bandera4",bandera4);
+			//valores.put("horaBandera4",horaBandera4);
 			valores.put("BalizaLugar",balizalugar);
 			valores.put("BalizaHora",balizahora);
 			valores.put("CartelLugar",cartelugar);
@@ -310,6 +321,7 @@ public class BD_sqlite extends SQLiteOpenHelper {
 			String sql ="DELETE FROM ParteIncidencias WHERE NombreApellido='"+nombre+"' AND FechaIncidencias='"+fecha+"'";
 			this.getWritableDatabase().execSQL(sql);
 		}
+		//PARTE PULSERAS
 		public void insertarPulsera(int numPuls,String numTlfContac,String nomMenor,String nomRespo){
 			ContentValues valores = new ContentValues();
 			valores.put("NumPulsera",numPuls);
@@ -318,8 +330,25 @@ public class BD_sqlite extends SQLiteOpenHelper {
 			valores.put("NomResponsable",nomRespo);
 			this.getWritableDatabase().insert("PartePulseras", null, valores);
 		}
+		
+		public Boolean existePulsera (int numPuls){
+			Boolean estaPuls = true;
+			String sql = "SELECT * FROM PartePulseras WHERE NumPulsera='"+numPuls+"'";
+			Cursor c= this.getReadableDatabase().rawQuery(sql, null);
+			c.moveToFirst();
+			if(c.getCount()<=0){
+				estaPuls = false;
+			}
+			return estaPuls;
+			}
+		
 		public void borrarPulsera (int numPulsera){
 			String sql ="DELETE FROM PartePulseras WHERE NumPulsera='"+numPulsera+"'";
 			this.getWritableDatabase().execSQL(sql);
+		}
+		public Cursor cargarPulseras (){
+			String sql = "SELECT * FROM PartePulseras";
+			Cursor c= this.getReadableDatabase().rawQuery(sql, null);
+			return c;
 		}
 }

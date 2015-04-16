@@ -6,6 +6,7 @@ import java.util.StringTokenizer;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -18,6 +19,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 
 
@@ -34,6 +36,7 @@ public class MainActivity extends ActionBarActivity{
     private NavDrawerListAdapterRight adapterRight;
     String playa;
     private Button ordenar;
+    BD_sqlite BDhelper= new BD_sqlite(this);
     private FragmentListaIncidencias parteincidencias;
     private FragmentListaDiarios partediarios;
     
@@ -161,7 +164,10 @@ public class MainActivity extends ActionBarActivity{
     		lanzarPartesDiarios();
     	break;
     	case 2://Modificador de partes
-    		lanzarPartesPulseras();
+    		Intent i = new Intent(getApplicationContext(),PartePulseras.class);
+    		i=crgIntentPuls(i);
+    		startActivity(i);		
+    		//---> pasar el intent con las pulseras existentes.
     	break;
     	case 3://Botiquin
     		lanzarBotiquin();
@@ -197,6 +203,25 @@ public class MainActivity extends ActionBarActivity{
     		}
 		}
 	}
+	public Intent crgIntentPuls(Intent i){
+		Cursor c = BDhelper.cargarPulseras();
+		int nP,nTC,nM,nR,contador = 0;
+		
+		for (c.moveToFirst();!c.isAfterLast();c.moveToNext()){
+			nP=c.getColumnIndex("NumPulsera");
+			nTC=c.getColumnIndex("NumContacto");
+			nM=c.getColumnIndex("NomMenor");
+			nR=c.getColumnIndex("NomResponsable");
+			i.putExtra("numPuls"+contador, c.getString(nP));
+			i.putExtra("numTlfContac"+contador, c.getString(nTC));
+			i.putExtra("nomMenor"+contador, c.getString(nM));
+			i.putExtra("nomRespo"+contador, c.getString(nR));
+			contador++;
+		}
+		i.putExtra("contador", contador);
+		return i;
+	}
+	
 	@Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
