@@ -28,10 +28,14 @@ public class BD_sqlite extends SQLiteOpenHelper {
 			"CalidadAgua TINYINT NOT NULL,Hora TIME NOT NULL,TemperaturaAgua TYNYINT NOT NULL," +
 			"Grados11 TINYINT,Hora11 TIME,Grados13 TINYINT,Hora13 TIME,Grados15 TINYINT,Hora15 TIME," +
 			"Grados17 TINYINT,Hora17 TIME,Grados19 TINYINT,Hora19 TIME,Hora20 TIME," +
-			"Bandera TEXT NOT NULL,horaBandera TEXT NOT NULL,Bandera1 TEXT,horaBandera1 TEXT" +
+			"Bandera0 TEXT NOT NULL,horaBandera0 TEXT NOT NULL,Bandera1 TEXT,horaBandera1 TEXT" +
 			",Bandera2 TEXT,horaBandera2 TEXT,Bandera3 TEXT,horaBandera3 TEXT" +
-			",Bandera4 TEXT,horaBandera4 TEXT,BalizaLugar TEXT,BalizaHora TIME,CartelLugar TEXT," +
-			"CartelHora TIME,Orgánico TINYINT,Papel TINYINT,Plástico TINYINT,Incidencias VARCHAR(200))";
+			",Bandera4 TEXT,horaBandera4 TEXT,BalizaLugar0 TEXT,BalizaHora0 TIME,BalizaLugar1 TEXT" +
+			",BalizaHora1 TEXT,BalizaLugar2 TEXT,BalizaHora2 TEXT,BalizaLugar3 TEXT,BalizaHora3 TEXT" +
+			",BalizaLugar4 TEXT,BalizaHora4 TEXT,CartelLugar0 TEXT,CartelHora0 TIME" +
+			",CartelLugar1 TEXT,CartelHora1 TIME,CartelLugar2 TEXT,CartelHora2 TIME" +
+			",CartelLugar3 TEXT,CartelHora3 TIME,CartelLugar4 TEXT,CartelHora4 TIME" +
+			",Orgánico TINYINT,Papel TINYINT,Plástico TINYINT,Incidencias VARCHAR(200))";
 	
 	String crearPartesPulseras = "CREATE TABLE PartePulseras (NumPulsera INT NOT NULL,NumContacto TEXT NOT NULL," +
 			"NomMenor TEXT NOT NULL,NomResponsable TEXT NOT NULL)";
@@ -182,7 +186,7 @@ public class BD_sqlite extends SQLiteOpenHelper {
 			//contador++;
 		//}
 		return result;
-	}
+		}
 
 		public void InsertarParteIncidencias(String nomApel,String fecha,Boolean sexo,int edad,int telefono,String hora,
 				int lugar,int suceso,int asistencia,int resultado,String observaciones){
@@ -210,7 +214,11 @@ public class BD_sqlite extends SQLiteOpenHelper {
 		public Cursor recuperarDiarios(String FechaDiarios){
 			String sql ="SELECT FechaDiarios,RecursoHumanos,CalidadAgua,Hora,TemperaturaAgua," +
 					"Grados11,Hora11,Grados13,Hora13,Grados15,Hora15,Grados17,Hora17,Grados19,Hora19," +
-					"Hora20,Bandera,BalizaLugar,BalizaHora,CartelLugar,CartelHora,Orgánico,Papel," +
+					"Hora20,Bandera0,horaBandera0,Bandera1,horaBandera1,Bandera2,horaBandera2,Bandera3,horaBandera3," +
+					"Bandera4,horaBandera4,BalizaLugar0,BalizaHora0,BalizaLugar1,BalizaHora1" +
+					",BalizaLugar2,BalizaHora2,BalizaLugar3,BalizaHora3,BalizaLugar4,BalizaHora4" +
+					",CartelLugar0,CartelHora0,CartelLugar1,CartelHora1,CartelLugar2,CartelHora2" +
+					",CartelLugar3,CartelHora3,CartelLugar4,CartelHora4,Orgánico,Papel," +
 					"Plástico,Incidencias FROM ParteDiarios WHERE FechaDiarios='"+FechaDiarios+"'";
 			return this.getReadableDatabase().rawQuery(sql, null);
 		}
@@ -235,8 +243,14 @@ public class BD_sqlite extends SQLiteOpenHelper {
 		public void insertarParteDiarios(String fecha, String playa,int rcsh,int calidadAgua,
 			String hora,int tmpagua,int g11,String h11,int g13,
 			String h13,int g15,String h15,int g17,String h17,int g19,
-			String h19,String h20,String bandera,String balizalugar,
-			String balizahora,String cartelugar,String cartelhora,int organico,int papel,
+			String h19,String h20,String bandera0,String horaBandera0,String bandera1
+			,String horaBandera1,String bandera2,String horaBandera2,String bandera3
+			,String horaBandera3,String bandera4,String horaBandera4,String balizalugar0,
+			String balizahora0,String balizalugar1,String balizahora1,String balizalugar2,
+			String balizahora2,String balizalugar3,String balizahora3,String balizalugar4,
+			String balizahora4,String cartelugar0,String cartelhora0,String cartelugar1,String cartelhora1
+			,String cartelugar2,String cartelhora2,String cartelugar3,String cartelhora3
+			,String cartelugar4,String cartelhora4,int organico,int papel,
 			int plastico,String incidencias){
 			
 			ContentValues valores = new ContentValues();
@@ -257,20 +271,36 @@ public class BD_sqlite extends SQLiteOpenHelper {
 			valores.put("Grados19",g19);
 			valores.put("Hora19",h19);
 			valores.put("Hora20",h20);
-			valores.put("Bandera",bandera);
-			//valores.put("horaBandera",horaBandera);
-			//valores.put("Bandera1",bandera1);
-			//valores.put("horaBandera1",horaBandera1);
-			//valores.put("Bandera2",bandera2);
-			//valores.put("horaBandera2",horaBandera2);
-			//valores.put("Bandera3",bandera3);
-			//valores.put("horaBandera3",horaBandera3);
-			//valores.put("Bandera4",bandera4);
-			//valores.put("horaBandera4",horaBandera4);
-			valores.put("BalizaLugar",balizalugar);
-			valores.put("BalizaHora",balizahora);
-			valores.put("CartelLugar",cartelugar);
-			valores.put("CartelHora",cartelhora);
+			valores.put("Bandera0",bandera0);
+			valores.put("horaBandera0",horaBandera0);
+			valores.put("Bandera1",bandera1);
+			valores.put("horaBandera1",horaBandera1);
+			valores.put("Bandera2",bandera2);
+			valores.put("horaBandera2",horaBandera2);
+			valores.put("Bandera3",bandera3);
+			valores.put("horaBandera3",horaBandera3);
+			valores.put("Bandera4",bandera4);
+			valores.put("horaBandera4",horaBandera4);
+			valores.put("BalizaLugar0",balizalugar0);
+			valores.put("BalizaHora0",balizahora0);
+			valores.put("BalizaLugar1",balizalugar1);
+			valores.put("BalizaHora1",balizahora1);
+			valores.put("BalizaLugar2",balizalugar2);
+			valores.put("BalizaHora2",balizahora2);
+			valores.put("BalizaLugar3",balizalugar3);
+			valores.put("BalizaHora3",balizahora3);
+			valores.put("BalizaLugar4",balizalugar4);
+			valores.put("BalizaHora4",balizahora4);
+			valores.put("CartelLugar0",cartelugar0);
+			valores.put("CartelHora0",cartelhora0);
+			valores.put("CartelLugar1",cartelugar1);
+			valores.put("CartelHora1",cartelhora1);
+			valores.put("CartelLugar2",cartelugar2);
+			valores.put("CartelHora2",cartelhora2);
+			valores.put("CartelLugar3",cartelugar3);
+			valores.put("CartelHora3",cartelhora3);
+			valores.put("CartelLugar4",cartelugar4);
+			valores.put("CartelHora4",cartelhora4);
 			valores.put("Orgánico",organico);
 			valores.put("Papel",papel);
 			valores.put("Plástico",plastico);
