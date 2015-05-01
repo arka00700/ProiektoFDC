@@ -26,10 +26,12 @@
     </string-array>
     
     <array name="nav_drawer_icons">
-        <item>@drawable/ic_whats_hot</item>
-        <item>@drawable/ic_people</item>
-        <item>@drawable/ic_photos</item>
-        <item>@drawable/ic_communities</item>
+        <item>@drawable/ic_cruz</item>
+        <item>@drawable/ic_faro</item>
+        <item>@drawable/ic_sos</item>
+        <item>@drawable/ic_action</item> 
+        <item>@drawable/ic_hoja</item>
+        <item>@drawable/ic_perfil</item>
     </array>
     
     <array name="nav_drawer_icons_right">
@@ -56,7 +58,9 @@
         <item>Parte Incidencia</item>
         <item>Parte Diario</item>
         <item>Parte Pulsera</item>
-        <item>Botiquin</item>
+        <item>Pedido de material</item>
+        <item>Botiquín</item>
+        <item>Perfil Sos</item>
     </string-array>
     
     <string-array name="OpcionesMenuLateralRight">

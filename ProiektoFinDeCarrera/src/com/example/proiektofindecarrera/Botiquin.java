@@ -1,6 +1,7 @@
 package com.example.proiektofindecarrera;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.SearchView;
@@ -52,6 +53,7 @@ public class Botiquin extends FragmentActivity implements OnQueryTextListener{
 				BDhelper.insertarMedicamentos("Nitrofurantoina", "Antiseptico Urinario");
 				BDhelper.insertarMedicamentos("Amikacina", "Aminoglucosido");
 				BDhelper.insertarMedicamentos("Raditina", "Antiacido");
+				//startService(new Intent(Botiquin.this,ServicioDeNotificaciones.class));			
 			}
 		});
 	}

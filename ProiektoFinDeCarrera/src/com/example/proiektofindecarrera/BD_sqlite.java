@@ -35,7 +35,9 @@ public class BD_sqlite extends SQLiteOpenHelper {
 			",BalizaLugar4 TEXT,BalizaHora4 TEXT,CartelLugar0 TEXT,CartelHora0 TIME" +
 			",CartelLugar1 TEXT,CartelHora1 TIME,CartelLugar2 TEXT,CartelHora2 TIME" +
 			",CartelLugar3 TEXT,CartelHora3 TIME,CartelLugar4 TEXT,CartelHora4 TIME" +
-			",Orgánico TINYINT,Papel TINYINT,Plástico TINYINT,Incidencias VARCHAR(200))";
+			",torre0 TEXT,puesto0 TIME,orilla0 TEXT,horaRot0 TIME,torre1 TEXT,puesto1 TIME,orilla1 TEXT,horaRot1 TIME" +
+			",torre2 TEXT,puesto2 TIME,orilla2 TEXT,horaRot2 TIME,torre3 TEXT,puesto3 TIME,orilla3 TEXT,horaRot3 TIME" +
+			",torre4 TEXT,puesto4 TIME,orilla4 TEXT,horaRot4 TIME,Orgánico TINYINT,Papel TINYINT,Plástico TINYINT,Incidencias VARCHAR(200))";
 	
 	String crearPartesPulseras = "CREATE TABLE PartePulseras (NumPulsera INT NOT NULL,NumContacto TEXT NOT NULL," +
 			"NomMenor TEXT NOT NULL,NomResponsable TEXT NOT NULL)";
@@ -218,7 +220,9 @@ public class BD_sqlite extends SQLiteOpenHelper {
 					"Bandera4,horaBandera4,BalizaLugar0,BalizaHora0,BalizaLugar1,BalizaHora1" +
 					",BalizaLugar2,BalizaHora2,BalizaLugar3,BalizaHora3,BalizaLugar4,BalizaHora4" +
 					",CartelLugar0,CartelHora0,CartelLugar1,CartelHora1,CartelLugar2,CartelHora2" +
-					",CartelLugar3,CartelHora3,CartelLugar4,CartelHora4,Orgánico,Papel," +
+					",CartelLugar3,CartelHora3,CartelLugar4,CartelHora4,torre0,puesto0,orilla0,horaRot0" +
+					",torre1,puesto1,orilla1,horaRot1,torre2,puesto2,orilla2,horaRot2" +
+					",torre3,puesto3,orilla3,horaRot3,torre4,puesto4,orilla4,horaRot4,Orgánico,Papel," +
 					"Plástico,Incidencias FROM ParteDiarios WHERE FechaDiarios='"+FechaDiarios+"'";
 			return this.getReadableDatabase().rawQuery(sql, null);
 		}
@@ -250,7 +254,10 @@ public class BD_sqlite extends SQLiteOpenHelper {
 			String balizahora2,String balizalugar3,String balizahora3,String balizalugar4,
 			String balizahora4,String cartelugar0,String cartelhora0,String cartelugar1,String cartelhora1
 			,String cartelugar2,String cartelhora2,String cartelugar3,String cartelhora3
-			,String cartelugar4,String cartelhora4,int organico,int papel,
+			,String cartelugar4,String cartelhora4,String torre0,String puesto0,String orilla0,String horaRot0
+			,String torre1,String puesto1,String orilla1,String horaRot1,String torre2,String puesto2
+			,String orilla2,String horaRot2,String torre3,String puesto3,String orilla3,String horaRot3
+			,String torre4,String puesto4,String orilla4,String horaRot4,int organico,int papel,
 			int plastico,String incidencias){
 			
 			ContentValues valores = new ContentValues();
@@ -301,6 +308,26 @@ public class BD_sqlite extends SQLiteOpenHelper {
 			valores.put("CartelHora3",cartelhora3);
 			valores.put("CartelLugar4",cartelugar4);
 			valores.put("CartelHora4",cartelhora4);
+			valores.put("torre0",torre0);
+			valores.put("puesto0",puesto0);
+			valores.put("orilla0",orilla0);
+			valores.put("horaRot0",horaRot0);
+			valores.put("torre1",torre1);
+			valores.put("puesto1",puesto1);
+			valores.put("orilla1",orilla1);
+			valores.put("horaRot1",horaRot1);
+			valores.put("torre2",torre2);
+			valores.put("puesto2",puesto2);
+			valores.put("orilla2",orilla2);
+			valores.put("horaRot2",horaRot2);
+			valores.put("torre3",torre3);
+			valores.put("puesto3",puesto3);
+			valores.put("orilla3",orilla3);
+			valores.put("horaRot3",horaRot3);
+			valores.put("torre4",torre4);
+			valores.put("puesto4",puesto4);
+			valores.put("orilla4",orilla4);
+			valores.put("horaRot4",horaRot4);
 			valores.put("Orgánico",organico);
 			valores.put("Papel",papel);
 			valores.put("Plástico",plastico);

@@ -22,14 +22,52 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Registration" android:label="registration"></activity>
-        <activity android:name=".MainActivity" android:label="mainactivity"></activity>
-        <activity android:name=".Botiquin" android:label="botiquin"></activity>
-        <activity android:label="indicacionesmedicamento" android:name=".IndicacionesMedicamento"></activity>
-        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
-        <activity android:label="parteIncidencias" android:name=".ParteIncidencias"></activity>
-        <activity android:label="ParteDiarios" android:name=".ParteDiarios"></activity>
-        <activity android:name=".PartePulseras" android:label="PartePulseras"></activity>
+        <activity
+            android:name=".Registration"
+            android:label="Registro" >
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" 
+            android:theme="@style/AppBaseTheme" >
+            
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Botiquin"
+            android:label="Botiquín" >
+        </activity>
+        <activity
+            android:name=".IndicacionesMedicamento"
+            android:label="Indicaciones" >
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".ParteIncidencias"
+            android:label="Parte de Incidencia" >
+        </activity>
+        <activity
+            android:name=".ParteDiarios"
+            android:label="Parte Diario" >
+        </activity>
+        <activity
+            android:name=".PartePulseras"
+            android:label="Parte de Pulseras" >
+        </activity>	
+        <service android:name=".ServicioDeNotificaciones" >
+        </service>
+
+        <activity
+            android:name=".Usuarios"
+            android:label="@string/title_activity_usuarios"
+            android:theme="@style/AppBaseTheme" >
+        </activity>
     </application>
 
 </manifest>

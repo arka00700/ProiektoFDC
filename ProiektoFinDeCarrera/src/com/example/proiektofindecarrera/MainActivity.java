@@ -1,13 +1,16 @@
 package com.example.proiektofindecarrera;
 
 import java.util.ArrayList;
-import java.util.StringTokenizer;
-
+import java.util.Calendar;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,9 +18,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -35,7 +36,6 @@ public class MainActivity extends ActionBarActivity{
     private NavDrawerListAdapter adapter;
     private NavDrawerListAdapterRight adapterRight;
     String playa;
-    private Button ordenar;
     BD_sqlite BDhelper= new BD_sqlite(this);
     private FragmentListaIncidencias parteincidencias;
     private FragmentListaDiarios partediarios;
@@ -72,6 +72,8 @@ public class MainActivity extends ActionBarActivity{
         navDrawerItems.add(new NavDrawerItem(names[1], navMenuIcons.getResourceId(1, -1)));
         navDrawerItems.add(new NavDrawerItem(names[2], navMenuIcons.getResourceId(2, -1)));
         navDrawerItems.add(new NavDrawerItem(names[3], navMenuIcons.getResourceId(3, -1)));
+        navDrawerItems.add(new NavDrawerItem(names[4], navMenuIcons.getResourceId(4, -1)));
+        navDrawerItems.add(new NavDrawerItem(names[5], navMenuIcons.getResourceId(5, -1)));
        
         // Metemos en el adapter toda la configuracion con iconos y titulos
         adapter = new NavDrawerListAdapter(getApplicationContext(),navDrawerItems);
@@ -99,18 +101,18 @@ public class MainActivity extends ActionBarActivity{
         getSupportActionBar().setHomeButtonEnabled(true);
         drawerLayout.setDrawerListener(drawerToggleRight);
         
-        //Listener del boton ordenar
-        ordenar=(Button) findViewById(R.id.ordenar);
-        ordenar.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {	
-				drawerLayout.openDrawer(Gravity.RIGHT);
-			}
-		});
-        
-	}
-	//Fuera del ONCREATE
+        //Crear ALARMA 19.30 para partes
+        SharedPreferences preferencias= PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = preferencias.edit();
+        int z = preferencias.getInt("numerolaunchers", 1);
+        //Toast.makeText(this, "z:"+z, 2000).show();
+        if(z<2){
+        	crearAlarma();
+        	z++;
+        	editor.putInt("numerolaunchers", z);
+        	editor.commit();
+        }
+	}//Fuera del ONCREATE
 	
 	private void crearAdaptador() {
 		
@@ -167,10 +169,15 @@ public class MainActivity extends ActionBarActivity{
     		Intent i = new Intent(getApplicationContext(),PartePulseras.class);
     		i=crgIntentPuls(i);
     		startActivity(i);		
-    		//---> pasar el intent con las pulseras existentes.
     	break;
-    	case 3://Botiquin
+    	case 3://Pedido de Material
+    		
+    	break;
+    	case 4://Botiquin
     		lanzarBotiquin();
+    	break;
+    	case 5://perfil sos
+    		lanzarUsuarios();
     	break;
     	default:
     		System.out.println("Error");
@@ -248,9 +255,30 @@ public class MainActivity extends ActionBarActivity{
 		Intent i = new Intent (this,ParteDiarios.class);
 		startActivity(i);
 	}
-	private void lanzarPartesPulseras() {
-		Intent i = new Intent (this,PartePulseras.class);
-		startActivity(i);	
+	public void lanzarUsuarios(){
+		Intent i = new Intent (this,Usuarios.class);
+		startActivity(i);
+	}
+	
+	private void crearAlarma(){
+		
+		AlarmManager alarma=(AlarmManager)getSystemService(ALARM_SERVICE);
+		Intent alarmai = new Intent(MainActivity.this,ServicioDeNotificaciones.class);
+		//PendingIntent intentPendiente = PendingIntent.getBroadcast(MainActivity.this, 0, alarmai, 0);
+		PendingIntent intentPendiente = PendingIntent.getService(MainActivity.this, 0, alarmai, 0);
+		Calendar calendario=Calendar.getInstance();
+		//calendario.setTimeInMillis(System.currentTimeMillis());
+		//Date date = calendario.getTime();
+		//SimpleDateFormat df = new SimpleDateFormat("hh:mm:ss");
+	   // String formatteDate = df.format(date);
+		calendario.set(Calendar.SECOND,0);
+		calendario.set(Calendar.MINUTE,30);
+		calendario.set(Calendar.HOUR,7);
+		calendario.set(Calendar.AM_PM,Calendar.PM);
+		//calendario.set(Calendar.DAY_OF_MONTH,1);
+		
+		alarma.setRepeating(AlarmManager.RTC_WAKEUP, calendario.getTimeInMillis(),1000*60*60*24, intentPendiente);
+		Toast.makeText(getApplicationContext(), "ALARMA PREPARADA", 10000).show();
 	}
 	//MENU ALTO
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -261,13 +289,22 @@ public class MainActivity extends ActionBarActivity{
 	public boolean onPrepareOptionsMenu(Menu menu) {
         // If the nav drawer is open, hide action items related to the content
         // view
-        boolean drawerOpen = drawerLayout.isDrawerOpen(navListLeft);
-        menu.findItem(R.id.action_search).setVisible(!drawerOpen);
+     //   boolean drawerOpen = drawerLayout.isDrawerOpen(navListLeft);
+      //  menu.findItem(R.id.action_search).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }
 	public boolean onOptionsItemSelected(MenuItem item) {
-        // Pass the event to ActionBarDrawerToggle, if it returns
-        // true, then it has handled the app icon touch event
+       //Si se selecciona algun boton del action bar
+		super.onOptionsItemSelected(item);
+		switch (item.getItemId()) {
+		case R.id.Actionbar:
+			drawerLayout.openDrawer(Gravity.RIGHT);
+		break;
+		case R.id.Actionbar2:
+			Toast.makeText(getApplicationContext(), "Acerca de sin hacer", 2000).show();
+		default:
+			break;
+		}
         if (drawerToggle.onOptionsItemSelected(item)) {
             return true;
         }

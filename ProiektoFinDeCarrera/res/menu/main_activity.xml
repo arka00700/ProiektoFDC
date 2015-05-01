@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:yourapp="http://schemas.android.com/apk/res-auto" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/action_search"
-        android:icon="@android:drawable/ic_menu_search"
-        android:title="@string/search"
-        yourapp:showAsAction="ifRoom"
-        yourapp:actionViewClass="android.support.v7.widget.SearchView"/>
- 
+    
+ 	<item
+        android:id="@+id/Actionbar"
+        android:icon="@android:drawable/ic_input_add"
+        android:title="Ordenar"
+        android:showAsAction="ifRoom"
+      />
+ 	<item
+        android:id="@+id/Actionbar2"
+        android:icon="@android:drawable/ic_input_add"
+        android:title="Acerca de"
+        android:showAsAction="ifRoom"
+      />
 </menu>
 
