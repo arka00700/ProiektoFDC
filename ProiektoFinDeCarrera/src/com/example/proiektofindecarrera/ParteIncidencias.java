@@ -12,6 +12,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AbsSpinner;
@@ -30,7 +33,6 @@ public class ParteIncidencias extends ActionBarActivity {
 	BD_sqlite BDhelper= new BD_sqlite(this);
 	Spinner spinnerLugar,spinnerSuceso,spinnerAsistencia,spinnerResultado;
 	RadioGroup sexo;
-	Button btguardar;
 	boolean sex;//SUB
 	int lugar,suceso,asistencia,resultado;
 	int[] cargarSpinners={0,0,0,0};
@@ -45,7 +47,7 @@ public class ParteIncidencias extends ActionBarActivity {
 		telefono = (EditText) findViewById(R.id.telefono);
         insertarHora=(EditText)findViewById(R.id.horaincidencia);
         observaciones=(EditText)findViewById(R.id.observaciones);
-        btguardar=(Button)findViewById(R.id.guardarIncidencias);
+        
         //Spiners de opciones
         spinnerLugar = (Spinner) findViewById(R.id.spinnerlugar);
         spinnerSuceso = (Spinner) findViewById(R.id.spinnersuceso);
@@ -88,14 +90,6 @@ public class ParteIncidencias extends ActionBarActivity {
         adapterResultado.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerResultado.setAdapter(adapterResultado);
         spinnerResultado.setSelection(cargarSpinners[3]);
-        
-        btguardar.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				guardarIncidencia();
-			}
-		});
 	}
 	
 	//TIME PICKER 
@@ -264,5 +258,30 @@ public class ParteIncidencias extends ActionBarActivity {
 		});
 		alertaSobEsc.create();
 		alertaSobEsc.show();
+	}
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    // Inflate the menu; this adds items to the action bar if it is present.
+		MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.guardar, menu);
+	    return super.onCreateOptionsMenu(menu);
+	}
+	public boolean onPrepareOptionsMenu(Menu menu) {
+       
+        return super.onPrepareOptionsMenu(menu);
+    }
+	public boolean onOptionsItemSelected(MenuItem item) {
+       //Si se selecciona algun boton del action bar
+		super.onOptionsItemSelected(item);
+		switch (item.getItemId()) {
+		case R.id.actionBarGuardar:
+			if(getIntent().getStringExtra("Hora")!=null){
+				alertaSobreescritura();
+			}else{
+				guardarIncidencia();
+			}
+		break;
+        }
+        // Handle your other action bar items...
+        return super.onOptionsItemSelected(item);
 	}
 }

@@ -3,7 +3,7 @@ package com.example.proiektofindecarrera;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.SearchView.OnQueryTextListener;
 import android.view.Menu;
@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class Botiquin extends FragmentActivity implements OnQueryTextListener{
+public class Botiquin extends ActionBarActivity implements OnQueryTextListener{
 	
 	private Button btmedicamentonuevo;
 	SearchView searchView; 
@@ -53,7 +53,7 @@ public class Botiquin extends FragmentActivity implements OnQueryTextListener{
 				BDhelper.insertarMedicamentos("Nitrofurantoina", "Antiseptico Urinario");
 				BDhelper.insertarMedicamentos("Amikacina", "Aminoglucosido");
 				BDhelper.insertarMedicamentos("Raditina", "Antiacido");
-				//startService(new Intent(Botiquin.this,ServicioDeNotificaciones.class));			
+				startService(new Intent(Botiquin.this,ServicioDeNotificaciones.class));			
 			}
 		});
 	}
@@ -70,7 +70,7 @@ public class Botiquin extends FragmentActivity implements OnQueryTextListener{
 	}
 	public boolean onCreateOptionsMenu(Menu menu) {
 	    // Inflate the menu; this adds items to the action bar if it is present.
-	    getMenuInflater().inflate(R.menu.main_activity, menu);
+	   // getMenuInflater().inflate(R.menu.main_activity, menu);
 	    return true;
 	}
 }	

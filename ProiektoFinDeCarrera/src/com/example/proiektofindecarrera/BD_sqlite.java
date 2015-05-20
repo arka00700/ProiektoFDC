@@ -41,6 +41,10 @@ public class BD_sqlite extends SQLiteOpenHelper {
 	
 	String crearPartesPulseras = "CREATE TABLE PartePulseras (NumPulsera INT NOT NULL,NumContacto TEXT NOT NULL," +
 			"NomMenor TEXT NOT NULL,NomResponsable TEXT NOT NULL)";
+	
+	String crearPartesPedidos = "CREATE TABLE PartePedidos (Socorrista TEXT NOT NULL,PlayaPedido TEXT NOT NULL" +
+			",FechaPedido DATE NOT NULL,Pedido TEXT)";
+	
 	//CONSTRUCTORES (CREAR Y EL SEGUNDO PARA MODIFICAR PASANDO LA VERSION)
 	public BD_sqlite(Context context) {
 		super(context, "BD.sqlite", null, 1);
@@ -77,6 +81,7 @@ public class BD_sqlite extends SQLiteOpenHelper {
 		db.execSQL(crearPartesIncidencias);
 		db.execSQL(crearPartesDiarios);
 		db.execSQL(crearPartesPulseras);
+		db.execSQL(crearPartesPedidos);
 	}
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -87,6 +92,7 @@ public class BD_sqlite extends SQLiteOpenHelper {
 			db.execSQL("DROP TABLE IF EXISTS ParteIncidencias");
 			db.execSQL("DROP TABLE IF EXISTS ParteDiarios");
 			db.execSQL("DROP TABLE IF EXISTS PartePulseras");
+			db.execSQL("DROP TABLE IF EXISTS PartePedidos");
 			onCreate(db);
 			}
 	
@@ -110,19 +116,20 @@ public class BD_sqlite extends SQLiteOpenHelper {
 		valores.put("Playa", playa);
 		valores.put("Recurso",recurso);
 		this.getWritableDatabase().insert("Usuarios", null, valores);
-	
 	}
+	
 	public Cursor leerIndicaciones (String md){
 		String sql = "SELECT Indicaciones FROM Medicamentos WHERE Nombre='"+md+"'";
-		return this.getWritableDatabase().rawQuery(sql, null);
-		
+		return this.getWritableDatabase().rawQuery(sql, null);	
 	}
+	
 	public void añadirconexion(String usr){
 		String sql="UPDATE Usuarios SET conectado='0'";
 		String sql2 ="UPDATE Usuarios SET conectado='1' WHERE User='"+usr+"'";
 		this.getWritableDatabase().execSQL(sql);
 		this.getWritableDatabase().execSQL(sql2);
 	}
+	
 	public String[] usrConectado(){
 		String result []= new String [2];
 		String sql ="SELECT User,Playa FROM Usuarios WHERE conectado='1'";
@@ -135,12 +142,28 @@ public class BD_sqlite extends SQLiteOpenHelper {
 		result[1]=c.getString(ip);
 		return result;
 	}
+	public void cerrarSesión(String usr){
+		String sql="UPDATE Usuarios SET conectado='0' WHERE User='"+usr+"'";
+		this.getWritableDatabase().execSQL(sql);
+	}
+	
+	public Cursor cargarUsuario(){
+		String sql ="SELECT User,Password,Playa,Recurso FROM Usuarios WHERE conectado='1'";
+		Cursor c= this.getReadableDatabase().rawQuery(sql, null);
+		return c;
+	}
+	public void borrarUsuario(String usr){
+		String sql ="DELETE FROM Usuarios WHERE User='"+usr+"'";
+		this.getWritableDatabase().execSQL(sql);
+	}
+
 	public void insertarMedicamentos (String nombre, String indicaciones){
 		ContentValues valores = new ContentValues();
 		valores.put("Nombre",nombre);
 		valores.put("Indicaciones",indicaciones);
 		this.getWritableDatabase().insert("Medicamentos", null, valores);
 	}
+	
 	public Cursor leerMedicamentos(){
 		String sql="SELECT Nombre FROM Medicamentos";
 		return this.getReadableDatabase().rawQuery(sql, null);
@@ -407,5 +430,14 @@ public class BD_sqlite extends SQLiteOpenHelper {
 			String sql = "SELECT * FROM PartePulseras";
 			Cursor c= this.getReadableDatabase().rawQuery(sql, null);
 			return c;
+		}
+		//Pedidos
+		public void insertarPedidos(String usr, String playa,String fecha,String pedido){
+			ContentValues valores = new ContentValues();
+			valores.put("Socorrista",usr);
+			valores.put("PlayaPedido",playa);
+			valores.put("FechaPedido", fecha);
+			valores.put("Pedido",pedido);
+			this.getWritableDatabase().insert("PartePedidos", null, valores);
 		}
 }

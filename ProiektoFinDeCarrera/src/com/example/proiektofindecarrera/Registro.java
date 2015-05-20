@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class Registration extends ActionBarActivity{
+public class Registro extends ActionBarActivity{
 	
 	private Button bRegistrar;
 	private EditText usrId,passId,passId2,usrRecurso;
@@ -21,7 +21,7 @@ public class Registration extends ActionBarActivity{
 	
 	protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registration);
+        setContentView(R.layout.activity_registro);
         
       //IDENTIFICACION
         bRegistrar = (Button) findViewById(R.id.rfinalizarregistro);
@@ -70,13 +70,10 @@ public class Registration extends ActionBarActivity{
 				Toast.makeText(getApplicationContext(),"Registro realizado correctamente", 2000).show();
 				lanzarLogin();
 				}else{
-				
 				Toast.makeText(getApplicationContext(),"El usuario ya existe", 2000).show();
-				
-				
 				}	
-	
 			}
+	
 	private boolean estaVacioRegistro(){
 		boolean vacio = true;
 		if(usrId.getText().toString().compareTo("")!=0 && passId.getText().toString().compareTo("")!=0

@@ -23,7 +23,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="30dp"
-                android:text="Ingrese los datos para nuevo usuario:" />
+                android:text="@+string/IngresoUsr" />
 
         </LinearLayout>
 
@@ -49,7 +49,7 @@
                     android:layout_marginLeft="1dp"
                     android:layout_marginRight="1dp"
                     android:gravity="center_vertical"
-                    android:text="Usuario:"
+                    android:text="@+string/Usuario"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <EditText
@@ -83,7 +83,7 @@
                     android:layout_marginLeft="1dp"
                     android:layout_marginRight="1dp"
                     android:gravity="center_vertical"
-                    android:text="Contraseña:"
+                    android:text="@+string/Contraseña"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <EditText
@@ -116,7 +116,7 @@
                     android:layout_marginLeft="1dp"
                     android:layout_marginRight="1dp"
                     android:gravity="center_vertical"
-                    android:text="Repetir contraseña:"
+                    android:text="@+string/Rpass"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <EditText
@@ -150,7 +150,7 @@
                     android:layout_marginLeft="1dp"
                     android:layout_marginRight="1dp"
                     android:gravity="center_vertical"
-                    android:text="Playa:"
+                    android:text="@+string/Playa"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <Spinner
@@ -181,7 +181,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginTop="15dp"
-                    android:text="Nº de Recurso:"
+                    android:text="@+string/NumR"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <EditText
@@ -217,7 +217,7 @@
                 android:minWidth="125dp"
                 android:shadowColor="#AAAAAA"
                 android:shadowRadius="2"
-                android:text="Finalizar registro"
+                android:text="@+string/FinRegis"
                 android:textColor="#777777" />
         </LinearLayout>
     </LinearLayout>

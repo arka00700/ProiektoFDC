@@ -1,117 +1,113 @@
-<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-	<TableLayout
-	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
-	    android:background="#ffffff"
-	    android:dividerPadding="5dp"
-	    android:padding="10dp" >
-
-		<TableRow
-		    android:id="@+id/cabezaRow1"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_marginTop="15dp" >
-
-			<TextView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/border"
+        android:orientation="vertical" >
+		
+		<LinearLayout 
+	    	android:layout_width="match_parent"
+        	android:layout_height="wrap_content">
+		    
+		    <TextView
 			    android:id="@+id/datosdelaplaya"
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content"
-			    android:text="Datos Personales:"
-			    android:textAppearance="?android:attr/textAppearanceLarge" />
-
-		</TableRow>
-	<View
+			    android:text="@+string/DatosPer"
+			    android:textAppearance="?android:attr/textAppearanceLarge" />    
+		</LinearLayout>
+		<View
         android:layout_width="fill_parent"
         android:layout_height="0.2dp"
         android:id="@+id/separator1"
         android:visibility="visible"
         android:background="@android:color/darker_gray"/>
+		
+		<LinearLayout 
+	    	android:layout_width="match_parent"
+        	android:layout_height="wrap_content">
+		   
+		   <EditText
+		       android:id="@+id/nombreapellidos"
+		       android:layout_width="match_parent"
+		       android:layout_height="match_parent"
+		       android:layout_marginLeft="5dp"
+		       android:contentDescription="Nombre y apellido"
+		       android:hint="@+string/NomApel"
+		       android:inputType="textPersonName"
+		       android:maxLength="30"
+		       android:singleLine="true"
+		       android:textAppearance="?android:attr/textAppearanceMedium" />
+    
+		</LinearLayout>
+		
+		<View
+        android:layout_width="fill_parent"
+        android:layout_height="0.2dp"
+        android:id="@+id/separator2"
+        android:visibility="visible"
+        android:background="@android:color/darker_gray"/>
+		
+		<LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal" >
 
-    <TableRow
-        android:id="@+id/nombreapellidosRow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:background="#BBBBBB" >
+		   <TextView
+		       android:id="@+id/textsexo"
+		       android:layout_width="wrap_content"
+		       android:layout_height="fill_parent"
+		       android:layout_marginLeft="5dp"
+		       android:gravity="center_vertical|center_horizontal"
+		       android:paddingRight="30dp"
+		       android:text="@+string/Sexo:"
+		       android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <EditText
-            android:id="@+id/nombreapellidos"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:contentDescription="Nombre y apellido"
-            android:hint="Nombre y Apellido"
-            android:inputType="textPersonName"
-            android:maxLength="30"
-            android:singleLine="true"
-            android:textAppearance="?android:attr/textAppearanceMedium" >
+		  <RadioGroup
+		      android:id="@+id/sexoradiogroup"
+		      android:layout_width="0dp"
+		      android:layout_height="wrap_content"
+		      android:layout_weight="60" >
 
-            <requestFocus />
-        </EditText>
-    </TableRow>
-	
-    <TableRow
-        android:id="@+id/sexoRow"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:background="#DDDDDD" >
-
-        <TableRow
-            android:id="@+id/LineaSexo"
-            android:layout_width="match_parent"
-            android:layout_height="fill_parent" >
-
-            <TextView
-                android:id="@+id/textsexo"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_margin="5dp"
-                android:paddingRight="30dp"
-                android:text="Sexo:"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-	<RadioGroup 
-	    android:id="@+id/sexoradiogroup">
             <RadioButton
                 android:id="@+id/Hombre"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Hombre" />
+                android:text="@+string/Hombre" />
 
             <RadioButton
                 android:id="@+id/Mujer"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"            
-                android:text="Mujer" />
-	</RadioGroup>
-	
-        </TableRow>
+                android:text="@+string/Mujer" />
+		</RadioGroup>     
+       </LinearLayout>
+       
+		<View
+        android:layout_width="fill_parent"
+        android:layout_height="0.2dp"
+        android:id="@+id/separator3"
+        android:visibility="visible"
+        android:background="@android:color/darker_gray"/>
 		
-    </TableRow>
-
-    <TableRow
-        android:id="@+id/edadRow"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="1dp"
-        android:background="#BBBBBB" >
-
-        <TableRow
-            android:id="@+id/lineaedad"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            <TextView
+       <LinearLayout 
+	    	android:layout_width="match_parent"
+        	android:layout_height="wrap_content">
+        	
+        	<TextView
                 android:id="@+id/textrecursoshumanos"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_gravity="bottom"
                 android:layout_margin="5dp"
                 android:paddingRight="30dp"
-                android:text="Edad:"
+                android:text="@+string/Edad:"
                 android:singleLine="true"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -122,29 +118,24 @@
                 android:ems="10"
                 android:maxLength="2"
                 android:singleLine="true" />
-
-        </TableRow>
-
-    </TableRow>
-
-    <TableRow
-        android:id="@+id/tlfRow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:background="#DDDDDD" >
-
-        <TableRow
-            android:id="@+id/lineatfn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <TextView
+       </LinearLayout>
+       <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.2dp"
+        android:id="@+id/separator4"
+        android:visibility="visible"
+        android:background="@android:color/darker_gray"/>
+		
+	 	<LinearLayout 
+	    	android:layout_width="match_parent"
+        	android:layout_height="wrap_content">
+         
+         <TextView
                 android:id="@+id/textelefono:"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_margin="5dp"
-                android:text="Telefono:"
+                android:text="@+string/Telefono:"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
@@ -153,54 +144,28 @@
                 android:layout_height="fill_parent"
                 android:layout_marginLeft="5dp"
                 android:ems="10"
-                android:hint="(opcional)"
+                android:hint="@+string/opcional"
                 android:inputType="phone"
                 android:maxLength="9"
-                android:singleLine="true" />
-
-        </TableRow>
-
-    </TableRow>
-
-    <TableRow
-        android:id="@+id/leyendaRow"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
-
-        <TextView
-            android:id="@+id/calidadaguatext"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="Leyenda:"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-    </TableRow>
-	 <View
+                android:singleLine="true" />   
+      	</LinearLayout>
+      	<View
         android:layout_width="fill_parent"
         android:layout_height="0.2dp"
-        android:id="@+id/separator2"
+        android:id="@+id/separator5"
         android:visibility="visible"
         android:background="@android:color/darker_gray"/>
-	 
-    <TableRow
-        android:id="@+id/horaRow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:background="#BBBBBB" >
-
-        <TableRow
-            android:id="@+id/LineaHora"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <TextView
+		
+      	<LinearLayout 
+	    	android:layout_width="match_parent"
+        	android:layout_height="wrap_content">
+         <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="10dp"
-                android:text="Hora:"
+                android:text="@+string/Hora:"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
@@ -213,29 +178,25 @@
                 android:inputType="time"
                 android:onClick="timeOnClick"
                 android:singleLine="true" />
-
-        </TableRow>
-
-    </TableRow>
-
-    <TableRow
-        android:id="@+id/lugarRow"
+        </LinearLayout>
+        
+        <View
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginTop="1dp"
-        android:background="#DDDDDD" >
-
-        <TableRow
-            android:id="@+id/tableRow2"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent" >
-
-            <TextView
+        android:layout_height="0.2dp"
+        android:id="@+id/separator6"
+        android:visibility="visible"
+        android:background="@android:color/darker_gray"/>
+        
+        <LinearLayout 
+	    	android:layout_width="match_parent"
+        	android:layout_height="wrap_content">
+        
+             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_marginLeft="5dp"
-                android:text="Lugar:"
+                android:text="@+string/Lugar:"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <Spinner
@@ -244,30 +205,26 @@
                 android:layout_height="fill_parent"
                 android:layout_marginTop="1dp"
                 android:prompt="@string/spinner" />
-
-        </TableRow>
-
-    </TableRow>
-
-    <TableRow
-        android:id="@+id/sucesoRow"
+        </LinearLayout>
+        
+        <View
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginTop="1dp"
-        android:background="#BBBBBB" >
-
-        <TableRow
-            android:id="@+id/lineasuceso"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent" >
-
-            <TextView
+        android:layout_height="0.2dp"
+        android:id="@+id/separator7"
+        android:visibility="visible"
+        android:background="@android:color/darker_gray"/>
+        
+        <LinearLayout 
+	    	android:layout_width="match_parent"
+        	android:layout_height="wrap_content">
+       
+        <TextView
                 android:id="@+id/Suceso"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="6dp"
-                android:text="Suceso:"
+                android:text="@+string/Suceso:"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <Spinner
@@ -276,30 +233,25 @@
                 android:layout_height="fill_parent"
                 android:layout_marginBottom="7dp"
                 android:layout_marginTop="7dp" />
-
-        </TableRow>
-
-    </TableRow>
-
-    <TableRow
-        android:id="@+id/asistenciaRow"
+       </LinearLayout>
+       <View
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginTop="1dp"
-        android:background="#DDDDDD" >
-
-        <TableRow
-            android:id="@+id/lineaasistencia"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent" >
-
-            <TextView
+        android:layout_height="0.2dp"
+        android:id="@+id/separator8"
+        android:visibility="visible"
+        android:background="@android:color/darker_gray"/>
+        
+        <LinearLayout 
+	    	android:layout_width="match_parent"
+        	android:layout_height="wrap_content">
+        
+             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
-                android:text="Asistencia:"
+                android:text="@+string/Asistencia:"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <Spinner
@@ -308,29 +260,25 @@
                 android:layout_height="fill_parent"
                 android:layout_marginBottom="7dp"
                 android:layout_marginTop="7dp" />
-
-        </TableRow>
-
-    </TableRow>
-
-    <TableRow
-        android:id="@+id/resultadoRow"
+       </LinearLayout>
+       <View
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginTop="1dp"
-        android:background="#BBBBBB" >
-	<TableRow
-            android:id="@+id/linearesultado"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent" >
-
-            <TextView
+        android:layout_height="0.2dp"
+        android:id="@+id/separator9"
+        android:visibility="visible"
+        android:background="@android:color/darker_gray"/>
+        
+        <LinearLayout 
+	    	android:layout_width="match_parent"
+        	android:layout_height="wrap_content">
+       
+           	<TextView
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
-                android:text="Resultado:"
+                android:text="@+string/Resultado:"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         
         <Spinner
@@ -340,60 +288,32 @@
             android:layout_marginBottom="7dp"
             android:layout_marginTop="7dp"
             android:contentDescription="Resultado" />
-
-   	 </TableRow>
-  </TableRow>
-
-    <TableRow
-        android:id="@+id/observacionesRow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#ffffff" >
-
-        <TextView
-            android:id="@+id/textObservaciones"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="Observaciones:"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-    </TableRow>
-
-    <View
-        android:id="@+id/separator3"
+        </LinearLayout>
+         <View
         android:layout_width="fill_parent"
         android:layout_height="0.2dp"
-        android:background="@android:color/darker_gray"
-        android:visibility="visible" />
+        android:id="@+id/separator10"
+        android:visibility="visible"
+        android:background="@android:color/darker_gray"/>
+        
+        <LinearLayout 
+	    	android:layout_width="match_parent"
+        	android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/observaciones"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/edittext_bg"
-        android:ems="10"
-        android:inputType="textMultiLine"
-        android:linksClickable="false"
-        android:maxLength="150"
-        android:maxLines="5"
-        android:scrollbars="vertical" />
+        <EditText
+            android:id="@+id/observaciones"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
+            android:ems="10"
+            android:hint="@+string/Observaciones"
+            android:inputType="textMultiLine"
+            android:lines="3"
+            android:linksClickable="false"
+            android:maxLength="150"
+            android:maxLines="5"
+            android:scrollbars="vertical" />
 
-    <View
-        android:id="@+id/separator4"
-        android:layout_width="match_parent"
-        android:layout_height="0.2dp"
-        android:background="@android:color/darker_gray"
-        android:visibility="visible" />
-
-    <Button
-        android:id="@+id/guardarIncidencias"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Guardar Incidencias" />
-	
-</TableLayout>
-
-	
-
+       </LinearLayout>
+</LinearLayout>
 </ScrollView>

@@ -2,7 +2,6 @@
 <resources>
 
     <string name="app_name">BeachControl</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="menu_guardar">SaveMenu</string>
     <string name="menu_nuevo">NewMenu</string>
@@ -11,5 +10,11 @@
     <string name="open_drawer">Drawer abierto</string>
     <string name="close_drawer">Drawer cerrado</string>
     <string name="title_activity_usuarios">Usuarios</string>
+    <string name="title_activity_pedidos">Pedidos</string>
+    <string name="registro"><u><b>Regístrate en BeachControl</b></u></string>
+    <string name="castellano">Castellano</string>
+    <string name="euskera">Vasco</string>
+    <string name="title_activity_estadisticas">Estadisticas</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

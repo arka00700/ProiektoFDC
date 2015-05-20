@@ -1,11 +1,21 @@
 package com.example.proiektofindecarrera;
 
+import java.util.HashMap;
+import java.util.Locale;
+
+import com.google.android.gms.drive.internal.SetResourceParentsRequest;
+
 import android.R.color;
+import android.app.Application;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.BitmapFactory.Options;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.v7.app.ActionBarActivity;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,7 +30,7 @@ import android.widget.Toast;
 public class Login extends ActionBarActivity {
 	private Button btlogin,btregistration;
 	private EditText usrId,passId;
-	private TextView registro;
+	private TextView registro,eus,cas;
 	public String playausr;
 	BD_sqlite BDhelper= new BD_sqlite(this);
     @Override
@@ -39,10 +49,19 @@ public class Login extends ActionBarActivity {
         
         usrId = (EditText) findViewById(R.id.loginusuario);
 		passId = (EditText) findViewById(R.id.loginpass);
-        registro=(TextView) findViewById(R.id.registro);       
+        registro=(TextView) findViewById(R.id.registro); 
+        eus = (TextView)findViewById(R.id.euskera);
+        cas = (TextView)findViewById(R.id.castellano);
+        
+        //ARRAY DE LENGUAJES
+        final HashMap<String, String> hmLocales = new HashMap<String, String>();
+        hmLocales.put(getString(R.string.euskera), "eu"); // Euskera
+        hmLocales.put(getString(R.string.castellano), "es"); // Castellano
+        
         //AÑADIR LISTENER Y CREAR BASE DE DATOS
 		btlogin.setOnClickListener(new OnClickListener() {
-	
+		//ARRAY DE LENGUAJES
+			
 			@Override
 		public void onClick(View v) {
 		// TODO Auto-generated method stub
@@ -80,12 +99,43 @@ public class Login extends ActionBarActivity {
 			
 			@Override
 			public void onClick(View v) {
-				lanzarRegistration();
-				
+				lanzarRegistration();	
+			}
+		});
+		eus.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Locale myLocale = new Locale("eu"); 
+			    Resources res = getResources(); 
+			    DisplayMetrics dm = res.getDisplayMetrics(); 
+			    Configuration conf = res.getConfiguration(); 
+			    conf.locale = myLocale; 
+			    res.updateConfiguration(conf, dm); 
+			    Intent i = new Intent (getApplicationContext(), Login.class);
+			    startActivity(i); 
+			 
+				Toast.makeText(getApplicationContext(), "Euskera hautatuta", 2000).show();		
+			}
+		});
+		cas.setOnClickListener(new OnClickListener() {
+	
+			@Override
+			public void onClick(View v) {
+				Locale myLocale = new Locale("es"); 
+			    Resources res = getResources(); 
+			    DisplayMetrics dm = res.getDisplayMetrics(); 
+			    Configuration conf = res.getConfiguration(); 
+			    conf.locale = myLocale; 
+			    res.updateConfiguration(conf, dm); 
+			    Intent i = new Intent (getApplicationContext(), Login.class);
+			    startActivity(i); 
+			 
+				Toast.makeText(getApplicationContext(), "Castellano seleccionado", 2000).show();
 			}
 		});
     }//FIN ONCREATE
-
+    
    private void lanzarMainActivity(){
     	Intent i = new Intent (Login.this,MainActivity.class);
 		i.putExtra("Usuario", usrId.getText()+"");
@@ -94,7 +144,7 @@ public class Login extends ActionBarActivity {
     	}
   
     private void lanzarRegistration(){
-    	Intent i = new Intent (this, Registration.class);
+    	Intent i = new Intent (this, Registro.class);
     	startActivity(i);
     	}
    

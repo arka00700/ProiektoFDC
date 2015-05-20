@@ -66,7 +66,7 @@ public class MainActivity extends ActionBarActivity{
         final String[] namesright = getResources().getStringArray(R.array.OpcionesMenuLateralRight);
         
         //MENU LATERAL IZQUIERDO
-        navDrawerItems = new ArrayList<NavDrawerItem>(); 
+        navDrawerItems = new ArrayList<NavDrawerItem>(8); 
         //con la clase navDrawerItem cargamos (nombre,icono)
         navDrawerItems.add(new NavDrawerItem(names[0], navMenuIcons.getResourceId(0, -1)));
         navDrawerItems.add(new NavDrawerItem(names[1], navMenuIcons.getResourceId(1, -1)));
@@ -74,7 +74,8 @@ public class MainActivity extends ActionBarActivity{
         navDrawerItems.add(new NavDrawerItem(names[3], navMenuIcons.getResourceId(3, -1)));
         navDrawerItems.add(new NavDrawerItem(names[4], navMenuIcons.getResourceId(4, -1)));
         navDrawerItems.add(new NavDrawerItem(names[5], navMenuIcons.getResourceId(5, -1)));
-       
+        navDrawerItems.add(new NavDrawerItem(names[6], navMenuIcons.getResourceId(6, -1)));
+        
         // Metemos en el adapter toda la configuracion con iconos y titulos
         adapter = new NavDrawerListAdapter(getApplicationContext(),navDrawerItems);
         navListLeft.setAdapter(adapter);//cargamos el adaptador en el menu lateral
@@ -162,22 +163,23 @@ public class MainActivity extends ActionBarActivity{
     	case 0://Crear Partes
     		lanzarPartesCuras();
     	break;
-    	case 1:
+    	case 1://Modificador de partes
     		lanzarPartesDiarios();
     	break;
-    	case 2://Modificador de partes
-    		Intent i = new Intent(getApplicationContext(),PartePulseras.class);
-    		i=crgIntentPuls(i);
-    		startActivity(i);		
+    	case 2://Parte de pulseras
+    		lanzarPulseras();	
     	break;
     	case 3://Pedido de Material
-    		
+    		lanzarPartesPedidos();
     	break;
     	case 4://Botiquin
     		lanzarBotiquin();
     	break;
     	case 5://perfil sos
     		lanzarUsuarios();
+    	break;
+    	case 6:
+    		lanzarEstadisticas();
     	break;
     	default:
     		System.out.println("Error");
@@ -228,6 +230,22 @@ public class MainActivity extends ActionBarActivity{
 		i.putExtra("contador", contador);
 		return i;
 	}
+	public Intent crgIntentUsurio(Intent i){
+		Cursor c = BDhelper.cargarUsuario();
+		int usr,pass,playa,rcs = 0;
+		
+		for (c.moveToFirst();!c.isAfterLast();c.moveToNext()){
+			usr=c.getColumnIndex("User");
+			pass=c.getColumnIndex("Password");
+			playa=c.getColumnIndex("Playa");
+			rcs=c.getColumnIndex("Recurso");
+			i.putExtra("User", c.getString(usr));
+			i.putExtra("Password", c.getString(pass));
+			i.putExtra("Playa", c.getString(playa));
+			i.putExtra("Recurso", c.getString(rcs));	
+		}
+		return i;
+	}
 	
 	@Override
     protected void onPostCreate(Bundle savedInstanceState) {
@@ -242,7 +260,11 @@ public class MainActivity extends ActionBarActivity{
 	    super.onConfigurationChanged(newConfig);
 	    drawerToggle.onConfigurationChanged(newConfig);
 	 }
-
+	  public void lanzarPulseras(){
+	  Intent i = new Intent(getApplicationContext(),PartePulseras.class);
+		i=crgIntentPuls(i);
+		startActivity(i);
+	 }
 	public void lanzarBotiquin(){
 		Intent i = new Intent (this,Botiquin.class);
 		startActivity(i);
@@ -255,8 +277,23 @@ public class MainActivity extends ActionBarActivity{
 		Intent i = new Intent (this,ParteDiarios.class);
 		startActivity(i);
 	}
+	public void lanzarLogin(){
+		Intent i = new Intent (this,Login.class);
+		startActivity(i);
+	}
+	public void lanzarPartesPedidos(){
+		Intent i = new Intent (this,Pedidos.class);
+		i=crgIntentUsurio(i);
+		startActivity(i);
+	}
 	public void lanzarUsuarios(){
 		Intent i = new Intent (this,Usuarios.class);
+		i=crgIntentUsurio(i);
+		startActivity(i);
+	}
+	public void lanzarEstadisticas(){
+		Intent i = new Intent (this,Estadisticas .class);
+		i=crgIntentUsurio(i);
 		startActivity(i);
 	}
 	
@@ -276,9 +313,12 @@ public class MainActivity extends ActionBarActivity{
 		calendario.set(Calendar.HOUR,7);
 		calendario.set(Calendar.AM_PM,Calendar.PM);
 		//calendario.set(Calendar.DAY_OF_MONTH,1);
-		
 		alarma.setRepeating(AlarmManager.RTC_WAKEUP, calendario.getTimeInMillis(),1000*60*60*24, intentPendiente);
 		Toast.makeText(getApplicationContext(), "ALARMA PREPARADA", 10000).show();
+	}
+	//Desactivar boton back del tactil
+	@Override
+	public void onBackPressed() {
 	}
 	//MENU ALTO
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -301,7 +341,10 @@ public class MainActivity extends ActionBarActivity{
 			drawerLayout.openDrawer(Gravity.RIGHT);
 		break;
 		case R.id.Actionbar2:
-			Toast.makeText(getApplicationContext(), "Acerca de sin hacer", 2000).show();
+			String[] usr=BDhelper.usrConectado();
+			BDhelper.cerrarSesión(usr[0]);
+			//Toast.makeText(getApplicationContext(), "usrconectado"+usr[0], 2000).show();
+			lanzarLogin();
 		default:
 			break;
 		}

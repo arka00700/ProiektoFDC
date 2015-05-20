@@ -2,25 +2,22 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <ScrollView
-        android:id="@+id/scrollView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+	
+   <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
     
     <FrameLayout
         android:id="@+id/content_frame"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
- 
-    <LinearLayout 
-	   android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:orientation="vertical">
-			
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+       >
+
+		//PRIMER LIST	
        <LinearLayout
            android:layout_width="match_parent"
            android:layout_height="match_parent"
+          
            android:minHeight="200dp"
            android:orientation="vertical"
            android:paddingLeft="5dp"
@@ -33,48 +30,36 @@
     	      android:layout_height="wrap_content"
     	      android:paddingBottom="5dp"
     	      android:paddingLeft="5dp"
-    	      android:text="Partes de Incidencias:" />
+    	      android:text="@+string/PInc" />
       
       	 <fragment
         	android:id="@+id/fragmentincidencias"
         	android:name="com.example.proiektofindecarrera.FragmentListaIncidencias"
        		android:layout_width="wrap_content"
-        	android:layout_weight="200"
-        	android:layout_height="0dp">
-			</fragment>
-    	
+        	android:layout_height="0dp"
+        	android:layout_weight="2"/>
+
+      	 <TextView
+      	     android:id="@+id/diariostext"
+      	     android:layout_width="wrap_content"
+      	     android:layout_height="wrap_content"
+      	     android:paddingBottom="5dp"
+      	     android:paddingLeft="5dp"
+      	     android:paddingTop="5dp"
+      	     android:text="@+string/PDia" />
+
+      	 <fragment
+      	     android:id="@+id/fragmentdiarios"
+      	     android:name="com.example.proiektofindecarrera.FragmentListaDiarios"
+      	     android:layout_width="wrap_content"
+      	     android:layout_height="0dp"
+      	     android:layout_weight="2" />
+
     	</LinearLayout>
-    
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:minHeight="200dp"
-        android:orientation="vertical"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:paddingTop="10dp" >
-    
-        <TextView
-        android:id="@+id/diariostext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="5dp"
-    	android:paddingLeft="5dp"
-        android:text="Partes Diarios:"/>
-		
-        <fragment
-        android:id="@+id/fragmentdiarios"
-        android:name="com.example.proiektofindecarrera.FragmentListaDiarios"
-       	android:layout_width="wrap_content"
-        android:layout_weight="200"
-        android:layout_height="0dp"
-		 >
-		</fragment>
-      
-    </LinearLayout>
-     </LinearLayout> 
+  
    </FrameLayout>
-	</ScrollView> 
+   </LinearLayout>
+   
 	
     <ListView android:id="@+id/left_drawer"
         android:layout_width="240dp"

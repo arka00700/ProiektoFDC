@@ -23,25 +23,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Registration"
-            android:label="Registro" >
+            android:name=".Registro"
+            android:label="@+string/Registro" >
         </activity>
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" 
+            android:label="@+string/Main"
             android:theme="@style/AppBaseTheme" >
-            
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </activity>
         <activity
             android:name=".Botiquin"
-            android:label="Botiquín" >
+            android:label="@+string/Botiquín" >
         </activity>
         <activity
             android:name=".IndicacionesMedicamento"
-            android:label="Indicaciones" >
+            android:label="@+string/Indicaciones" >
         </activity>
 
         <meta-data
@@ -50,23 +49,31 @@
 
         <activity
             android:name=".ParteIncidencias"
-            android:label="Parte de Incidencia" >
+            android:label="@+string/PartedeIncidencia" >
         </activity>
         <activity
             android:name=".ParteDiarios"
-            android:label="Parte Diario" >
+            android:label="@+string/ParteDiario" >
         </activity>
         <activity
             android:name=".PartePulseras"
-            android:label="Parte de Pulseras" >
-        </activity>	
+            android:label="@+string/PartedePulseras" >
+        </activity>
+
         <service android:name=".ServicioDeNotificaciones" >
         </service>
 
         <activity
             android:name=".Usuarios"
-            android:label="@string/title_activity_usuarios"
-            android:theme="@style/AppBaseTheme" >
+            android:label="@+string/PerfilSos" >
+        </activity>
+        <activity
+            android:name=".Pedidos"
+            android:label="@+string/pedidos" >
+        </activity>
+        <activity
+            android:name=".Estadisticas"
+            android:label="@+string/Estadisticas" >
         </activity>
     </application>
 
