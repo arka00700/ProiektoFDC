@@ -431,6 +431,7 @@ public class BD_sqlite extends SQLiteOpenHelper {
 			Cursor c= this.getReadableDatabase().rawQuery(sql, null);
 			return c;
 		}
+
 		//Pedidos
 		public void insertarPedidos(String usr, String playa,String fecha,String pedido){
 			ContentValues valores = new ContentValues();
@@ -440,4 +441,26 @@ public class BD_sqlite extends SQLiteOpenHelper {
 			valores.put("Pedido",pedido);
 			this.getWritableDatabase().insert("PartePedidos", null, valores);
 		}
+		public Cursor consultaSemanal(String fecha){
+			String sql = "SELECT TemperaturaAgua,Grados11,Bandera0 FROM ParteDiarios WHERE FechaDiarios='"+fecha+"'";
+			Cursor c= this.getReadableDatabase().rawQuery(sql, null);
+			return c;
+		}
+		public int numCurasSemanal(String fecha){
+			int numCuras=0;
+			String sql = "SELECT * FROM ParteIncidencias WHERE FechaIncidencias='"+fecha+"'";
+			Cursor c= this.getReadableDatabase().rawQuery(sql, null);
+			return numCuras =c.getCount() ;	
+		}
+		
+		public Boolean existePedidos (String fecha){
+			Boolean estaPuls = true;
+			String sql = "SELECT * FROM PartePedidos WHERE FechaPedido='"+fecha+"'";
+			Cursor c= this.getReadableDatabase().rawQuery(sql, null);
+			c.moveToFirst();
+			if(c.getCount()<=0){
+				estaPuls = false;
+			}
+			return estaPuls;
+			}
 }
