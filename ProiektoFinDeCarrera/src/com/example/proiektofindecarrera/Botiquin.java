@@ -1,7 +1,6 @@
 package com.example.proiektofindecarrera;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.SearchView;
@@ -13,7 +12,7 @@ import android.widget.Button;
 
 public class Botiquin extends ActionBarActivity implements OnQueryTextListener{
 	
-	private Button btmedicamentonuevo;
+	
 	SearchView searchView; 
 	BD_sqlite BDhelper = new BD_sqlite(this);
 	FragmentListaMedicamentos medicamentos;
@@ -26,7 +25,6 @@ public class Botiquin extends ActionBarActivity implements OnQueryTextListener{
         
 		medicamentos.mostrarTodosLosMedicamentos();
         searchView= (SearchView) findViewById(R.id.buscarmedicamento); 
-        btmedicamentonuevo = (Button) findViewById(R.id.insertarmedicamento);
 		searchView.setOnQueryTextListener(new OnQueryTextListener() {
 			
 			@Override
@@ -39,21 +37,6 @@ public class Botiquin extends ActionBarActivity implements OnQueryTextListener{
 			public boolean onQueryTextChange(String newText) {			
 				medicamentos.actualizarLista(newText);
 				return false;
-			}
-		});
-        btmedicamentonuevo.setOnClickListener(new OnClickListener() {	
-			@Override
-			public void onClick(View v) {
-				// INSERTAMOS MEDICAMENTOS DE PRUEBA
-				BDhelper.insertarMedicamentos("Trombocil", "Anestesico local");
-				BDhelper.insertarMedicamentos("Tropical", "Anestesico local");
-				BDhelper.insertarMedicamentos("Botarel", "Crema de uso local");
-				BDhelper.insertarMedicamentos("Reflex", "Dolor muscular");
-				BDhelper.insertarMedicamentos("Sintrom", "Anestesico local");
-				BDhelper.insertarMedicamentos("Nitrofurantoina", "Antiseptico Urinario");
-				BDhelper.insertarMedicamentos("Amikacina", "Aminoglucosido");
-				BDhelper.insertarMedicamentos("Raditina", "Antiacido");
-				startService(new Intent(Botiquin.this,ServicioDeNotificaciones.class));			
 			}
 		});
 	}

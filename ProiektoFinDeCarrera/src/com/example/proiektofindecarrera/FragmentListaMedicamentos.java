@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
@@ -41,7 +42,8 @@ import android.widget.Toast;
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		// TODO Auto-generated method stub
 		super.onListItemClick(l, v, position, id);
-		Toast.makeText(getActivity(), "Has pulsado "+ sistemas.get(position), 2000).show();
+		Resources res=getResources();
+		Toast.makeText(getActivity(), res.getString(R.string.hasPulsado)+""+ sistemas.get(position), 2000).show();
 		Intent i = new Intent(getActivity(),IndicacionesMedicamento.class);
 		i.putExtra("NombreMedicamento", sistemas.get(position));
 		startActivity(i);

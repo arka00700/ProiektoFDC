@@ -1,5 +1,6 @@
 package com.example.proiektofindecarrera;
 
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -17,7 +18,8 @@ public class IndicacionesMedicamento extends ActionBarActivity {
         indicaciones = (TextView) findViewById(R.id.indicaciones); 
         
         String medicamento =getIntent().getStringExtra("NombreMedicamento");
-      	bienvenidoMedicamento.setText("Medicamento: "+medicamento);
+        Resources res=getResources();
+      	bienvenidoMedicamento.setText(res.getString(R.string.MedicamentoTitulo)+""+medicamento);
       	InsertarIndicaciones(medicamento,indicaciones);
 	}
 	
@@ -26,7 +28,8 @@ public class IndicacionesMedicamento extends ActionBarActivity {
 		c.moveToFirst();
 		String indicaciones="";
 		indicaciones = c.getString(0);
-		t.setText("El siguiente farmaco se utiliza para: "+indicaciones);
+		 Resources res=getResources();
+		t.setText((res.getString(R.string.introduccionMedicamento))+indicaciones);
 	}
 }
 

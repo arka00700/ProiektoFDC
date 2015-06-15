@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -48,10 +49,7 @@ public class MainActivity extends ActionBarActivity{
 		partediarios = (FragmentListaDiarios) getSupportFragmentManager().findFragmentById(R.id.fragmentdiarios);
         parteincidencias.mostrarPartesPorFecha();
         partediarios.mostrarPartesPorFecha();
-		
-		/*Intent de nombre del usuario introducido en el registro
-        String usuario =getIntent().getStringExtra("Usuario");
-      	bienvenido.setText("Bienvenido "+usuario);*/
+	
         playa = getIntent().getStringExtra("Playa"); 
       	mTitle = getTitle();
       	
@@ -102,16 +100,23 @@ public class MainActivity extends ActionBarActivity{
         getSupportActionBar().setHomeButtonEnabled(true);
         drawerLayout.setDrawerListener(drawerToggleRight);
         
-        //Crear ALARMA 19.30 para partes
+        //Insertar campos de los medicamentos
         SharedPreferences preferencias= PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferencias.edit();
         int z = preferencias.getInt("numerolaunchers", 1);
-        //Toast.makeText(this, "z:"+z, 2000).show();
+        
         if(z<2){
-        	crearAlarma();
         	z++;
         	editor.putInt("numerolaunchers", z);
         	editor.commit();
+        	BDhelper.insertarMedicamentos("Trombocil", "Anestesico local");
+			BDhelper.insertarMedicamentos("Tropical", "Anestesico local");
+			BDhelper.insertarMedicamentos("Botarel", "Crema de uso local");
+			BDhelper.insertarMedicamentos("Reflex", "Dolor muscular");
+			BDhelper.insertarMedicamentos("Sintrom", "Anestesico local");
+			BDhelper.insertarMedicamentos("Nitrofurantoina", "Antiseptico Urinario");
+			BDhelper.insertarMedicamentos("Amikacina", "Aminoglucosido");
+			BDhelper.insertarMedicamentos("Raditina", "Antiacido");
         }
 	}//Fuera del ONCREATE
 	
@@ -186,10 +191,7 @@ public class MainActivity extends ActionBarActivity{
     		}
 		}
 	}
-	/*private void selectedItem(int pos){
-		mTitle=getResources().getStringArray(R.array.OpcionesMenuLateral)[pos].toString();
-			
-	}*/
+	
 	//OPCIONES MENU DERECHO
 	private class DrawerItemClickListenerRight implements ListView.OnItemClickListener {
 		public void onItemClick(AdapterView<?> parent, View view, int position,long id) {
@@ -313,6 +315,7 @@ public class MainActivity extends ActionBarActivity{
 		calendario.set(Calendar.HOUR,7);
 		calendario.set(Calendar.AM_PM,Calendar.PM);
 		//calendario.set(Calendar.DAY_OF_MONTH,1);
+		alarma.cancel(intentPendiente);
 		alarma.setRepeating(AlarmManager.RTC_WAKEUP, calendario.getTimeInMillis(),1000*60*60*24, intentPendiente);
 		Toast.makeText(getApplicationContext(), "ALARMA PREPARADA", 10000).show();
 	}
@@ -322,15 +325,12 @@ public class MainActivity extends ActionBarActivity{
 	}
 	//MENU ALTO
 	public boolean onCreateOptionsMenu(Menu menu) {
-	    // Inflate the menu; this adds items to the action bar if it is present.
+	    
 	    getMenuInflater().inflate(R.menu.main_activity, menu);
 	    return true;
 	}
 	public boolean onPrepareOptionsMenu(Menu menu) {
-        // If the nav drawer is open, hide action items related to the content
-        // view
-     //   boolean drawerOpen = drawerLayout.isDrawerOpen(navListLeft);
-      //  menu.findItem(R.id.action_search).setVisible(!drawerOpen);
+       
         return super.onPrepareOptionsMenu(menu);
     }
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -343,7 +343,6 @@ public class MainActivity extends ActionBarActivity{
 		case R.id.Actionbar2:
 			String[] usr=BDhelper.usrConectado();
 			BDhelper.cerrarSesión(usr[0]);
-			//Toast.makeText(getApplicationContext(), "usrconectado"+usr[0], 2000).show();
 			lanzarLogin();
 		default:
 			break;

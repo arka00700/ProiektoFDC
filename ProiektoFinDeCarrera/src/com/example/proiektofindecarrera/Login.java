@@ -2,23 +2,13 @@ package com.example.proiektofindecarrera;
 
 import java.util.HashMap;
 import java.util.Locale;
-
-import com.google.android.gms.drive.internal.SetResourceParentsRequest;
-
-import android.R.color;
-import android.app.Application;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.BitmapFactory.Options;
 import android.os.Bundle;
-import android.support.annotation.DrawableRes;
 import android.support.v7.app.ActionBarActivity;
 import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -33,6 +23,7 @@ public class Login extends ActionBarActivity {
 	private TextView registro,eus,cas;
 	public String playausr;
 	BD_sqlite BDhelper= new BD_sqlite(this);
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,9 +31,9 @@ public class Login extends ActionBarActivity {
         
         
         //PARA ACTUALIZAR LA BASE DE DATOS
-		/*SQLiteDatabase db = BDhelper.getWritableDatabase();
+		SQLiteDatabase db = BDhelper.getWritableDatabase();
 		//Log.i(this.getClass().toString(), "Probando BD");
-		BDhelper.onUpgrade(db, 1, 2);*/
+		BDhelper.onUpgrade(db, 1, 2);
 		
         btlogin = (Button) findViewById(R.id.login);
         btregistration= (Button) findViewById(R.id.registrarse);
@@ -59,19 +50,19 @@ public class Login extends ActionBarActivity {
         hmLocales.put(getString(R.string.castellano), "es"); // Castellano
         
         //AÑADIR LISTENER Y CREAR BASE DE DATOS
-		btlogin.setOnClickListener(new OnClickListener() {
-		//ARRAY DE LENGUAJES
-			
+		btlogin.setOnClickListener(new OnClickListener() {	
 			@Override
 		public void onClick(View v) {
-		// TODO Auto-generated method stub
+		
 				//COMPROVACION DE USER Y PASSWORD CORRECTOS
 				String usr = usrId.getText().toString(); 
 				String pass = passId.getText().toString();
 				if(estaVacio()==true){
-					Toast.makeText(getApplicationContext(),"Algun campo en blanco", 2000).show();
+					Resources res=getResources();
+					Toast.makeText(getApplicationContext(),res.getString(R.string.CampoEnBlanco), 2000).show();
 				}else if(BDhelper.existeUsuario(usr)==false){
-					Toast.makeText(getApplicationContext(),"El usuario no existe", 2000).show();
+					Resources res1=getResources();
+					Toast.makeText(getApplicationContext(),res1.getString(R.string.usrNoExiste), 2000).show();
 				}else{
 					String comparar[]= new String[2];
 					comparar=BDhelper.buscarUsuario(usr);
@@ -81,7 +72,8 @@ public class Login extends ActionBarActivity {
 						BDhelper.cerrar();
 						lanzarMainActivity();	
 					}else if (comparar[0].equals(usr)==false || comparar[1].equals(pass)==false){
-						Toast.makeText(getApplicationContext(),"Usuario o contraseña incorrectos", 2000).show();	
+						Resources res2=getResources();
+						Toast.makeText(getApplicationContext(),res2.getString(R.string.noCoinciden), 2000).show();	
 					}
 				}
 			}
@@ -91,17 +83,15 @@ public class Login extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				btregistration.getBackground();
-				
-			}
-		}); 
+				lanzarAcercaDe();
+			}}); 
 		
 		registro.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				lanzarRegistration();	
-			}
-		});
+			}});
 		eus.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -114,10 +104,8 @@ public class Login extends ActionBarActivity {
 			    res.updateConfiguration(conf, dm); 
 			    Intent i = new Intent (getApplicationContext(), Login.class);
 			    startActivity(i); 
-			 
-				Toast.makeText(getApplicationContext(), "Euskera hautatuta", 2000).show();		
-			}
-		});
+			    Toast.makeText(getApplicationContext(), "Euskera hautatuta", 2000).show();		
+			}});
 		cas.setOnClickListener(new OnClickListener() {
 	
 			@Override
@@ -147,7 +135,10 @@ public class Login extends ActionBarActivity {
     	Intent i = new Intent (this, Registro.class);
     	startActivity(i);
     	}
-   
+    private void lanzarAcercaDe(){
+    	Intent i = new Intent (this, AcercaDe.class);
+    	startActivity(i);
+    	}
 
     public boolean estaVacio(){
 		boolean vacio = true;
@@ -155,7 +146,5 @@ public class Login extends ActionBarActivity {
 			vacio=false;
 		}
 		return vacio;
-	}
-    
-    
+	}   
 }

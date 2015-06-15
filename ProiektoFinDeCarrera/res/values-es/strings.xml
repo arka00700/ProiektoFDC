@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<string name="app_name">BeachControl</string>
+    <string name="registro"><u><b>Regístrate en BeachControl</b></u></string>
+    <string name="castellano">Castellano</string>
+    <string name="euskera">Euskera</string>
+	<string name="Registro">Registro</string>
+    <string name="Main">BeachControl</string>
+    <string name="Botiquín">Botiquín</string>
+    <string name="Indicaciones">Indicaciones</string>
+    <string name="PartedeIncidencia">Parte de Incidencia</string>
+    <string name="PartedePulseras">Parte de Pulseras</string>
+    <string name="ParteDiario">Parte Diario</string>
+    <string name="PerfilSos">Perfil Sos</string>
+    <string name="Estadisticas">Estadísticas</string>   
+    <string name="pedidos">Pedido de Material</string>
+    <string name="Usuario">Usuario</string>
+    <string name="Contraseña">Contraseña</string>
+    <string name="LogIn">Entrar</string>
+    <string name="Rpass">Repetir Contraseña</string>
+    <string name="Playa">Playa</string>
+    <string name="NumR">Nº de recurso</string>
+    <string name="IngresoUsr">Ingrese los datos para un nuevo usuario:</string>
+   	<string name="FinRegis">Finalizar registro</string>
+   	<string name="spinner">Lugar del suceso</string>
+   	<string name="open_drawer">Drawer abierto</string>
+   	<string name="close_drawer">Drawer cerrado</string>
+   	<string name="PInc">Parte de Incidencias</string>
+   	<string name="PDia">Partes Diarios</string>
+   	<string name="ReHum">Recursos Humanos:</string>
+   	<string name="CalAgua">Calidad del agua:</string>
+   	<string name="Hora:">Hora:</string>
+   	<string name="Hora">Hora</string>
+   	<string name="TempAgua">Temperatura del agua:</string>
+   	<string name="MegTemp">Megafonias y Temperaturas</string>
+   	<string name="Grados">Grados</string>
+   	<string name="Bandera:">Bandera:</string>
+   	<string name="Verde">Verde</string>
+    <string name="Amarilla">Amarilla</string>
+    <string name="Roja">Roja</string>
+    <string name="Balizas:">Balizas:</string>
+    <string name="Lugar:">Lugar:</string>
+    <string name="Cartel:">Carteles:</string>
+  	<string name="Torre">Torre</string>
+    <string name="Puesto">Puesto</string>
+    <string name="Orilla">Orilla</string>
+    <string name="TorreRcs">Torre Rcs.</string>
+    <string name="PuestoRcs">Puesto Rcs.</string>
+    <string name="OrillaRcs">Orilla Rcs.</string>
+    <string name="Orgánico">Orgánico</string>
+    <string name="Papel">Papel</string>
+    <string name="Plástico">Plástico</string>
+    <string name="NºBolsa">NºBolsa</string>
+    <string name="Incidencias">Incidencias</string>
+    <string name="DatosPer">Datos Personales</string>
+    <string name="NomApel">Nombre y apellidos</string>
+ 	<string name="Sexo:">Sexo:</string>
+     <string name="Edad:">Edad:</string>
+     <string name="Hombre">Hombre</string>
+     <string name="Mujer">Mujer</string>
+     <string name="Telefono:">Telefono:</string>
+     <string name="opcional">(opcional)</string>
+     <string name="Suceso:">Suceso:</string>
+     <string name="Asistencia:">Asistencia:</string>
+     <string name="Resultado:">Resultado:</string>
+     <string name="Observaciones">Observaciones</string>
+     <string name="Numpulsera">Nº de la pulsera</string>
+     <string name="Numcontacto">Nº del contacto</string>
+     <string name="Nommenor">Nombre del menor</string>
+     <string name="Nomresponsable">Nombre del responsable</string>
+     <string name="Pulsera:">Pulsera:</string>
+     <string name="Modusuario:">Modifique los datos del usuario:</string>
+     <string name="Datosdelaplaya">Datos de la playa!!</string>
+     <string name="Cantidad">Kantitatea</string>
+     <string name="Nombre">Izena</string>
+     <string name="Gasas">Gasak</string>
+     <string name="SueroFisiológico">Suero Fisiologikoa</string>
+     <string name="Aguaoxigenada">Ur oxigenatua</string>
+     <string name="Guantesgrandes">Eskularru handiak</string>
+     <string name="Guantesmedianos">Eskularru ertainak</string>
+     <string name="Guantespequeños">Eskularru txikiak</string>
+     <string name="Tijeras">Artaziak</string>
+     <string name="Pinzadisección">Disekzio pintza</string>
+     <string name="Cubetainstrumental">Lanabes kubeta</string>
+     <string name="MascarillaEFP3">EFP3 maskara</string>
+     <string name="Algodón">Kotoia</string>
+     <string name="Mantatérmica">Burusi termikoa</string>
+     <string name="Vendasp">Hesgailuak (5x5)</string>
+     <string name="Vendasm">Hesgailuak (5x7)</string>
+     <string name="Vendasg">Hesgailuak (10x10)</string>
+     <string name="Alcohol">Alkohola</string>
+     <string name="Esparadrapopapel">Paper esparadrapua</string>
+     <string name="Esparadrapotela">Ehun esparadrapua</string>
+     <string name="Tiritas">Tiritak</string>
+     <string name="Bolsasdefrio">Hotz boltsak</string>
+     <string name="Papeldemanos">Esku papera</string>
+     <string name="Jabónmanos">Esku jaboia</string>
+     <string name="Jabónlavavajillas">Plater-garbigailu jaboia</string>
+     <string name="Escoba">Erratza</string>
+     <string name="Paloescoba">Erratz makila</string>
+     <string name="Recogedor">Zabor bilgailua</string>
+     <string name="Fregona">Zoru-garbigailua</string>
+     <string name="BaldeFregona">Baldea</string>
+     <string name="Bayeta">Baieta</string>
+     <string name="LimpiaSuelos">Zoru-garbigarria</string>
+     <string name="Estropajo">Espartzua</string>
+     <string name="Palangana">Konketa</string>
+     <string name="Cuerda">Soka</string>
+     <string name="Folios">Orriak</string>
+     <string name="Bolígrafos">Boligrafoa</string>
+     <string name="ParteSemanal">Asteko parteak</string>
+     <string name="Añada">Añada lo que falte, recuerde separar con comas. </string>
+     <string name="Socorrista:">Socorrista:</string>
+     <string name="Playadelpedido:">Playa del pedido:</string>
+     <string name="Fechadelpedido:">Fecha del pedido:</string>
+     <string name="Ordenar">Ordenar</string>
+     <string name="CerrarSesión">Cerrar Sesión</string>  
+     <string name="columDia">Día</string>  
+     <string name="columTempAgua">Agua</string>  
+     <string name="columTempAmb">Ambiente</string>  
+     <string name="columBandera">Bandera</string>  
+     <string name="columCuras">Curas</string> 
+     <string name="AcercaDe">Acerca De</string>
+     <string name="Residuos">Residuos</string>
+     <string name="Rotacion">Rotación</string>
+     <string name="Señales">Señales</string>
+     <string name="DatosPlaya">Datos de la Playa</string>
+     <string name="Pedidos">Pedidos</string>
+     <string name="Desglose">Desglose del pedido</string>
+     <string name="introduccionMedicamento">El siguiente medicamento se utiliza para:</string>
+     <string name="CampoEnBlanco">Algún campo en blanco</string>
+     <string name="usrNoExiste">El usuario no existe</string>
+     <string name="usrYaExiste">El usuario ya existe</string>
+     <string name="noCoinciden">Usuario o contraseña incorrectas</string>
+     <string name="passDiferente">Contraseñas diferentes</string>
+     <string name="insertarHora">Inserte una hora</string>
+     <string name="personaAtendida">Esta persona ya ha sido atendida hoy modifique el nombre</string>
+     <string name="numRecursoMal">El numero de recurso es incorrecto</string>
+     <string name="registroFinalizado">Registro realizado correctamente</string>
+     <string name="TodoOk">Todo correctamente</string>
+     <string name="MedicamentoTitulo">Medicamento:</string>   
+     <string name="maximoB">Maximo de banderas alcanzado</string> 
+     <string name="maximoBa">Maximo de balizas alcanzado</string>   
+     <string name="maximoR">Maximo de carteles alcanzado</string>  
+     <string name="maximoC">Maximo de rotaciones alcanzado</string>
+     <string name="pedido1">Ya existe un pedido con esta fecha</string>    
+     <string name="hasPulsado">Has pulsado</string>
+     <string name="estadistiscas1">Compruebe los meses introducidos</string>
+     <string name="estadistiscas2">Compruebe los días introducidos</string>
+     <string name="estadistiscas3">Solo se calcularán 30 días máximo</string> 
+     <string name="textAcercaDe">1. ACEPTACIÓN DE LOS TÉRMINOS DE USO \n La utilización de la aplicación BeachControl, es absolutamente voluntaria y el uso de la misma supone la aceptación plena por quién accede al mismo, de todas las Condiciones Generales de Uso vigentes en cada momento que se encuentren en la presente dirección, por lo cual el Usuario deberá leer detenidamente la presente política de privacidad antes de realizar cualquier tipo de operación o utilización de la aplicación.
+         El Usuario al mismo tiempo se compromete a no utilizar BeachControl de forma contraria a lo dispuesto por la legislación vigente. Así mismo, BeachControl se reserva el derecho de modificar en cualquier momento las presentes Condiciones Generales de Uso así como cualesquiera otras condiciones generales o particulares.\n \n
+         2. OBJETO \nBeachControl, proporciona información en forma de cuestionarios a los Usuarios para usos empresariales o estadísticos.\n \n
+         3. PROPIEDAD INTELECTUAL E INDUSTRIAL \nEl Usuario reconoce y acepta que todos los derechos de propiedad intelectual sobre los contenidos y cualesquiera otros elementos insertados en la aplicación BeachControl o a sus licenciantes.\n
+   		 BeachControl es titular de los elementos que integran el diseño de la aplicación móvil, los menús, botones de navegación, el código JAVA, los textos, imágenes, texturas, gráficos y cualquier otro contenido de la página web o, en cualquier caso, dispone de la correspondiente autorización o licencia para la utilización de dichos elementos. Por lo tanto, el Usuario sólo está autorizado a utilizar y visualizar la información de los cuestionarios y contenido de la aplicación tal y como se presenta.\n \n
+   		 4. USO DEL SERVICIO Y RESPONSABILIDADES \n Las condiciones de acceso y uso de la presente aplicación móvil se rigen estrictamente por la legalidad vigente y por el principio de buena fe comprometiéndose el Usuario a realizar un buen uso de la app y de los servicios que se ofrecen en la misma. Quedan prohibidos todos los actos que vulneren la legalidad, derechos o intereses de terceros, prohibiéndose expresamente: \n
+		 1. Realizar actuaciones que puedan producir en la app o a través de la misma y por cualquier medio algún tipo de daño a terceros.\n
+		 2. Realizar publicidad o información comercial directamente o de forma encubierta, spam (envío de correos masivos) o el envío de grandes mensajes con fines ilícitos o contrarios a los términos de uso aquí descritos.\n\n
+		 BeachControl no puede asumir ninguna responsabilidad derivada del uso incorrecto, inapropiado o ilícito de la información aparecida en la aplicación.\n\n
+		 5. CONDICIONES LEGALES DE INFORMACIÓN GENERAL \n
+		 BeachControl en cumplimiento con lo dispuesto en el art. 10 de Ley 34/2002 de Servicios de la Sociedad de la Información y de Comercio Electrónico, por medios electrónicos, de forma permanente, fácil, directa y gratuita, a la información relativa a su razón social, datos fiscales, domicilio y dirección de comunicaciones.\n\n
+		 6. POLÍTICA EN PROTECCIÓN DE DATOS \n
+		 BeachControl cumple con la normativa vigente establecida en la Ley 15/1999 de Protección de datos de carácter personal, LOPD, y demás legislación que la desarrolla.\n
+		 Con carácter previo, se pone de manifiesto que para el acceso a determinada información y contenido, el Usuario deberá previamente registrarse, aceptando los términos de uso y al mismo tiempo lo establecido en la LOPD, el tratamiento de sus datos personales.\n
+		 En ningún caso BeachControl cederá los datos de carácter personal aportados por el Usuario a terceras personas y del mismo modo,el Usuario puede ejercitar sus derechos de acceso, rectificación, cancelación y oposición (ARCO) al fichero como indica la LOPD.\n\n
+		 7. EXCLUSIÓN DE RESPONSABILIDAD \n
+		 Se declina igualmente toda responsabilidad derivada de los daños y perjuicios que pudiera sufrir el visitante en sus medios informáticos a consecuencia del uso irresponsable o ilícito de los usuarios. \n
+		 BeachControl no garantiza la disponibilidad y continuidad de la aplicación ni se hace responsable de cualesquiera daños y perjuicios producidos o que puedan producirse en el futuro, ni de los defectos técnicos, cualquiera que sea su naturaleza, que se deriven del uso de la información y de las materias contenidas en el.\n
+		 Con los límites establecidos en la Ley, BeachControl no asume ninguna responsabilidad derivada de la falta de actualización y precisión en los datos. </string> 
+</resources>

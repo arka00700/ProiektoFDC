@@ -24,13 +24,6 @@
 			    android:layout_weight="90"
 			    app:queryHint="Buscar medicamento" />
 
-			<Button
-			    android:id="@+id/insertarmedicamento"
-			    android:layout_width="0dp"
-			    android:layout_height="wrap_content"
-			    android:layout_weight="10"
-			    android:text="+" />
-
 		</LinearLayout>
 
     <LinearLayout

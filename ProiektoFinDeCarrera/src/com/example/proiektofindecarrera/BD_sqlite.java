@@ -21,7 +21,7 @@ public class BD_sqlite extends SQLiteOpenHelper {
 			"FechaIncidencias DATE NOT NULL,Sexo BOOLEAN NOT NULL,Edad TINYINT NOT NULL," +
 			"Telefono INT,Hora TIME NOT NULL,Lugar TINYINT NOT NULL," +
 			"Suceso TINYINT NOT NULL,Asistencia TINYINT NOT NULL,Resultado TINYINT NOT NULL," +
-			"Observaciones VARCHAR(200))";//AÑADIR LA PLAYA
+			"Observaciones VARCHAR(200),User TEXT NOT NULL)";
 	
 	String crearPartesDiarios = "CREATE TABLE ParteDiarios (FechaDiarios DATE NOT NULL," +
 			"PlayaDiarios TEXT NOT NULL,RecursoHumanos TEXT NOT NULL," +
@@ -37,10 +37,10 @@ public class BD_sqlite extends SQLiteOpenHelper {
 			",CartelLugar3 TEXT,CartelHora3 TIME,CartelLugar4 TEXT,CartelHora4 TIME" +
 			",torre0 TEXT,puesto0 TIME,orilla0 TEXT,horaRot0 TIME,torre1 TEXT,puesto1 TIME,orilla1 TEXT,horaRot1 TIME" +
 			",torre2 TEXT,puesto2 TIME,orilla2 TEXT,horaRot2 TIME,torre3 TEXT,puesto3 TIME,orilla3 TEXT,horaRot3 TIME" +
-			",torre4 TEXT,puesto4 TIME,orilla4 TEXT,horaRot4 TIME,Orgánico TINYINT,Papel TINYINT,Plástico TINYINT,Incidencias VARCHAR(200))";
+			",torre4 TEXT,puesto4 TIME,orilla4 TEXT,horaRot4 TIME,Orgánico TINYINT,Papel TINYINT,Plástico TINYINT,Incidencias VARCHAR(200),User TEXT NOT NULL)";
 	
 	String crearPartesPulseras = "CREATE TABLE PartePulseras (NumPulsera INT NOT NULL,NumContacto TEXT NOT NULL," +
-			"NomMenor TEXT NOT NULL,NomResponsable TEXT NOT NULL)";
+			"NomMenor TEXT NOT NULL,NomResponsable TEXT NOT NULL,User TEXT NOT NULL)";
 	
 	String crearPartesPedidos = "CREATE TABLE PartePedidos (Socorrista TEXT NOT NULL,PlayaPedido TEXT NOT NULL" +
 			",FechaPedido DATE NOT NULL,Pedido TEXT)";
@@ -58,7 +58,6 @@ public class BD_sqlite extends SQLiteOpenHelper {
 	public BD_sqlite(FragmentListaMedicamentos fl) {
 		super(fl.getActivity(),"BD.sqlite", null, 1);
 	}
-	
 	public BD_sqlite(FragmentListaDiarios fl) {
 		super(fl.getActivity(),"BD.sqlite", null, 1);
 	}
@@ -196,20 +195,11 @@ public class BD_sqlite extends SQLiteOpenHelper {
 			String sql = "SELECT * FROM Usuarios WHERE User='"+usr+"'";
 			Cursor c= this.getReadableDatabase().rawQuery(sql, null);
 			c.moveToFirst();
-			
-			//String columnas[]={"User","Password"};
-			//Cursor c = this.getWritableDatabase().query("Usuarios", columnas, null, null, null, null, null);
 			int iu,ip;
-			
 			iu=c.getColumnIndex("User");
 			ip=c.getColumnIndex("Password");
-		
-		//int contador=0; SI QUISIERAMOS LEER TODA LA TABLA
-		//for (c.moveToFirst();!c.isAfterLast();c.moveToNext()){
 			result[0]=c.getString(iu);
 			result[1]=c.getString(ip);
-			//contador++;
-		//}
 		return result;
 		}
 

@@ -75,6 +75,11 @@
             android:name=".Estadisticas"
             android:label="@+string/Estadisticas" >
         </activity>
+        <activity
+            android:name=".AcercaDe"
+            android:label="@+string/AcercaDe"
+            android:theme="@android:style/Theme.Dialog" >
+        </activity>
     </application>
 
 </manifest>

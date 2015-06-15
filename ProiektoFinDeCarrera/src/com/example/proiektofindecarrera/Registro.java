@@ -1,6 +1,7 @@
 package com.example.proiektofindecarrera;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
@@ -42,13 +43,9 @@ public class Registro extends ActionBarActivity{
 		bRegistrar.setOnClickListener(new OnClickListener() {
 			
 			@Override
-			public void onClick(View v) {
-				//CAPTACION DE DATOS
-				
-				Registrar();
-				
-			}
-		});
+			public void onClick(View v) {	
+				Registrar();	
+			}});
 	}
 	public void Registrar (){
 		String usr = usrId.getText().toString(); 
@@ -56,21 +53,21 @@ public class Registro extends ActionBarActivity{
 		String pass2 = passId2.getText().toString();
 		String playa = spinnerPlayas.getSelectedItem().toString();
 		String editvalue=usrRecurso.getText().toString();
-		
+		Resources res=getResources();
 		
 		if (estaVacioRegistro()==true){
-			Toast.makeText(getApplicationContext(),"Algun campo en blanco", 2000).show();
+			Toast.makeText(getApplicationContext(),res.getString(R.string.CampoEnBlanco), 2000).show();
 		}else if (pass.equals(pass2)==false){
-				Toast.makeText(getApplicationContext(),"Contraseñas diferentes", 2000).show();
+				Toast.makeText(getApplicationContext(),res.getString(R.string.passDiferente), 2000).show();
 		}else if(numeroCorrecto()==false){
-				Toast.makeText(getApplicationContext(),"Numero de recurso incorrecto", 2000).show();
+				Toast.makeText(getApplicationContext(),res.getString(R.string.numRecursoMal), 2000).show();
 			}else if (BDhelper.existeUsuario(usr)==false){
 				int recurso = Integer.parseInt(editvalue);
 				BDhelper.insertarUsuarios(usr, pass,playa,recurso);
-				Toast.makeText(getApplicationContext(),"Registro realizado correctamente", 2000).show();
+				Toast.makeText(getApplicationContext(),res.getString(R.string.registroFinalizado), 2000).show();
 				lanzarLogin();
 				}else{
-				Toast.makeText(getApplicationContext(),"El usuario ya existe", 2000).show();
+				Toast.makeText(getApplicationContext(),res.getString(R.string.usrYaExiste), 2000).show();
 				}	
 			}
 	
@@ -89,15 +86,7 @@ public class Registro extends ActionBarActivity{
 		correcto=false;
 		}
 		return correcto;
-	}
-	/*public boolean existe(){
-		boolean existe = true;
-		//String x[]=LaBD.getMiBD(getApplicationContext()).leerUsuarios();
-		//Toast.makeText(getApplicationContext(),x[0], 2000).show();
-		
-		return false;
-	}*/
-	 
+	} 
 	private void lanzarLogin(){
 	    	Intent i = new Intent (this, Login.class);
 	    	startActivity(i);

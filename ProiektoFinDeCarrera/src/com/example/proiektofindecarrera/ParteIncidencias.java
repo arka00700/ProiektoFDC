@@ -4,22 +4,19 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.app.TimePickerDialog.OnTimeSetListener;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.AbsSpinner;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -130,14 +127,14 @@ public class ParteIncidencias extends ActionBarActivity {
 		int datosSpinner[]=ConversorSpinner(spinnerLugar, spinnerSuceso, 
 				spinnerAsistencia, spinnerResultado);
 		int edadInt = 0,telefonoInt = 0;
-		
+		Resources res=getResources();
 		if (estaVacioIncidencias()==true){
-			Toast.makeText(getApplicationContext(), "Algún campo en blanco", 2000).show();
+			Toast.makeText(getApplicationContext(), res.getString(R.string.CampoEnBlanco), 2000).show();
 		}else if(horaNew.isEmpty()){
-				Toast.makeText(getApplicationContext(),"Inserta una hora", 2000).show();
+				Toast.makeText(getApplicationContext(),res.getString(R.string.insertarHora), 2000).show();
 				//HAY UNA PERSONA QUE SE LLAMA IGUAL Y YA HA SIDO ATENTIDA HOY
 		}else if(BDhelper.existeParteIncidenciaNombre(nombreString,datephone) && getIntent().getStringExtra("Hora")==null){ 
-			Toast.makeText(getApplicationContext(),"Esta persona ya ha sido atendida hoy,modifique el nombre", 2000).show();
+			Toast.makeText(getApplicationContext(),res.getString(R.string.personaAtendida), 2000).show();
 			
 			//SE HA CLICADO DESDE EL MAIN PERO NO SE HA MODIFICADO LA HORA Y EL NOMBRE
 		}else if (BDhelper.existeParteIncidencias(datephone,horaOld) && getIntent().getStringExtra("Hora")!=null){
@@ -156,7 +153,7 @@ public class ParteIncidencias extends ActionBarActivity {
 			BDhelper.InsertarParteIncidencias(nombreString,datephone,esHombre, edadInt, telefonoInt,
 					horaNew, datosSpinner[0], datosSpinner[1], datosSpinner[2], datosSpinner[3], observacionesString);
 			BDhelper.cerrar();
-			Toast.makeText(getApplicationContext(),"Parte realizado correctamente", 2000).show();
+			Toast.makeText(getApplicationContext(),res.getString(R.string.TodoOk), 2000).show();
 			irMainActivity();
 			}	
 	

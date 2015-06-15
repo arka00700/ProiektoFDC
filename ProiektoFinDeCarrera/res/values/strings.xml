@@ -9,12 +9,5 @@
     <string name="spinner">Lugar de suceso</string>
     <string name="open_drawer">Drawer abierto</string>
     <string name="close_drawer">Drawer cerrado</string>
-    <string name="title_activity_usuarios">Usuarios</string>
-    <string name="title_activity_pedidos">Pedidos</string>
-    <string name="registro"><u><b>Regístrate en BeachControl</b></u></string>
-    <string name="castellano">Castellano</string>
-    <string name="euskera">Vasco</string>
-    <string name="title_activity_estadisticas">Estadisticas</string>
-    <string name="hello_world">Hello world!</string>
-
+   
 </resources>
